@@ -1,0 +1,245 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+/***************/
+.twitter-wrap {
+  display: grid;
+  grid-template-columns: 20% 50% 30%;
+  position: relative;
+}
+
+.side-left {
+  border-right: 1px solid #eee;
+  position: fixed;
+  background-color: white;
+  height: 100%;
+  width: 20%;
+  text-align: right;
+  z-index: 999;
+  left: 0;
+  top: 0;
+}
+
+.menu .menu-item {
+  padding: 0px 20px;
+  margin-bottom: 0px;
+}
+.menu .menu-item .menu-link {
+  width: 55px;
+  height: 55px;
+  display: block;
+  text-align: center;
+  border-radius: 50%;
+  margin-left: auto;
+}
+.menu .menu-item .menu-link:hover {
+  background-color: #cee9f9;
+}
+.menu .menu-item .menu-link:hover i {
+  color: #1b95e0;
+}
+.menu .menu-item .menu-link:hover.box {
+  display: block !important;
+}
+.menu .menu-item .menu-link i {
+  color: #000;
+  font-size: 25px;
+  line-height: 55px;
+}
+.menu .menu-item .menu-link.active i {
+  color: #1b95e0;
+}
+.menu .menu-item .box {
+  display: none;
+  padding: 20px;
+  position: absolute;
+  box-shadow: 0px 0px 10px #ccc;
+  background-color: #fff;
+  margin-top: -50px;
+  margin-left: 80px;
+  width: 300px;
+  border-radius: 10px;
+  text-align: left;
+  z-index: 9;
+}
+.menu .menu-item .box .name {
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 5px;
+}
+.menu .menu-item .box .username {
+  color: #999;
+}
+.menu .menu-item .box .bio {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.menu .menu-item .box .folow {
+  display: flex;
+}
+.menu .menu-item .box .folow a {
+  display: inline-block;
+  margin-right: 10px;
+  color: #999;
+}
+.menu .menu-item .box .folow a span {
+  color: #000 !important;
+  font-weight: 600;
+}
+.menu .menu-item:hover .user-img-30 {
+  border: 2px solid #1b95e0;
+}
+.menu .menu-item:hover .box {
+  display: block;
+}
+
+.user-img-30 {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-top: 12px;
+  border: 2px solid #fff;
+}
+
+.user-img-40 {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.add-twit {
+  background-color: #1b95e0;
+  margin-top: 20px;
+}
+.add-twit i {
+  color: #fff !important;
+}
+.add-twit:hover {
+  background-color: #1677b2 !important;
+}
+
+.side-main {
+  position: absolute;
+  width: 90%;
+  height: 100%;
+  margin-left: 100px;
+  background-color: #eee;
+  z-index: -99;
+}
+.side-main .link-home {
+  font-weight: 500;
+  color: #000;
+  font-size: 20px;
+}
+
+.top-fixed {
+  position: fixed;
+  top: 0;
+  border-bottom: 1px solid #eee;
+  border-right: 1px solid #eee;
+  padding: 20px 10px;
+  width: 100%;
+  background-color: #fff;
+  z-index: 997;
+}
+
+/**************************/
+.side-right {
+  border-right: 1px solid #eee;
+  position: fixed;
+  background-color: white;
+  overflow: auto;
+  width: 400px;
+  height: 100%;
+  padding: 70px 15px 15px 15px;
+  right: 0;
+  top: 0;
+  z-index: 996;
+}
+
+
+/* Style the tab */
+.tab {
+  overflow: hidden;
+  background-color: #f1f1f1;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border-top: none;
+}
+.object {
+  font-size: 10px;
+}
+
+.gallery {
+  -webkit-column-count: 3;
+  -moz-column-count: 3;
+  column-count: 3;
+  -webkit-column-width: 33%;
+  -moz-column-width: 33%;
+  column-width: 33%; }
+  .gallery .pics {
+  -webkit-transition: all 350ms ease;
+  transition: all 350ms ease; }
+  .gallery .animation {
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1); }
+  
+  @media (max-width: 450px) {
+  .gallery {
+  -webkit-column-count: 1;
+  -moz-column-count: 1;
+  column-count: 1;
+  -webkit-column-width: 100%;
+  -moz-column-width: 100%;
+  column-width: 100%;
+  }
+  }
+  
+  @media (max-width: 400px) {
+  .btn.filter {
+  padding-left: 1.1rem;
+  padding-right: 1.1rem;
+  }
+  }
