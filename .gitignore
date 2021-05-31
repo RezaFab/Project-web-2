@@ -1,13 +1,17 @@
-/Manual Book.docx
-/appgarden_ucard.sql
-/manual book ucard.docx
-/ucard.appgarden.xyz.zip
-/ucard.sql
-/ucard.zip
-*.PNG
-*.png
-*.jpg
-*.xlsx
+*.zip
+*.rar
+*.tar*
+
+*.sql
+
+*.doc*
+*.ppt*
+*.xls*
 *.pdf
 *.txt
-*.pptx
+
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.svg
