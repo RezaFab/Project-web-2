@@ -30,7 +30,7 @@ $config['mailtype']     = 'html';
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'https://amarizky.site';
+$config['base_url'] = 'https://amarizky.com';
 
 /*
 |--------------------------------------------------------------------------
