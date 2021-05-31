@@ -145,16 +145,16 @@
                                             $verifikator = "";
                                             switch ($s['status_urut']) {
                                                 case "1":
-                                                    $verifikator = $verif['verif_pesanan'];
+                                                    $verifikator = (!empty($verif['verif_pesanan']) ? $verif['verif_pesanan'] : "-");
                                                     break;
                                                 case "2":
-                                                    $verifikator = $verif['verif_desain'];
+                                                    $verifikator = (!empty($verif['verif_desain']) ? $verif['verif_desain'] : "-");
                                                     break;
                                                 case "3":
-                                                    $verifikator = $verif['verif_pembayaran'];
+                                                    $verifikator = (!empty($verif['verif_pembayaran']) ? $verif['verif_pembayaran'] : "-");
                                                     break;
                                                 case "4":
-                                                    $verifikator = $verif['verif_cetak'];
+                                                    $verifikator = (!empty($verif['verif_cetak']) ? $verif['verif_cetak'] : "-");
                                                     break;
                                             }
                                             ?>
@@ -268,6 +268,7 @@
                                 <?php
                                 foreach ($design as $d) :
                                 ?>
+
                                     <a title="<?= $d['design_id'] ?>" id="modal_lihat" type="button" class="modal_lihat" data-toggle="modal" data-target="#lihat"><img style="width:100%;" src="<?= base_url('design_user/' . $d['design_image']) ?>" alt=""></a>
                                     <hr>
                             <?php
@@ -275,17 +276,40 @@
                             endif;
                             ?>
                             <?php if ($upload) : ?>
-                                <h3>Upload Design</h3>
+                                <h3>Uploaded File & Design</h3>
                                 <br>
+                                <div class="table-responsive">
+                                    <table class="table table-flush" id="datatable-basic">
+                                        <thead>
+                                            <tr>
+                                                <th>File Name</th>
+                                                <th>View</th>
+                                                <th>Download</th>
+                                                <th>Delete</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                            foreach ($upload as $u) :
+                                            ?>
+                                                <tr>
+                                                    <td><?php echo  $u['design_image']; ?></td>
+                                                    <td><a href="<?= base_url('design_user/' . $u['design_image']) ?>" target="_blank">View</a></td>
+                                                    <td><a href="<?= base_url('design_user/' . $u['design_image']) ?>" download>Download</a></td>
+                                                    <td><a id="<?= $u['design_id'] ?>" type="button" class="hapus" data-toggle="modal" data-target="#hapus" style="color:red;">Delete</a></td>
+                                                </tr>
+                                            <?php
+                                            endforeach;
+                                            ?>
+                                        </tbody>
+                                    </table>
                                 <?php
-                                foreach ($upload as $u) :
-                                ?>
-                                    <a id="<?= $u['design_id'] ?>" type="button" class="hapus" data-toggle="modal" data-target="#hapus"><img style="width:100%;" src="<?= base_url('design_user/' . $u['design_image']) ?>" alt=""></a>
-                                    <hr>
-                            <?php
-                                endforeach;
                             endif;
-                            ?>
+                                ?>
+                                </div>
+
+
+
                         </div>
                     </div>
                 </div>

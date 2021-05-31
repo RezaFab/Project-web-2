@@ -282,17 +282,33 @@
                         endif;
                         ?>
                         <?php if ($upload) : ?>
-                            <h3>Upload Design</h3>
+                            <h3>Uploaded File & Design</h3>
                             <br>
+                            <div class="table-responsive">
+                                <table class="table table-flush" id="datatable-basic">
+                                    <thead>
+                                        <tr>
+                                            <th>File Name</th>
+                                            <th>Download</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        foreach ($upload as $u) :
+                                        ?>
+                                            <tr>
+                                                <td><?php echo  $u['design_image']; ?></td>
+                                                <td><a href="<?= base_url('design_user/' . $u['design_image']) ?>" download>Download</a></td>
+                                            </tr>
+                                        <?php
+                                        endforeach;
+                                        ?>
+                                    </tbody>
+                                </table>
                             <?php
-                            foreach ($upload as $u) :
-                            ?>
-                                <a design-kirim="<?= base_url('design_user/' . $u['design_image']) ?>" id="<?= $u['design_id'] ?>" type="button" class="design" data-toggle="modal" data-target="#design"><img style="width:100%;" src="<?= base_url('design_user/' . $u['design_image']) ?>" alt=""></a>
-                                <hr>
-                        <?php
-                            endforeach;
                         endif;
-                        ?>
+                            ?>
+                            </div>
                     </div>
                 </div>
             </div>

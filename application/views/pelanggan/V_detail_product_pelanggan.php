@@ -72,7 +72,7 @@
                 <p><?= $p['product_keterangan'] ?></p>
                 </div>
                 <br>
-                <form method="post" action="<?= base_url('Detail_product_pelanggan/order') ?>">
+                <form method="post" onsubmit="if(document.getElementById('agree').checked) { return true; } else { alert('Tolong Baca dan Setujui Syarat & Ketentuan yang berlaku'); return false; }" action="<?= base_url('Detail_product_pelanggan/order') ?>">
                   <input type="hidden" value="<?= $p['product_id'] ?>" name="id_product">
                   <input type="hidden" value="<?= $_SESSION['pelanggan_nohp'] ?>" name="nohp">
                   <div class="form-group">
@@ -82,13 +82,9 @@
                 <div class="form-group">
                 <textarea class="form-control" name="keterangan" placeholder="Keterangan"></textarea>
                 </div>
-
-                <form action="#" onsubmit="if(document.getElementById('agree').checked) { return true; } else { alert(Tolong Baca dan Setujui Syarat & Ketentuan yang berlaku); return false; }">
-                
-                <input type="checkbox" name="checkbox" value="check" id="agree" /> Saya Telah Membaca & Menyetujui Syarat & Ketentuan
+                <input type="checkbox" name="checkbox" value="check" id="agree" /> Saya Telah Membaca & Menyetujui  <a href="#">Syarat & Ketentuan</a>
                
                 <button type="submit" class="btn btn-info">Order</button>
-                </form>
                 </form>
               </div>
             </div>
