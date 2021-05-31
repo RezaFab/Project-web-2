@@ -472,19 +472,21 @@
                                 $resi = $this->db->query("SELECT transaksi_resi FROM tbl_transaksi WHERE transaksi_id='$id';")->row_array();
                                 ?>
 
-                                <div class="wrapper">
-                                    <div class="form-group row w-100">
-                                        <label for="noresi" class="col-sm-4 col-form-label">Nomor Resi:</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" readonly class="form-control-plaintext" id="noresi" value="<?= $resi['transaksi_resi']; ?>">
+                                <?php if ($o['transaksi_paket'] == '1') : ?>
+                                    <div class="wrapper">
+                                        <div class="form-group row w-100">
+                                            <label for="noresi" class="col-sm-4 col-form-label">Nomor Resi:</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" readonly class="form-control-plaintext" id="noresi" value="<?= $resi['transaksi_resi']; ?>">
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                <?php endif; ?>
 
                                 <br>
 
                                 <div id="paket_terima">
-                                    <button style="width:100%;display:none;" class="btn btn-primary terima">Paket Sudah Diterima</button>
+                                    <!-- <button style="width:100%;display:none;" class="btn btn-primary terima">Paket Sudah Diterima</button> -->
                                     <?php
                                     if ($o['transaksi_paket'] != NULL) :
                                     ?>

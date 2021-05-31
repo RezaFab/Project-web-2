@@ -496,15 +496,17 @@
                                     $resi = $this->db->query("SELECT transaksi_resi FROM tbl_transaksi WHERE transaksi_id='$id';")->row_array();
                                     ?>
 
-                                    <h3>Nomor Resi</h3>
-                                    <div class="form-group row">
-                                        <div class="col-sm-8 pr-1">
-                                            <input type="text" class="form-control" id="resi" placeholder="Nomor Resi" value="<?= $resi['transaksi_resi']; ?>">
+                                    <?php if ($o['transaksi_paket'] == '1') : ?>
+                                        <h3>Nomor Resi</h3>
+                                        <div class="form-group row">
+                                            <div class="col-sm-8 pr-1">
+                                                <input type="text" class="form-control" id="resi" placeholder="Nomor Resi" value="<?= $resi['transaksi_resi']; ?>">
+                                            </div>
+                                            <div class="col-sm-4 pl-1">
+                                                <button type="submit" class="btn btn-primary mb-2 w-100" id="updateResi">Update</button>
+                                            </div>
                                         </div>
-                                        <div class="col-sm-4 pl-1">
-                                            <button type="submit" class="btn btn-primary mb-2 w-100" id="updateResi">Update</button>
-                                        </div>
-                                    </div>
+                                    <?php endif; ?>
 
                                     <br>
 
