@@ -432,7 +432,7 @@
                 <div class="card">
 
                     <div class="card-header bg-transparent">
-                        <h3 class="mb-0">Ambil / Kirim</h3>
+                        <h3 class="mb-0">Konfirmasi Pesanan</h3>
                     </div>
 
                     <div id="terima_p" class="card-body">
@@ -506,7 +506,18 @@
                                                 <button type="submit" class="btn btn-primary mb-2 w-100" id="updateResi">Update</button>
                                             </div>
                                         </div>
+
                                     <?php endif; ?>
+
+                                    <h3>Ongkir</h3>
+                                    <div class="form-group row">
+                                        <div class="col-sm-8 pr-1">
+                                            <input type="number" name="ongkir" id="ongkir" placeholder="Masukkan ongkir">
+                                        </div>
+                                        <div class="col-sm-4 pl-1">
+                                            <button type="submit" class="btn btn-primary mb-2 w-100" id="updateOngkir">Update</button>
+                                        </div>
+                                    </div>
 
                                     <br>
 
@@ -860,5 +871,23 @@
             }
         });
         // }
+    });
+    $('#updateOngkir').click(function(e) {
+        e.preventDefault();
+
+        var id = $('#id').val();
+        var ongkir = $('#ongkir').val();
+
+        $.ajax({
+            type: 'POST',
+            url: "<?= base_url('Order/updateOngkir') ?>",
+            data: {
+                id: id,
+                ongkir: ongkir
+            },
+            success: function(data) {
+                alert('Ongkir berhasil diubah');
+            }
+        });
     });
 </script>

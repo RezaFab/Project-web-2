@@ -543,4 +543,10 @@ class Order extends CI_Controller
         $resi = $this->input->post('resi');
         $this->db->query("UPDATE tbl_transaksi SET transaksi_resi = '$resi' WHERE transaksi_id = '$id';");
     }
+    function updateOngkir()
+    {
+        $id = $this->input->post('id');
+        $ongkir = $this->input->post('ongkir');
+        $this->db->query("UPDATE tbl_transaksi SET transaksi_ongkir = '$ongkir' WHERE transaksi_id = '$id';");
+    }
 }
