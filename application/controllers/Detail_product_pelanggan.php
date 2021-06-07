@@ -49,7 +49,8 @@ class Detail_product_pelanggan extends CI_Controller
 			'transaksi_paket' 				=> null,
 			'transaksi_terima' 				=> null,
 			'transaksi_new' 				=> 1,
-			'transaksi_resi' 				=> null
+			'transaksi_resi' 				=> null,
+			'transaksi_ongkir'				=> 0
 		);
 
 		$this->db->insert('tbl_transaksi', $data);
