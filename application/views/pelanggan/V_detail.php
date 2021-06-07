@@ -70,6 +70,10 @@
         transform: scale(1);
     }
 
+    .btnreviewcenter {
+        text-align: center;
+    }
+
     .wrapper .option span {
         font-size: 20px;
         color: #808080;
@@ -314,16 +318,44 @@
                     </div>
                 </div>
                 <div id="status3" class="tabcontent">
+                    <?php
+                    $ongkir = $this->db->query("SELECT transaksi_ongkir FROM tbl_transaksi WHERE transaksi_id='$id';")->row_array();
+                    $total_bayar = $this->db->query("SELECT*, (transaksi_harga+transaksi_ongkir) as transaksi_total FROM tbl_transaksi WHERE transaksi_id='$id';")->row_array();
+                    ?>
                     <div class="card">
                         <div class="card-header bg-transparent">
                             <h3 class="mb-0">Pembayaran</h3>
+                        </div>
+                        <div class="wrapper">
+                            <?php if ($o['transaksi_paket'] == '1') : ?>
+                                <input class="p" type="radio" value="1" name="paket" id="option-1" checked>
+                            <?php else : ?>
+                                <input class="p" type="radio" value="1" name="paket" id="option-1">
+                            <?php endif; ?>
+                            <?php if ($o['transaksi_paket'] == '2') : ?>
+                                <input class="p" type="radio" value="2" name="paket" id="option-2" checked>
+                            <?php else : ?>
+                                <input class="p" type="radio" value="2" name="paket" id="option-2">
+                            <?php endif; ?>
+                            <label for="option-1" class="option option-1">
+                                <div class="dot"></div>
+                                <span>Kirim Product</span>
+                            </label>
+                            <label for="option-2" class="option option-2">
+                                <div class="dot"></div>
+                                <span>Ambil Sendiri</span>
+                            </label>
                         </div>
                         <div class="card-body">
                             <p>Silahkan melakukan transaksi sesuai harga yang di sepakati</p>
                             <?php if ($o['transaksi_harga'] == NULL || $o['transaksi_harga'] == '0') : ?>
                                 <h3>Harga Belum Ditentukan</h3>
                             <?php else : ?>
-                                <h3>Rp. <?= number_format($o['transaksi_harga']) ?></h3>
+                                <h3>Harga Barang : Rp. <?= number_format($o['transaksi_harga']) ?></h3>
+                                <?php if ($o['transaksi_paket'] == '1') : ?>
+                                    <h3>Ongkos Kirim : Rp.<?= number_format($ongkir['transaksi_ongkir']) ?></h3>
+                                <?php endif; ?>
+                                <h2><b>Total Dibayarkan : Rp.<?= number_format($total_bayar['transaksi_total']) ?></b></h2>
                             <?php endif ?>
                             <br>
                             <form method="post" action="<?= base_url('Order_pelanggan/upload_bukti') ?>" enctype="multipart/form-data">
@@ -440,34 +472,13 @@
                     <div class="card">
 
                         <div class="card-header bg-transparent">
-                            <h3 class="mb-0">Ambil / Kirim</h3>
+                            <h3 class="mb-0">Konfirmasi Pesanan</h3>
                         </div>
 
                         <div id="terima_p" class="card-body">
 
                             <?php if ($o['transaksi_terima'] == NULL) : ?>
-                                <div class="wrapper">
-                                    <?php if ($o['transaksi_paket'] == '1') : ?>
-                                        <input class="p" type="radio" value="1" name="paket" id="option-1" checked>
-                                    <?php else : ?>
-                                        <input class="p" type="radio" value="1" name="paket" id="option-1">
-                                    <?php endif; ?>
-                                    <?php if ($o['transaksi_paket'] == '2') : ?>
-                                        <input class="p" type="radio" value="2" name="paket" id="option-2" checked>
-                                    <?php else : ?>
-                                        <input class="p" type="radio" value="2" name="paket" id="option-2">
-                                    <?php endif; ?>
-                                    <label for="option-1" class="option option-1">
-                                        <div class="dot"></div>
-                                        <span>Kirim Product</span>
-                                    </label>
-                                    <label for="option-2" class="option option-2">
-                                        <div class="dot"></div>
-                                        <span>Ambil Sendiri</span>
-                                    </label>
-                                </div>
 
-                                <br>
                                 <?php
                                 $resi = $this->db->query("SELECT transaksi_resi FROM tbl_transaksi WHERE transaksi_id='$id';")->row_array();
                                 ?>
@@ -498,13 +509,23 @@
 
                             <?php else : ?>
 
-                                <div class="wrapper">
-                                    <?php if ($o['transaksi_paket'] == "1") { ?>
-                                        <h2>Kirim Paket</h2>
-                                    <?php } else { ?>
-                                        <h2>Ambil Sendiri</h2>
-                                    <?php } ?>
-                                    <h2>Paket Sudah diterima</h2>
+                                <h2 style="text-align: center;">Transaksi Anda Selesai</h2>
+                                <h2 style="text-align: center;">Terima kasih telah berbelanja di<br>UCARD Indonesia</h2>
+                                <br>
+                                <h2 style="text-align: center;">Tulis review tentang kami di Google</h2>
+                                <br>
+                                <div class="btnreviewcenter">
+                                    <a style="text-align: center;" href="https://g.page/r/Ce2lxSIiDOxWEAE/review">
+                                        <button class="btn btn-info">UCARD Surabaya</button>
+                                    </a>
+                                    <a style="text-align: center;" href="https://g.page/r/CTvioWQ51qDNEAg/review">
+                                        <button class="btn btn-danger">UCARD Semarang</button>
+                                        <br>
+                                        <br>
+                                    </a>
+                                    <a style="text-align: center;" href="https://g.page/r/CQCSzZXego0MEAg/review">
+                                        <button class="btn btn-success">UCARD Jakarta</button>
+                                    </a>
                                 </div>
 
                             <?php endif; ?>

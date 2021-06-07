@@ -312,6 +312,9 @@
                     </div>
                 </div>
             </div>
+            <?php
+            $ongkir = $this->db->query("SELECT transaksi_ongkir FROM tbl_transaksi WHERE transaksi_id='$id';")->row_array();
+            ?>
             <div id="status3" class="tabcontent">
                 <div class="card">
                     <div class="card-header bg-transparent">
@@ -329,7 +332,20 @@
                                     <button id="update_harga" class="btn btn-primary">Save</button>
                                 </td>
                                 <td><i id="alert"></i></td>
+                                <td>
+                                </td>
                             </tr>
+                            <tr></tr>
+                            <?php if ($o['transaksi_paket'] == '1') : ?>
+                                <tr>
+                                    <td>
+                                        <input type="number" name="ongkir" id="ongkir" placeholder="Masukkan ongkir" value="<?= $ongkir['transaksi_ongkir']; ?>">
+                                    </td>
+                                    <td>
+                                        <button type="submit" class="btn btn-primary btn-sm" id="updateOngkir">Update</button>
+                                    </td>
+                                </tr>
+                            <?php endif ?>
                         </table>
                         <br>
                         <?php foreach ($bank as $b) : ?>
@@ -508,17 +524,6 @@
                                         </div>
 
                                     <?php endif; ?>
-
-                                    <h3>Ongkir</h3>
-                                    <div class="form-group row">
-                                        <div class="col-sm-8 pr-1">
-                                            <input type="number" name="ongkir" id="ongkir" placeholder="Masukkan ongkir">
-                                        </div>
-                                        <div class="col-sm-4 pl-1">
-                                            <button type="submit" class="btn btn-primary mb-2 w-100" id="updateOngkir">Update</button>
-                                        </div>
-                                    </div>
-
                                     <br>
 
                                     <button style="width:100%;" class="btn btn-primary terima">Paket Sudah Diterima ?</button>
