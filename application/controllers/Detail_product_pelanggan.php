@@ -64,4 +64,14 @@ class Detail_product_pelanggan extends CI_Controller
 		$this->db->query("INSERT INTO tbl_status_transaksi VALUES (NULL,1,'$id_transaksi',2,NULL,$tanggal_ini,$tanggal_hangus) ");
 		redirect('Order_pelanggan/detail/' . $id_transaksi);
 	}
+	function checkStatus()
+	{
+		$id = $_POST['id'];
+		$status = $_POST['status'];
+		$chk = $this->db->query("SELECT max(transaksi_status_id) tsi FROM tbl_status_transaksi WHERE transaksi_order_id=" . $id)->row_array();
+
+		if ($chk['tsi'] !== $status) {
+			echo 'refresh';
+		}
+	}
 }

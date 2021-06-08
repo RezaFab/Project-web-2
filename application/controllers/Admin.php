@@ -9,6 +9,8 @@ class Admin extends CI_Controller
 
     function index()
     {
+        if (isset($_SESSION['admin_nama'])) redirect(base_url('Order'));
+        else if (isset($_SESSION['pelanggan_nama'])) redirect(base_url('Order_pelanggan'));
         $this->load->view('V_login');
     }
     function login()

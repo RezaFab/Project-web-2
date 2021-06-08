@@ -307,10 +307,10 @@
                                             ?>
                                         </tbody>
                                     </table>
-                                <?php
-                            endif;
-                                ?>
                                 </div>
+                            <?php
+                            endif;
+                            ?>
 
 
 
@@ -721,5 +721,30 @@
                 }
             });
         }
+    });
+</script>
+<?php
+$chk = $this->db->query("SELECT max(transaksi_status_id) tsi FROM tbl_status_transaksi WHERE transaksi_order_id=" . $this->uri->segment(3))->row_array();
+
+?>
+<script>
+    $(document).ready(function() {
+        setInterval(function() {
+            var id = $('#id').val();
+            var status = '<?= $chk['tsi']; ?>';
+            $.ajax({
+                type: 'POST',
+                url: '<?= base_url('Detail_product_pelanggan/checkStatus') ?>',
+                data: {
+                    id: id,
+                    status: status
+                },
+                success: function(data) {
+                    if (data === 'refresh') {
+                        location.reload();
+                    }
+                }
+            });
+        }, 5000);
     });
 </script>

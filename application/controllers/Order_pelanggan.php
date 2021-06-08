@@ -56,8 +56,8 @@ class Order_pelanggan extends CI_Controller
                   <button class="tablinks" onclick="detail(event, \'bukti\')">Bukti Transaksi</button>
                 </div>
 
-<div id="Detail" class="tabcontent">
-  <div class="row">
+                <div id="Detail" class="tabcontent">
+                <div class="row">
                     <div class="col-md-5">
                     <h2>Pelanggan</h2>
                     <hr>
@@ -96,28 +96,28 @@ class Order_pelanggan extends CI_Controller
                     <p>' . $get['transaksi_keterangan'] . '</p>
                     </div>
                 </div>
-</div>
+            </div>
 
-<div id="bukti" class="tabcontent">';
+            <div id="bukti" class="tabcontent">';
         if ($get['transaksi_bukti'] == NULL) {
             $html .= '<h3>Belum ada bukti transaksi</h3>';
         } else {
             $html .= '<h3>Bukti Transaksi</h3>
-    <img style="width: 60px;" src="' . base_url('assets/img/bank/' . $b['bank_image']) . '"> 
-    <table class="table">
-                          <tr>
-                            <th>Atas Nama</th>
-                            <th>No Rekening</th>
-                          </tr>
-                          <tr>
-                            <td>' . $b['bank_atas_nama'] . '</td>
-                            <td>' . $b['bank_no_rek'] . '</td>
-                          </tr>
-                        </table>
-    <img style="width:100%;" src="' . base_url('bukti_transaksi/' . $get['transaksi_bukti']) . '" >';
+                    <img style="width: 60px;" src="' . base_url('assets/img/bank/' . $b['bank_image']) . '"> 
+                    <table class="table">
+                                        <tr>
+                                            <th>Atas Nama</th>
+                                            <th>No Rekening</th>
+                                        </tr>
+                                        <tr>
+                                            <td>' . $b['bank_atas_nama'] . '</td>
+                                            <td>' . $b['bank_no_rek'] . '</td>
+                                        </tr>
+                                        </table>
+                    <img style="width:100%;" src="' . base_url('bukti_transaksi/' . $get['transaksi_bukti']) . '" >';
         }
         $html .= '
-</div>
+            </div>
                 
             </div>
             <div class="modal-footer">

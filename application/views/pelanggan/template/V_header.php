@@ -124,7 +124,7 @@
                 <div class="dropdown-header noti-title">
                   <h6 class="text-overflow m-0"><?= $_SESSION['pelanggan_nama'] ?></h6>
                 </div>
-                <a href="<?= base_url('Admin/logout_admin') ?>" class="dropdown-item">
+                <a href="<?= isset($_SESSION['admin_nama']) ? base_url('Admin/logout_admin') : base_url('Admin/logout_pelanggan') ?>" class="dropdown-item">
                   <i class="ni ni-user-run"></i>
                   <span>Logout</span>
                 </a>
