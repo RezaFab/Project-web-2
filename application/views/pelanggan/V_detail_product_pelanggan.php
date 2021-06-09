@@ -72,7 +72,7 @@
                             <p><?= $p['product_keterangan'] ?></p>
                         </div>
                         <br>
-                        <form method="post" onsubmit="if(document.getElementById('agree').checked) { return true; } else { alert('Tolong Baca dan Setujui Syarat & Ketentuan yang berlaku'); return false; }" action="<?= base_url('Detail_product_pelanggan/order') ?>">
+                        <form method="post" onsubmit="if(document.getElementById('agree').checked) { return true; } else { alert('Silahkan baca dan setujui syarat & ketentuan yang berlaku terlebih dahulu'); return false; }" action="<?= base_url('Detail_product_pelanggan/order') ?>">
                             <input type="hidden" value="<?= $p['product_id'] ?>" name="id_product">
                             <input type="hidden" value="<?= $_SESSION['pelanggan_nohp'] ?>" name="nohp">
                             <div class="form-group">

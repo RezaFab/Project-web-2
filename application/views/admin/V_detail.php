@@ -305,10 +305,10 @@
                                         ?>
                                     </tbody>
                                 </table>
-                            <?php
-                        endif;
-                            ?>
                             </div>
+                        <?php
+                        endif;
+                        ?>
                     </div>
                 </div>
             </div>

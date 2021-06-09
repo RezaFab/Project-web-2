@@ -122,7 +122,7 @@
                                             <?php if ($st['transaksi_status'] == '4') : ?>
                                                 <b>Sudah Lewat Tanggal</b>
                                             <?php else : ?>
-                                                <strong>Kirim Sebelum</strong>
+                                                <strong>Kirim sebelum</strong>
                                                 <b><?= date('d/m/Y H:m', $st['transaksi_tanggal_hangus']) ?></b>
                                             <?php endif; ?>
                                         <?php endif; ?>
@@ -183,9 +183,9 @@
                                         <p class=" text-sm mt-1 mb-0"><?= $s['status_keterangan'] ?></p>
                                         <?php if ($s['status_jangka_waktu'] != NULL) : ?>
                                             <?php if ($st['transaksi_status'] == '4') : ?>
-                                                <b>Sudah Lewat Tanggal</b>
+                                                <b>Sudah lewat tanggal</b>
                                             <?php else : ?>
-                                                <strong>Kirim Sebelum</strong>
+                                                <strong>Kirim sebelum</strong>
                                                 <b><?= date('d/m/Y H:m', $st['transaksi_tanggal_hangus']) ?></b>
                                             <?php endif; ?>
                                         <?php endif; ?>
@@ -199,7 +199,7 @@
                                 </div>
                             <?php else : ?>
                                 <div class="timeline-block">
-                                    <span style="background-color: grey;color: white;" class="timeline-step badge-success">
+                                    <span style="background-color: grey; color: white;" class="timeline-step badge-success">
                                         <i class="<?= $s['status_icon'] ?>"></i>
                                     </span>
                                     <div class="timeline-content">
@@ -348,14 +348,55 @@
                         </div>
                         <div class="card-body">
                             <p>Silahkan melakukan transaksi sesuai harga yang di sepakati</p>
+                            <h3>Silahkan pilih salah satu</h3>
+
+                            <input type="radio" name="opsibayar" id="opsibayarlunas">
+                            <label for="opsibayarlunas">Lunas</label>
+                            <br>
+                            <input type="radio" name="opsibayar" id="opsibayardp">
+                            <label for="opsibayardp">DP</label>
+
+                            <br>
+                            <br>
                             <?php if ($o['transaksi_harga'] == NULL || $o['transaksi_harga'] == '0') : ?>
                                 <h3>Harga Belum Ditentukan</h3>
                             <?php else : ?>
-                                <h3>Harga Barang : Rp. <?= number_format($o['transaksi_harga']) ?></h3>
-                                <?php if ($o['transaksi_paket'] == '1') : ?>
-                                    <h3>Ongkos Kirim : Rp.<?= number_format($ongkir['transaksi_ongkir']) ?></h3>
-                                <?php endif; ?>
-                                <h2><b>Total Dibayarkan : Rp.<?= number_format($total_bayar['transaksi_total']) ?></b></h2>
+                                <table style="width: 100%;">
+                                    <tr>
+                                        <td style="width: 30%;">
+                                            <h3>Harga barang:</h3>
+                                        </td>
+                                        <td>
+                                            Rp <?= number_format($o['transaksi_harga'], 2, ',', '.') ?>
+                                        </td>
+                                    </tr>
+                                    <?php if ($o['transaksi_paket'] == '1') : ?>
+                                        <tr>
+                                            <td>
+                                                <h3>Ongkos kirim:</h3>
+                                            </td>
+                                            <td>
+                                                Rp <?= number_format($ongkir['transaksi_ongkir'], 2, ',', '.') ?>
+                                            </td>
+                                        </tr>
+                                    <?php endif; ?>
+                                    <tr>
+                                        <td>
+                                            <h3>Total:</h3>
+                                        </td>
+                                        <td>
+                                            Rp <?= number_format($total_bayar['transaksi_total'], 2, ',', '.') ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h3>Harus dibayar:</h3>
+                                        </td>
+                                        <td id="totalbayar">
+                                            Rp <?= number_format($total_bayar['transaksi_total'], 2, ',', '.') ?>
+                                        </td>
+                                    </tr>
+                                </table>
                             <?php endif ?>
                             <br>
                             <form method="post" action="<?= base_url('Order_pelanggan/upload_bukti') ?>" enctype="multipart/form-data">
@@ -424,15 +465,19 @@
                                     <b><?= $o['transaksi_atas_nama'] ?></b>
                                     <img style="width: 100%;" src="<?= base_url('bukti_transaksi/' . $o['transaksi_bukti']) ?>">
                                 <?php endif ?>
-                                <br>
-                                <br>
                                 <?php if ($o['transaksi_terima'] !== '1') : ?>
+                                    <input type="hidden" value="<?= $this->uri->segment(3) ?>" name="id_transaksi">
+
                                     <div class="form-group">
-                                        <h3>Upload Bukti Pembayaran</h3>
-                                        <input placeholder="Atas Nama" type="text" required="" name="atas_nama" class="form-control">
-                                        <br>
+                                        <p class="mb-1">Atas Nama</p>
+                                        <input id="atas_nama" placeholder="Misal: Reza Fabriza Lesmana" type="text" name="atas_nama" class="form-control" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <p class="mb-1">Jumlah yang ditransfer</p>
+                                        <input id="transfer" placeholder="Misal: 500000" type="number" name="transfer" class="form-control" required>
+                                    </div>
+                                    <div class="form-group">
                                         <input type="file" required="" name="bukti" class="form-control">
-                                        <input type="hidden" value="<?= $this->uri->segment(3) ?>" name="id_transaksi">
                                     </div>
                                     <br>
                                     <button type="submit" style="width: 100%;" class="btn btn-primary">Kirim</button>
@@ -449,7 +494,7 @@
                         <div class="card-body">
                             <?php
                             $ctk = $this->db->query("SELECT * FROM tbl_status_transaksi WHERE transaksi_status_id = '4' AND transaksi_order_id = '$id_transaksi' ")->row_array();
-                            if ($ctk['transaksi_status'] == '1') :
+                            if (!empty($ctk['transaksi_status']) && $ctk['transaksi_status'] == '1') :
                             ?>
                                 <div style="display: flex;justify-content: center;">
                                     <img style="width:50%;margin: auto;" src="<?= base_url('assets/img/gifcheck.gif') ?>" alt="">
@@ -729,6 +774,14 @@ $chk = $this->db->query("SELECT max(transaksi_status_id) tsi FROM tbl_status_tra
 ?>
 <script>
     $(document).ready(function() {
+        $('#opsibayarlunas').click(function() {
+            $('#totalbayar').html('Rp  ' +
+                '<?= number_format($total_bayar["transaksi_total"], 2, ',', '.'); ?>');
+        });
+        $('#opsibayardp').click(function() {
+            $('#totalbayar').html('Rp  ' + '<?= number_format($total_bayar["transaksi_total"] * 0.5, 2, ',', '.'); ?>');
+        });
+
         setInterval(function() {
             var id = $('#id').val();
             var status = '<?= $chk['tsi']; ?>';
