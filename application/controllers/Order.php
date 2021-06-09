@@ -10,17 +10,6 @@ class Order extends CI_Controller
         }
     }
 
-    function tes()
-    {
-        $this->load->library('email');
-
-        $this->email->from('amarizky02@gmail.com', 'noreply');
-        $this->email->to('yogacheater@gmail.com');
-        $this->email->subject('Email Test');
-        $this->email->message('Testing the email class.');
-        $this->email->send();
-    }
-
     function index()
     {
         $x['title'] = "Order";

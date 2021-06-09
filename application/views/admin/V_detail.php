@@ -266,6 +266,7 @@
                         $id = $this->uri->segment(3);
                         $design = $this->db->query("SELECT * FROM tbl_user_design WHERE design_transaksi_id = '$id' ")->result_array();
                         $upload = $this->db->query("SELECT * FROM tbl_design_kirim WHERE design_transaksi_id = '$id' ")->result_array();
+                        $link = $this->db->query("SELECT transaksi_link_desain FROM tbl_transaksi WHERE transaksi_id='$id';")->row_array();
                         if (!$design && !$upload) {
                             echo '<h2>Belum ada design yang dikirim</h2>';
                         }
@@ -309,7 +310,26 @@
                         <?php
                         endif;
                         ?>
+                        <div>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <label for="link" class="col-form-label">Link File:</label>
+                                    </td>
+                                    <td>
+                                        <input size="35%" type="text" style="border: 1px solid #ccc; border-radius: 4px;" readonly class="form-control-plaintext" id="link" value="<?= $link['transaksi_link_desain']; ?>">
+
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-primary" onclick="copy()">Copy</button>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
+                    <?php
+
+                    ?>
                 </div>
             </div>
             <?php
@@ -895,4 +915,15 @@
             }
         });
     });
+
+    function copy() {
+        var copyText = document.getElementById("link");
+
+        copyText.select();
+        copyText.setSelectionRange(0, 99999);
+
+        document.execCommand("copy");
+
+        alert("Copied the text: " + copyText.value);
+    }
 </script>

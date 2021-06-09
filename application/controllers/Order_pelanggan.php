@@ -323,4 +323,11 @@ class Order_pelanggan extends CI_Controller
 
         $this->db->set('verif_kirimambil', $user)->where('transaksi_id', $id)->update('tbl_verifikasi');
     }
+
+    function updateLink()
+    {
+        $id = $this->input->post('id');
+        $link = $this->input->post('link');
+        $this->db->query("UPDATE tbl_transaksi SET transaksi_link_desain = '$link' WHERE transaksi_id = '$id';");
+    }
 }

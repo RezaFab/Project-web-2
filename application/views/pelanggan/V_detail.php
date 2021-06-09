@@ -280,7 +280,7 @@
                             endif;
                             ?>
                             <?php if ($upload) : ?>
-                                <h3>Uploaded File & Design</h3>
+                                <h3>Uploaded File/Link Design </h3>
                                 <br>
                                 <div class="table-responsive">
                                     <table class="table table-flush" id="datatable-basic">
@@ -311,6 +311,18 @@
                             <?php
                             endif;
                             ?>
+                            <?php
+                            $link = $this->db->query("SELECT transaksi_link_desain FROM tbl_transaksi WHERE transaksi_id='$id';")->row_array();
+                            ?>
+                            <h3>Link File </h3>
+                            <div class="form-group row">
+                                <div class="col-sm-8 pr-1">
+                                    <input type="text" class="form-control" id="link" placeholder="link file" value="<?= $link['transaksi_link_desain']; ?>">
+                                </div>
+                                <div class="col-sm-4 pl-1">
+                                    <button type="submit" class="btn btn-primary mb-2 w-100" id="updateLink">Save</button>
+                                </div>
+                            </div>
 
 
 
@@ -350,10 +362,10 @@
                             <p>Silahkan melakukan transaksi sesuai harga yang di sepakati</p>
                             <h3>Silahkan pilih salah satu</h3>
 
-                            <input type="radio" name="opsibayar" id="opsibayarlunas">
+                            <input type="radio" name="opsibayar" id="opsibayarlunas" required>
                             <label for="opsibayarlunas">Lunas</label>
                             <br>
-                            <input type="radio" name="opsibayar" id="opsibayardp">
+                            <input type="radio" name="opsibayar" id="opsibayardp" required>
                             <label for="opsibayardp">DP</label>
 
                             <br>
@@ -747,6 +759,24 @@
     });
 </script>
 <script>
+    $('#updateLink').click(function(e) {
+        e.preventDefault();
+
+        var id = $('#id').val();
+        var link = $('#link').val();
+
+        $.ajax({
+            type: 'POST',
+            url: "<?= base_url('Order_pelanggan/updateLink') ?>",
+            data: {
+                id: id,
+                link: link
+            },
+            success: function(data) {
+                alert('Link Berhasil Di Update');
+            }
+        });
+    });
     $('.terima').click(function() {
         if (confirm('Apakah anda yakin paket sudah diterima?')) {
             var val = 1;
