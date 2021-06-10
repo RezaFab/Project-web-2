@@ -24,4 +24,14 @@ class Data extends CI_Controller
         $this->load->view('admin/V_data_produk', $data);
         $this->load->view('admin/template/V_footer');
     }
+    function penjualan()
+    {
+        $data['data'] = $this->db
+            ->query("SELECT pe.pelanggan_nama, pr.product_nama, tr.transaksi_atas_nama, tr.transaksi_tanggal, tr.transaksi_jumlah, tr.transaksi_harga
+                     FROM tbl_transaksi tr JOIN tbl_pelanggan pe ON (tr.transaksi_nohp=pe.pelanggan_nohp) JOIN tbl_product pr ON (tr.transaksi_product_id=pr.product_id);")
+            ->result_array();
+        $this->load->view('admin/template/V_header', ['title' => 'Data Produk']);
+        $this->load->view('admin/V_data_penjualan', $data);
+        $this->load->view('admin/template/V_footer');
+    }
 }

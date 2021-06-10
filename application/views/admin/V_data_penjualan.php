@@ -15,12 +15,7 @@
                     <table style="width: 100%;">
                         <tr>
                             <td style="text-align: left;">
-                                <h3 class="mb-0" id="judul">Data Produk</h3>
-                            </td>
-                            <td style="text-align: right;">
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambah">
-                                    <i class="fa fa-plus"></i>
-                                </button>
+                                <h3 class="mb-0" id="judul">Data Penjualan</h3>
                             </td>
                         </tr>
                     </table>
@@ -32,10 +27,12 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Kode</th>
-                                <th>Nama</th>
-                                <th>Gambar</th>
-                                <th>Harga</th>
+                                <th>Nama Pelanggan</th>
+                                <th>Atas Nama</th>
+                                <th>Nama Produk</th>
+                                <th>Tanggal</th>
+                                <th>Jumlah</th>
+                                <th>Total</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -44,10 +41,12 @@
                             ?>
                                 <tr>
                                     <td><?= $n++ ?></td>
-                                    <td><?= $d['product_kode'] ?></td>
+                                    <td><?= $d['pelanggan_nama'] ?></td>
+                                    <td><?= $d['transaksi_atas_nama'] ?? "-" ?></td>
                                     <td><?= $d['product_nama'] ?></td>
-                                    <td><img src="<?= base_url('image/' . $d['product_image']); ?>" width="100px" alt=""></td>
-                                    <td><?= $d['product_harga'] ?></td>
+                                    <td><?= $d['transaksi_tanggal'] ?></td>
+                                    <td><?= $d['transaksi_jumlah'] ?></td>
+                                    <td><?= $d['transaksi_harga'] ?></td>
                                 </tr>
                             <?php
                             endforeach;
