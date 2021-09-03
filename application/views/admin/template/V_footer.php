@@ -120,7 +120,7 @@ function notifyMe() {
   Notification.requestPermission();
  else {
   var notification = new Notification('UCARD INDONESIA', {
-   icon: 'https://amarizky.site/assets/img/icon.png',
+   icon: 'https://amarizky.com/assets/img/icon.png',
    body: 'Ada pesanan baru!',
   });
   notification.onclick = function() {

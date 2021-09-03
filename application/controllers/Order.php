@@ -589,7 +589,7 @@ body{background-color:#f5f5f5;text-align:center}.btn{color:#fff;background-color
                 // </head>
                 // <body>
                 //     <center>
-                //     <img src="https://amarizky.site/assets/img/logo-kartuidcard-blue.png" alt="">
+                //     <img src="https://amarizky.com/assets/img/logo-kartuidcard-blue.png" alt="">
                 //     <hr>
                 //     <br>
 

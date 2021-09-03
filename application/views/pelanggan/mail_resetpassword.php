@@ -70,7 +70,7 @@
     <div class="text-center">
         <div class="container">
             <div class="m-auto p-10 text-center">
-                <img src="https://amarizky.site/assets/img/logo-kartuidcard-white.png" alt="">
+                <img src="https://amarizky.com/assets/img/logo-kartuidcard-white.png" alt="">
             </div>
             <div class="m-10 body">
                 <h2 class="text-center">Halo, [nama]!</h2>
@@ -81,7 +81,7 @@
                 </div>
                 <p>Anda juga bisa menyetel ulang kata sandi Anda dengan menekan tombol di bawah ini.</p>
                 <div class="text-center">
-                    <a href="https://amarizky.site/Password?email=[email]&resetcode=[kode]">
+                    <a href="https://amarizky.com/Password?email=[email]&resetcode=[kode]">
                         <button class="btn">Reset Password</button>
                     </a>
                 </div>
