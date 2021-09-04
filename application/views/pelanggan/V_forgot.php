@@ -46,6 +46,9 @@
                         <form id="reset">
                             <div class="card-body px-lg-5 py-lg-5">
                                 <div id="alert"></div>
+                                <div class="form-group mb-3">
+                                    <a class="btn btn-primary mb-3" id="btnBack" href="<?= base_url('Admin'); ?>">&laquo; Kembali</a>
+                                </div>
                                 <p id="phint">Masukkan email yang Anda gunakan pada saat mendaftar</p>
                                 <div class="form-group mb-3">
                                     <div class="input-group input-group-merge input-group-alternative">

@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="<?= base_url('assets/admin/vendor/@fortawesome/fontawesome-free/css/all.min.css') ?>" type="text/css">
     <!-- Argon CSS -->
     <link rel="stylesheet" href="<?= base_url('assets/admin/css/argon.css?v=1.2.0') ?>" type="text/css">
+    <link rel="stylesheet" href="<?= base_url('assets/admin/css/login.css') ?>" type="text/css">
 </head>
 
 <body class="bg-default">
@@ -47,6 +48,9 @@
                             <div class="card-body px-lg-5 py-lg-5">
                                 <div id="alert"></div>
                                 <div class="form-group mb-3">
+                                    <a class="btn btn-primary mb-3" id="btnBack" href="<?= base_url(); ?>">&laquo; Kembali</a>
+                                </div>
+                                <div class="form-group mb-3">
                                     <div class="input-group input-group-merge input-group-alternative">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="ni ni-circle-08"></i></span>
@@ -66,7 +70,7 @@
                                     <a class="w-100" style="color: #3e3e3e;" href="<?= base_url('Password'); ?>">Lupa password?</a>
                                 </div>
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-primary my-4">Login</button>
+                                    <button type="submit" class="btn btn-primary mt-4">Login</button>
                                 </div>
                             </div>
                         </form>

@@ -536,7 +536,7 @@
                                         <h3>Nomor Resi</h3>
                                         <div class="form-group row">
                                             <div class="col-sm-8 pr-1">
-                                                <input type="text" class="form-control" id="resi" placeholder="Nomor Resi" value="<?= $resi['transaksi_resi'] ?? "Belum ada resi"; ?>">
+                                                <input type="text" class="form-control" id="resi" placeholder="Nomor Resi" value="<?= empty($resi['transaksi_resi']) && is_null(empty($resi['transaksi_resi'])) ? "Belum ada resi" : $resi['transaksi_resi']; ?>">
                                             </div>
                                             <div class="col-sm-4 pl-1">
                                                 <button type="submit" class="btn btn-primary mb-2 w-100" id="updateResi">Update</button>
