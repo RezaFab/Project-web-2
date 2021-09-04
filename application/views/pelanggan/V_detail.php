@@ -572,16 +572,16 @@
                                 <h2 style="text-align: center;">Tulis review tentang kami di Google</h2>
                                 <br>
                                 <div class="btnreviewcenter">
-                                    <a style="text-align: center;" href="https://g.page/r/Ce2lxSIiDOxWEAE/review">
-                                        <button class="btn btn-info">UCARD Surabaya</button>
+                                    <a class="btn btn-info" style="text-align: center;" href="https://g.page/r/Ce2lxSIiDOxWEAE/review">
+                                        UCARD Surabaya
                                     </a>
-                                    <a style="text-align: center;" href="https://g.page/r/CTvioWQ51qDNEAg/review">
-                                        <button class="btn btn-danger">UCARD Semarang</button>
-                                        <br>
-                                        <br>
+                                    <a class="btn btn-danger" style="text-align: center;" href="https://g.page/r/CTvioWQ51qDNEAg/review">
+                                        UCARD Semarang
                                     </a>
-                                    <a style="text-align: center;" href="https://g.page/r/CQCSzZXego0MEAg/review">
-                                        <button class="btn btn-success">UCARD Jakarta</button>
+                                    <br>
+                                    <br>
+                                    <a class="btn btn-success" style="text-align: center;" href="https://g.page/r/CQCSzZXego0MEAg/review">
+                                        UCARD Jakarta
                                     </a>
                                 </div>
 
