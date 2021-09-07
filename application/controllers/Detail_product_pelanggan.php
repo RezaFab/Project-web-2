@@ -37,7 +37,7 @@ class Detail_product_pelanggan extends CI_Controller
 
 		// $this->db->query(
 		// 	"INSERT INTO tbl_transaksi VALUES (NULL,'$nohp','$id_product','$tanggal',
-		// 	'$jumlah','$keterangan','$tot_h',NULL,NULL,NULL,NULL,NULL,1) "
+		// 	'$jumlah','$keterangan','$personalisasi','$coating','$finishing','$function','$packaging','$tot_h',NULL,NULL,NULL,NULL,NULL,1) "
 		// );
 
 		$data = array(
