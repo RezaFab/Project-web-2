@@ -35,6 +35,26 @@
         position: relative;
     }
 
+    .grid-container {
+        display: inline-grid;
+        grid-template-columns: auto auto;
+        background-color: #FFFFFF;
+        width: 100%;
+    }
+
+    .grid-item {
+        width: 100%;
+        background-color: #FFFFFF;
+        border: 0px solid rgba(202, 0, 0, 0.8);
+        padding: 20px;
+        font-size: 15px;
+    }
+
+    .item1 {
+        width: 100%;
+        grid-column: 2;
+    }
+
     .wrapper .option .dot::before {
         position: absolute;
         content: "";
@@ -240,6 +260,33 @@
                                 <p><?= $o['transaksi_jumlah'] ?></p>
                                 <b>Keterangan</b>
                                 <p><?= $o['transaksi_keterangan'] ?></p>
+                                <div class="grid-container">
+                                    <div class="grid-item">
+                                        <b>Personalisasi</b>
+                                        <p><?= $o['transaksi_personalisasi'] ?></p>
+                                    </div>
+                                    <div class="grid-item">
+                                        <b>Coating</b>
+                                        <p><?= $o['transaksi_coating'] ?></p>
+                                    </div>
+                                    <div class="grid-item">
+                                        <b>Finishing</b>
+                                        <p><?= $o['transaksi_finishing'] ?></p>
+                                    </div>
+                                    <div class="grid-item">
+                                        <b>Function</b>
+                                        <p><?= $o['transaksi_function'] ?></p>
+                                    </div>
+                                    <div class="grid-item">
+                                        <b>Packaging</b>
+                                        <p><?= $o['transaksi_packaging'] ?></p>
+                                    </div>
+                                    <div class="grid-item">
+                                        <b>Ambil/Kirim</b>
+                                        <p><?= $o['transaksi_paket'] ?></p>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
