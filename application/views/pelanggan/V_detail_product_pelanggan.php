@@ -66,7 +66,7 @@
                             <p><?= $p['product_nama'] ?></p>
                             <b>Deskripsi</b>
                             <p><?= $p['product_deskripsi'] ?></p>
-                            <b>Keungulan</b>
+                            <b>Keunggulan</b>
                             <p><?= $p['product_keunggulan'] ?></p>
                             <b>Keterangan</b>
                             <p><?= $p['product_keterangan'] ?></p>
