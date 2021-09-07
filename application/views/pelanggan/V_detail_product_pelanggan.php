@@ -193,7 +193,7 @@
                                     <br><br>
                                     <input type="radio" id="kirim" placeholder="status" name="status" value="1">
                                     <label for="kirim">Kirim Product</label><br>
-                                    <input type="radio" id="ambil" placeholder="status" name="Status" value="2">
+                                    <input type="radio" id="ambil" placeholder="status" name="status" value="2">
                                     <label for="ambil">Ambil Sendiri</label>
                                 </div>
                             </div>

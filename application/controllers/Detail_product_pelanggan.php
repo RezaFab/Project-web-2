@@ -34,6 +34,7 @@ class Detail_product_pelanggan extends CI_Controller
 		$finishing = $this->input->post('finishing');
 		$function = $this->input->post('function');
 		$packaging = $this->input->post('packaging');
+		$status = $this->input->post('status');
 
 		// $this->db->query(
 		// 	"INSERT INTO tbl_transaksi VALUES (NULL,'$nohp','$id_product','$tanggal',
@@ -56,7 +57,7 @@ class Detail_product_pelanggan extends CI_Controller
 			'transaksi_bank' 				=> null,
 			'transaksi_atas_nama' 			=> null,
 			'transaksi_bukti' 				=> null,
-			'transaksi_paket' 				=> null,
+			'transaksi_paket' 				=> $status,
 			'transaksi_terima' 				=> null,
 			'transaksi_new' 				=> 1,
 			'transaksi_resi' 				=> null,
