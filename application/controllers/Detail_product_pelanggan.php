@@ -29,11 +29,11 @@ class Detail_product_pelanggan extends CI_Controller
 		$harga = $this->input->post('harga');
 		$tot_h = $harga * $jumlah;
 		$tanggal = date('Y-m-d');
-		$personalisasi = $this->input->post('transaksi_personalisasi');
-		$coating = $this->input->post('transaksi_coating');
-		$finishing = $this->input->post('transaksi_finishing');
-		$function = $this->input->post('transaksi_function');
-		$packaging = $this->input->post('transaksi_packaging');
+		$personalisasi = $this->input->post('personalisasi');
+		$coating = $this->input->post('coating');
+		$finishing = $this->input->post('finishing');
+		$function = $this->input->post('function');
+		$packaging = $this->input->post('packaging');
 
 		// $this->db->query(
 		// 	"INSERT INTO tbl_transaksi VALUES (NULL,'$nohp','$id_product','$tanggal',
