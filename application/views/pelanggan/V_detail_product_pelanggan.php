@@ -106,8 +106,7 @@
                             <div class="grid-container">
                                 <div class="grid-item">
                                     <b>Personalisasi</b>
-                                    <br>
-                                    <br>
+                                    <br><br>
                                     <input type="radio" id="persona1" placeholder="Personalisasi" name="persona1" value="1">
                                     <label for="persona1">Blanko</label><br>
                                     <input type="radio" id="persona2" placeholder="Personalisasi" name="persona2" value="2">
