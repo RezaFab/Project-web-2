@@ -549,15 +549,16 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <a class="btn btn-success" style="width:100%;" style="text-align: center;" href="https://cekresi.com/">
+                                        Cek Resi
+                                    </a>
                                 <?php endif; ?>
 
                                 <br>
 
                                 <div id="paket_terima">
                                     <!-- <button style="width:100%;display:none;" class="btn btn-primary terima">Paket Sudah Diterima</button> -->
-                                    <a class="btn btn-success" style="width:100%;" style="text-align: center;" href="https://cekresi.com/">
-                                        Cek Resi
-                                    </a>
+
                                     <br>
                                     <br>
                                     <?php

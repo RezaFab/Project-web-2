@@ -107,18 +107,17 @@
                                 <div class="grid-item">
                                     <b>Personalisasi</b>
                                     <br><br>
-                                    <div class="form-group">
-                                        <input type="radio" id="persona1" placeholder="Personalisasi" name="personalisasi" value="1">
-                                        <label for="persona1">Blanko</label><br>
-                                        <input type="radio" id="persona2" placeholder="Personalisasi" name="personalisasi" value="2">
-                                        <label for="persona2">Nomerator</label><br>
-                                        <input type="radio" id="persona3" placeholder="Personalisasi" name="personalisasi" value="3">
-                                        <label for="persona3">Barcode</label><br>
-                                        <input type="radio" id="persona4" placeholder="Personalisasi" name="personalisasi" value="4">
-                                        <label for="persona4">Data</label><br>
-                                        <input type="radio" id="persona5" placeholder="Personalisasi" name="personalisasi" value="5">
-                                        <label for="persona5">Data + Foto</label>
-                                    </div>
+                                    <input type="radio" id="persona1" placeholder="Personalisasi" name="personalisasi" value="1">
+                                    <label for="persona1">Blanko</label><br>
+                                    <input type="radio" id="persona2" placeholder="Personalisasi" name="personalisasi" value="2">
+                                    <label for="persona2">Nomerator</label><br>
+                                    <input type="radio" id="persona3" placeholder="Personalisasi" name="personalisasi" value="3">
+                                    <label for="persona3">Barcode</label><br>
+                                    <input type="radio" id="persona4" placeholder="Personalisasi" name="personalisasi" value="4">
+                                    <label for="persona4">Data</label><br>
+                                    <input type="radio" id="persona5" placeholder="Personalisasi" name="personalisasi" value="5">
+                                    <label for="persona5">Data + Foto</label>
+
                                 </div>
                                 <div class="grid-item">
                                     <b>Coating</b>
@@ -133,27 +132,27 @@
                                 <div class="grid-item">
                                     <b>Finishing</b>
                                     <br><br>
-                                    <input type="checkbox" id="finish1" placeholder="Finishing" name="finishing" value="1">
+                                    <input type="radio" id="finish1" placeholder="Finishing" name="finishing" value="1">
                                     <label for="finish1">Tidak ada</label><br>
-                                    <input type="checkbox" id="finish2" placeholder="Finishing" name="finishing" value="2">
+                                    <input type="radio" id="finish2" placeholder="Finishing" name="finishing" value="2">
                                     <label for="finish2">Urutkan</label><br>
-                                    <input type="checkbox" id="finish3" placeholder="Finishing" name="finishing" value="3">
+                                    <input type="radio" id="finish3" placeholder="Finishing" name="finishing" value="3">
                                     <label for="finish3">Label Gosok</label><br>
-                                    <input type="checkbox" id="finish4" placeholder="Finishing" name="finishing" value="4">
+                                    <input type="radio" id="finish4" placeholder="Finishing" name="finishing" value="4">
                                     <label for="finish4">Plong Oval</label><br>
-                                    <input type="checkbox" id="finish5" placeholder="Finishing" name="finishing" value="5">
+                                    <input type="radio" id="finish5" placeholder="Finishing" name="finishing" value="5">
                                     <label for="finish5">Plong Bulat</label><br>
-                                    <input type="checkbox" id="finish6" placeholder="Finishing" name="finishing" value="6">
+                                    <input type="radio" id="finish6" placeholder="Finishing" name="finishing" value="6">
                                     <label for="finish6">Copy Data RFID</label><br>
-                                    <input type="checkbox" id="finish7" placeholder="Finishing" name="finishing" value="7">
+                                    <input type="radio" id="finish7" placeholder="Finishing" name="finishing" value="7">
                                     <label for="finish7">Emboss Silver</label><br>
-                                    <input type="checkbox" id="finish8" placeholder="Finishing" name="finishing" value="8">
+                                    <input type="radio" id="finish8" placeholder="Finishing" name="finishing" value="8">
                                     <label for="finish8">Emboss Gold</label><br>
-                                    <input type="checkbox" id="finish9" placeholder="Finishing" name="finishing" value="9">
+                                    <input type="radio" id="finish9" placeholder="Finishing" name="finishing" value="9">
                                     <label for="finish9">Panel</label><br>
-                                    <input type="checkbox" id="finish10" placeholder="Finishing" name="finishing" value="10">
+                                    <input type="radio" id="finish10" placeholder="Finishing" name="finishing" value="10">
                                     <label for="finish10">Hot Print</label><br>
-                                    <input type="checkbox" id="finish11" placeholder="Finishing" name="finishing" value="11">
+                                    <input type="radio" id="finish11" placeholder="Finishing" name="finishing" value="11">
                                     <label for="finish11">Swipe</label><br>
                                 </div>
                                 <div class="grid-item">
@@ -196,6 +195,7 @@
                                     <input type="radio" id="ambil" placeholder="Ambil/Kirim" name="Status" value="2">
                                     <label for="ambil">Ambil Sendiri</label>
                                 </div>
+
                             </div>
                             <div class="form-group">
                                 <textarea class="form-control" name="keterangan" placeholder="Keterangan"></textarea>
