@@ -18,6 +18,30 @@
         font-size: 17px;
     }
 
+    .grid-container {
+        display: inline-grid;
+        grid-template-columns: auto auto;
+        background-color: #FFFFFF;
+        width: 100%;
+    }
+
+    .grid-item {
+        width: 100%;
+        background-color: #FFFFFF;
+        border: 0px solid rgba(202, 0, 0, 0.8);
+        padding: 20px;
+        font-size: 15px;
+    }
+
+    .item1 {
+        width: 100%;
+        grid-column: 2;
+    }
+
+    .solid {
+        border-style: solid;
+    }
+
     /* Change background color of buttons on hover */
     .tab button:hover {
         background-color: #ddd;
@@ -68,7 +92,7 @@
                             <p><?= $p['product_deskripsi'] ?></p>
                             <b>Keunggulan</b>
                             <p><?= $p['product_keunggulan'] ?></p>
-                            <b>Keterangan Tambahan</b>
+                            <b>Keterangan</b>
                             <p><?= $p['product_keterangan'] ?></p>
                         </div>
                         <br>
@@ -78,6 +102,26 @@
                             <div class="form-group">
                                 <input type="number" placeholder="jumlah" name="jumlah" class="form-control">
                                 <input type="hidden" value="<?= $p['product_harga'] ?>" name="harga">
+                            </div>
+                            <div class="grid-container">
+                                <div class="grid-item">
+                                    <b>Personalisasi</b>
+                                    <br>
+                                    <br>
+                                    <input type="radio" id="persona1" placeholder="Personalisasi" name="persona1" value="1">
+                                    <label for="persona1">Blanko</label><br>
+                                    <input type="radio" id="persona2" placeholder="Personalisasi" name="persona2" value="2">
+                                    <label for="persona2">Nomerator</label><br>
+                                    <input type="radio" id="persona3" placeholder="Personalisasi" name="persona3" value="3">
+                                    <label for="persona3">Barcode</label><br>
+                                    <input type="radio" id="persona4" placeholder="Personalisasi" name="persona4" value="4">
+                                    <label for="persona4">Data</label><br>
+                                    <input type="radio" id="persona5" placeholder="Personalisasi" name="persona5" value="5">
+                                    <label for="persona5">Data + Foto</label>
+                                </div>
+                                <div class="grid-item">
+                                    <b> </b>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <textarea class="form-control" name="keterangan" placeholder="Keterangan"></textarea>
