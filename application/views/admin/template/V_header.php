@@ -7,7 +7,7 @@ $h = $this->db->query("SELECT count(transaksi_id) AS h FROM tbl_transaksi WHERE 
 ?>
 <!DOCTYPE html>
 <html>
-
+<!-- buat push doang -->
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
