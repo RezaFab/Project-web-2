@@ -252,7 +252,7 @@
                                 <p><?= $p['product_nama'] ?></p>
                                 <b>Deskripsi</b>
                                 <p><?= $p['product_deskripsi'] ?></p>
-                                <b>Keungulan</b>
+                                <b>Keunggulan</b>
                                 <p><?= $p['product_keunggulan'] ?></p>
                                 <b>Keterangan</b>
                                 <p><?= $p['product_keterangan'] ?></p>
@@ -263,27 +263,111 @@
                                 <div class="grid-container">
                                     <div class="grid-item">
                                         <b>Personalisasi</b>
-                                        <p><?= $o['transaksi_personalisasi'] ?></p>
+                                        <p><?php
+                                            if ($o['transaksi_personalisasi'] == 1) {
+                                                echo "Blanko";
+                                            } elseif ($o['transaksi_personalisasi'] == 2) {
+                                                echo "Nomerator";
+                                            } elseif ($o['transaksi_personalisasi'] == 3) {
+                                                echo "Barcode";
+                                            } elseif ($o['transaksi_personalisasi'] == 4) {
+                                                echo "Data";
+                                            } elseif ($o['transaksi_personalisasi'] == 5) {
+                                                echo "Data + Foto";
+                                            } else {
+                                                echo "Tidak Diketahui";
+                                            } ?></p>
                                     </div>
                                     <div class="grid-item">
                                         <b>Coating</b>
-                                        <p><?= $o['transaksi_coating'] ?></p>
+                                        <p><?php
+                                            if ($o['transaksi_coating'] == 1) {
+                                                echo "Glossy";
+                                            } elseif ($o['transaksi_coating'] == 2) {
+                                                echo "Doff";
+                                            } elseif ($o['transaksi_coating'] == 3) {
+                                                echo "Glossy + Doff";
+                                            } else {
+                                                echo "Tidak Diketahui";
+                                            } ?></p>
                                     </div>
                                     <div class="grid-item">
                                         <b>Finishing</b>
-                                        <p><?= $o['transaksi_finishing'] ?></p>
+                                        <p><?php
+                                            if ($o['transaksi_finishing'] == 1) {
+                                                echo "Tidak Ada";
+                                            } elseif ($o['transaksi_finishing'] == 2) {
+                                                echo "Urutkan";
+                                            } elseif ($o['transaksi_finishing'] == 3) {
+                                                echo "Label Gosok";
+                                            } elseif ($o['transaksi_finishing'] == 4) {
+                                                echo "Plong Oval";
+                                            } elseif ($o['transaksi_finishing'] == 5) {
+                                                echo "Plong Bulat";
+                                            } elseif ($o['transaksi_finishing'] == 6) {
+                                                echo "Urutkan";
+                                            } elseif ($o['transaksi_finishing'] == 7) {
+                                                echo "Emboss Silver";
+                                            } elseif ($o['transaksi_finishing'] == 8) {
+                                                echo "Emboss Gold";
+                                            } elseif ($o['transaksi_finishing'] == 9) {
+                                                echo "Panel";
+                                            } elseif ($o['transaksi_finishing'] == 10) {
+                                                echo "Hot Print";
+                                            } elseif ($o['transaksi_finishing'] == 11) {
+                                                echo "Swipe";
+                                            } else {
+                                                echo "Tidak Diketahui";
+                                            } ?></p>
                                     </div>
                                     <div class="grid-item">
                                         <b>Function</b>
-                                        <p><?= $o['transaksi_function'] ?></p>
+                                        <p><?php
+                                            if ($o['transaksi_function'] == 1) {
+                                                echo "Print Thermal";
+                                            } elseif ($o['transaksi_function'] == 2) {
+                                                echo "Scan Barcode";
+                                            } elseif ($o['transaksi_function'] == 3) {
+                                                echo "Swipe Magnetic";
+                                            } elseif ($o['transaksi_function'] == 4) {
+                                                echo "Tap RFID";
+                                            } else {
+                                                echo "Tidak Diketahui";
+                                            } ?></p>
                                     </div>
                                     <div class="grid-item">
                                         <b>Packaging</b>
-                                        <p><?= $o['transaksi_packaging'] ?></p>
+                                        <p><?php
+                                            if ($o['transaksi_packaging'] == 1) {
+                                                echo "Plastik 1 on 1";
+                                            } elseif ($o['transaksi_packaging'] == 2) {
+                                                echo "Plastik Terpisah";
+                                            } elseif ($o['transaksi_packaging'] == 3) {
+                                                echo "Box Kartu Nama";
+                                            } elseif ($o['transaksi_packaging'] == 4) {
+                                                echo "Box Putih";
+                                            } elseif ($o['transaksi_packaging'] == 5) {
+                                                echo "Small UCARD";
+                                            } elseif ($o['transaksi_packaging'] == 6) {
+                                                echo "Small Maxi UCARD";
+                                            } elseif ($o['transaksi_packaging'] == 7) {
+                                                echo "Large UCARD";
+                                            } elseif ($o['transaksi_packaging'] == 8) {
+                                                echo "Large Maxi UCARD";
+                                            } else {
+                                                echo "Tidak Diketahui";
+                                            } ?></p>
                                     </div>
                                     <div class="grid-item">
                                         <b>Ambil/Kirim</b>
-                                        <p><?= $o['transaksi_paket'] ?></p>
+                                        <p><?php
+                                            if ($o['transaksi_paket'] == 1) {
+                                                echo "Kirim Product";
+                                            } elseif ($o['transaksi_paket'] == 2) {
+                                                echo "Ambil Sendiri";
+                                            } else {
+                                                echo "Tidak Diketahui";
+                                            } ?></p>
                                     </div>
                                 </div>
 
