@@ -42,6 +42,14 @@ class Order extends CI_Controller
         $this->load->view('admin/V_order', $x);
         $this->load->view('admin/template/V_footer');
     }
+    function approval()
+    {
+        $x['title'] = "APPROVAL";
+        $x['order'] = $this->db->query("SELECT t.*,p.pelanggan_nama, s.transaksi_status_id, s.transaksi_order_id, s.transaksi_status, s.transaksi_keterangan FROM tbl_transaksi AS t JOIN tbl_status_transaksi AS s ON t.transaksi_id = s.transaksi_order_id JOIN tbl_pelanggan AS p ON t.transaksi_nohp = p.pelanggan_nohp WHERE t.transaksi_terima IS NULL AND s.transaksi_status_id = '3' AND (s.transaksi_status = '2' OR s.transaksi_status = '0' OR s.transaksi_status IS NULL) ")->result_array();
+        $this->load->view('admin/template/V_header', $x);
+        $this->load->view('admin/V_order', $x);
+        $this->load->view('admin/template/V_footer');
+    }
     function cetak_produk()
     {
         $x['title'] = "CETAK PRODUK";

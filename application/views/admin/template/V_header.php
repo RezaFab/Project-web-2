@@ -102,6 +102,16 @@ $h = $this->db->query("SELECT count(transaksi_id) AS h FROM tbl_transaksi WHERE 
                                             </a>
                                         </li>
                                         <li class="nav-item">
+                                            <a href="<?= base_url('Order/approval') ?>" class="nav-link"><i class="fa fa-check"></i>
+                                                <table style="width:100%;">
+                                                    <tr>
+                                                        <td>APPROVAL</td>
+                                                        <td style="text-align:right;"><span class="badge badge-pill badge-danger"><?= $pmb['pmb'] ?></span></td>
+                                                    </tr>
+                                                </table>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
                                             <a href="<?= base_url('Order/cetak_produk') ?>" class="nav-link"><i class="fa fa-print"></i>
                                                 <table style="width:100%;">
                                                     <tr>

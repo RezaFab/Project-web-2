@@ -569,7 +569,7 @@
             <div id="status4" class="tabcontent">
                 <div class="card">
                     <div class="card-header bg-transparent">
-                        <h3 class="mb-0">Cetak Produk</h3>
+                        <h3 class="mb-0">Approval</h3>
                     </div>
                     <div class="card-body">
                         <?php
@@ -594,6 +594,33 @@
             </div>
 
             <div id="status5" class="tabcontent">
+                <div class="card">
+                    <div class="card-header bg-transparent">
+                        <h3 class="mb-0">Cetak Produk</h3>
+                    </div>
+                    <div class="card-body">
+                        <?php
+                        $ctk = $this->db->query("SELECT * FROM tbl_status_transaksi WHERE transaksi_status_id = '5' AND transaksi_order_id = '$id_transaksi' ")->row_array();
+                        if ($ctk['transaksi_status'] == '1') :
+                        ?>
+                            <div style="display: flex;justify-content: center;">
+                                <img style="width:50%;margin: auto;" src="<?= base_url('assets/img/gifcheck.gif') ?>" alt="">
+                            </div>
+                            <br>
+                            <br>
+                            <h2>Sudah Selesai</h2>
+                        <?php else : ?>
+                            <img style="width:100%;" src="<?= base_url('assets/img/print.gif') ?>" alt="">
+                            <br>
+                            <br>
+                            <h2>Sedang Menyetak Produk</h2>
+                        <?php endif; ?>
+
+                    </div>
+                </div>
+            </div>
+
+            <div id="status6" class="tabcontent">
 
                 <div class="card">
 
