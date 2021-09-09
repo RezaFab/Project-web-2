@@ -82,8 +82,8 @@ $db['default'] = array(
 	// 'database' => 'appgarden_ucard',
 
 	'hostname' => 'localhost',
-	'username' => 'ucard',
-	'password' => 'Uc@rDsAfEsTpAsSw0Rd',
+	'username' => 'root',
+	'password' => '',
 	'database' => 'ucard',
 
 	'dbdriver' => 'mysqli',
