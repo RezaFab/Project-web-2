@@ -45,7 +45,7 @@ class Order extends CI_Controller
     function approval()
     {
         $x['title'] = "APPROVAL";
-        $x['order'] = $this->db->query("SELECT t.*,p.pelanggan_nama, s.transaksi_status_id, s.transaksi_order_id, s.transaksi_status, s.transaksi_keterangan FROM tbl_transaksi AS t JOIN tbl_status_transaksi AS s ON t.transaksi_id = s.transaksi_order_id JOIN tbl_pelanggan AS p ON t.transaksi_nohp = p.pelanggan_nohp WHERE t.transaksi_terima IS NULL AND s.transaksi_status_id = '3' AND (s.transaksi_status = '2' OR s.transaksi_status = '0' OR s.transaksi_status IS NULL) ")->result_array();
+        $x['order'] = $this->db->query("SELECT t.*,p.pelanggan_nama, s.transaksi_status_id, s.transaksi_order_id, s.transaksi_status, s.transaksi_keterangan FROM tbl_transaksi AS t JOIN tbl_status_transaksi AS s ON t.transaksi_id = s.transaksi_order_id JOIN tbl_pelanggan AS p ON t.transaksi_nohp = p.pelanggan_nohp WHERE t.transaksi_terima IS NULL AND s.transaksi_status_id = '4' AND (s.transaksi_status = '2' OR s.transaksi_status = '0' OR s.transaksi_status IS NULL) ")->result_array();
         $this->load->view('admin/template/V_header', $x);
         $this->load->view('admin/V_order', $x);
         $this->load->view('admin/template/V_footer');
@@ -53,7 +53,7 @@ class Order extends CI_Controller
     function cetak_produk()
     {
         $x['title'] = "CETAK PRODUK";
-        $x['order'] = $this->db->query("SELECT t.*,p.pelanggan_nama, s.transaksi_status_id, s.transaksi_order_id, s.transaksi_status, s.transaksi_keterangan FROM tbl_transaksi AS t JOIN tbl_status_transaksi AS s ON t.transaksi_id = s.transaksi_order_id JOIN tbl_pelanggan AS p ON t.transaksi_nohp = p.pelanggan_nohp WHERE t.transaksi_terima IS NULL AND s.transaksi_status_id = '4' AND (s.transaksi_status = '2' OR s.transaksi_status = '0' OR s.transaksi_status IS NULL) ")->result_array();
+        $x['order'] = $this->db->query("SELECT t.*,p.pelanggan_nama, s.transaksi_status_id, s.transaksi_order_id, s.transaksi_status, s.transaksi_keterangan FROM tbl_transaksi AS t JOIN tbl_status_transaksi AS s ON t.transaksi_id = s.transaksi_order_id JOIN tbl_pelanggan AS p ON t.transaksi_nohp = p.pelanggan_nohp WHERE t.transaksi_terima IS NULL AND s.transaksi_status_id = '5' AND (s.transaksi_status = '2' OR s.transaksi_status = '0' OR s.transaksi_status IS NULL) ")->result_array();
         $this->load->view('admin/template/V_header', $x);
         $this->load->view('admin/V_order', $x);
         $this->load->view('admin/template/V_footer');
@@ -61,7 +61,7 @@ class Order extends CI_Controller
     function kirim_ambil()
     {
         $x['title'] = "AMBIL / KIRIM";
-        $x['order'] = $this->db->query("SELECT t.*,p.pelanggan_nama, s.transaksi_status_id, s.transaksi_order_id, s.transaksi_status, s.transaksi_keterangan FROM tbl_transaksi AS t JOIN tbl_status_transaksi AS s ON t.transaksi_id = s.transaksi_order_id JOIN tbl_pelanggan AS p ON t.transaksi_nohp = p.pelanggan_nohp WHERE t.transaksi_terima IS NULL AND s.transaksi_status_id = '5' AND (s.transaksi_status = '2' OR s.transaksi_status = '0' OR s.transaksi_status IS NULL) ")->result_array();
+        $x['order'] = $this->db->query("SELECT t.*,p.pelanggan_nama, s.transaksi_status_id, s.transaksi_order_id, s.transaksi_status, s.transaksi_keterangan FROM tbl_transaksi AS t JOIN tbl_status_transaksi AS s ON t.transaksi_id = s.transaksi_order_id JOIN tbl_pelanggan AS p ON t.transaksi_nohp = p.pelanggan_nohp WHERE t.transaksi_terima IS NULL AND s.transaksi_status_id = '6' AND (s.transaksi_status = '2' OR s.transaksi_status = '0' OR s.transaksi_status IS NULL) ")->result_array();
         $this->load->view('admin/template/V_header', $x);
         $this->load->view('admin/V_order', $x);
         $this->load->view('admin/template/V_footer');
@@ -267,7 +267,7 @@ class Order extends CI_Controller
         $pelanggan = $this->db->query("SELECT p.* FROM tbl_transaksi AS t JOIN tbl_pelanggan AS p ON t.transaksi_nohp = p.pelanggan_nohp WHERE transaksi_id = '$id' ")->row_array();
 
         if ($keputusan == '1') {
-            if ($id_status == '4') {
+            if ($id_status == '5') {
                 $k = 'PRODUCT SELESAI DICETAK';
                 $s = $this->db->query("SELECT * FROM tbl_status WHERE status_id = '$status_urut' ")->row_array();
                 $tanggal_hangus = $tanggal_ini + (86400 * $s['status_jangka_waktu']);
@@ -511,7 +511,7 @@ body{background-color:#f5f5f5;text-align:center}.btn{color:#fff;background-color
         $val = $this->input->post('val');
         $user = $this->input->post('user');
         $this->db->query("UPDATE tbl_transaksi SET transaksi_terima = '$val' WHERE transaksi_id = '$id' ");
-        $this->db->query("UPDATE tbl_status_transaksi SET transaksi_status = '$val', transaksi_keterangan = 'Sudah Diterima' WHERE transaksi_status_id = '5' AND transaksi_order_id = '$id' ");
+        $this->db->query("UPDATE tbl_status_transaksi SET transaksi_status = '$val', transaksi_keterangan = 'Sudah Diterima' WHERE transaksi_status_id = '6' AND transaksi_order_id = '$id' ");
         $o = $this->db->query("SELECT * FROM tbl_transaksi WHERE transaksi_id = '$id' ")->row_array();
         $html = '<div class="wrapper">';
         if ($o['transaksi_paket'] == "1") {
@@ -554,7 +554,7 @@ body{background-color:#f5f5f5;text-align:center}.btn{color:#fff;background-color
         <select id="keputusan" name="keputusan" class="form-control" required="">
         <option value="">--Pilih--</option>';
 
-        if ($id_status != '4') {
+        if ($id_status != '5') {
 
             if ($s['transaksi_status'] == '1') {
                 $html .= '<option selected value="1">Diterima</option>';

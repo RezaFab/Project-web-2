@@ -202,8 +202,10 @@ class Order_pelanggan extends CI_Controller
             } elseif ($s['transaksi_status_id'] == '3') {
                 $html .= '<p class="text-sm mb-0">Silahkan Melakukan Pembayaran</p>';
             } elseif ($s['transaksi_status_id'] == '4') {
+                $html .= '<p class="text-sm mb-0">Silahkan Pilih Desain Yang Diinginkan</p>';
+            }elseif ($s['transaksi_status_id'] == '5') {
                 $html .= '<p class="text-sm mb-0">Sedang Di cetak</p>';
-            } elseif ($s['transaksi_status_id'] == '5') {
+            } elseif ($s['transaksi_status_id'] == '6') {
                 $html .= '<p class="text-sm mb-0">Kirim / Ambil</p>';
             }
             $html .= '</div>
@@ -309,7 +311,7 @@ class Order_pelanggan extends CI_Controller
         $val = $this->input->post('val');
         $user = $this->input->post('user');
         $this->db->query("UPDATE tbl_transaksi SET transaksi_terima = '$val' WHERE transaksi_id = '$id' ");
-        $this->db->query("UPDATE tbl_status_transaksi SET transaksi_status = '$val', transaksi_keterangan = 'Sudah Diterima' WHERE transaksi_status_id = '5' AND transaksi_order_id = '$id' ");
+        $this->db->query("UPDATE tbl_status_transaksi SET transaksi_status = '$val', transaksi_keterangan = 'Sudah Diterima' WHERE transaksi_status_id = '6' AND transaksi_order_id = '$id' ");
         $o = $this->db->query("SELECT * FROM tbl_transaksi WHERE transaksi_id = '$id' ")->row_array();
         $html = '<div class="wrapper">';
         if ($o['transaksi_paket'] == "1") {

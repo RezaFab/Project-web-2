@@ -572,22 +572,7 @@
                         <h3 class="mb-0">Approval</h3>
                     </div>
                     <div class="card-body">
-                        <?php
-                        $ctk = $this->db->query("SELECT * FROM tbl_status_transaksi WHERE transaksi_status_id = '4' AND transaksi_order_id = '$id_transaksi' ")->row_array();
-                        if ($ctk['transaksi_status'] == '1') :
-                        ?>
-                            <div style="display: flex;justify-content: center;">
-                                <img style="width:50%;margin: auto;" src="<?= base_url('assets/img/gifcheck.gif') ?>" alt="">
-                            </div>
-                            <br>
-                            <br>
-                            <h2>Sudah Selesai</h2>
-                        <?php else : ?>
-                            <img style="width:100%;" src="<?= base_url('assets/img/print.gif') ?>" alt="">
-                            <br>
-                            <br>
-                            <h2>Sedang Menyetak Produk</h2>
-                        <?php endif; ?>
+                        Isi Approval
 
                     </div>
                 </div>
