@@ -67,6 +67,26 @@
           <div class="col-xl-4 col-md-6">
               <div class="card card-stats">
                 <!-- Card body -->
+                <a href="<?= base_url('Order/approval') ?>">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <h5 class="card-title text-uppercase text-muted mb-0">APPROVAL</h5>
+                      <span class="h2 font-weight-bold mb-0"><?= $apv['apv'] ?></span>
+                    </div>
+                    <div class="col-auto">
+                      <div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
+                        <i class="fa fa-check"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                </a>
+              </div>
+            </div>
+          <div class="col-xl-4 col-md-6">
+              <div class="card card-stats">
+                <!-- Card body -->
                 <a href="<?= base_url('Order/cetak_produk') ?>">
                 <div class="card-body">
                   <div class="row">
@@ -97,26 +117,6 @@
                     <div class="col-auto">
                       <div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
                         <i class="fa fa-truck"></i>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                </a>
-              </div>
-            </div>
-          <div class="col-xl-4 col-md-6">
-              <div class="card card-stats">
-                <!-- Card body -->
-                <a href="<?= base_url('Order/history') ?>">
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">Order History</h5>
-                      <span class="h2 font-weight-bold mb-0"><?= $h['h'] ?></span>
-                    </div>
-                    <div class="col-auto">
-                      <div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
-                        <i class="fa fa-history"></i>
                       </div>
                     </div>
                   </div>

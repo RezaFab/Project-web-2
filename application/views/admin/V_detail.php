@@ -569,11 +569,23 @@
             <div id="status4" class="tabcontent">
                 <div class="card">
                     <div class="card-header bg-transparent">
+                        <h3 class="mb-0">Approval</h3>
+                    </div>
+                    <div class="card-body">
+                        Isi Approval
+
+                    </div>
+                </div>
+            </div>
+
+            <div id="status5" class="tabcontent">
+                <div class="card">
+                    <div class="card-header bg-transparent">
                         <h3 class="mb-0">Cetak Produk</h3>
                     </div>
                     <div class="card-body">
                         <?php
-                        $ctk = $this->db->query("SELECT * FROM tbl_status_transaksi WHERE transaksi_status_id = '4' AND transaksi_order_id = '$id_transaksi' ")->row_array();
+                        $ctk = $this->db->query("SELECT * FROM tbl_status_transaksi WHERE transaksi_status_id = '5' AND transaksi_order_id = '$id_transaksi' ")->row_array();
                         if ($ctk['transaksi_status'] == '1') :
                         ?>
                             <div style="display: flex;justify-content: center;">
@@ -593,7 +605,7 @@
                 </div>
             </div>
 
-            <div id="status5" class="tabcontent">
+            <div id="status6" class="tabcontent">
 
                 <div class="card">
 
