@@ -41,7 +41,7 @@ class Order_pelanggan extends CI_Controller
     function get_data()
     {
         $id = $this->input->post('id');
-        $status = $this->db->query("SELECT * FROM tbl_status")->result_array();
+        $status = $this->db->query("SELECT * FROM tbl_status WHERE status_id LIKE '_'")->result_array();
         $get = $this->db->query("SELECT * FROM tbl_transaksi WHERE transaksi_id = '$id' ")->row_array();
         $nohp = $get['transaksi_nohp'];
         $pel = $this->db->query("SELECT * FROM tbl_pelanggan WHERE pelanggan_nohp = '$nohp' ")->row_array();
@@ -203,7 +203,7 @@ class Order_pelanggan extends CI_Controller
                 $html .= '<p class="text-sm mb-0">Silahkan Melakukan Pembayaran</p>';
             } elseif ($s['transaksi_status_id'] == '4') {
                 $html .= '<p class="text-sm mb-0">Silahkan Pilih Desain Yang Diinginkan</p>';
-            }elseif ($s['transaksi_status_id'] == '5') {
+            } elseif ($s['transaksi_status_id'] == '5') {
                 $html .= '<p class="text-sm mb-0">Sedang Di cetak</p>';
             } elseif ($s['transaksi_status_id'] == '6') {
                 $html .= '<p class="text-sm mb-0">Kirim / Ambil</p>';
@@ -226,7 +226,7 @@ class Order_pelanggan extends CI_Controller
             $id_product = $o['transaksi_product_id'];
             $x['p'] = $this->db->query("SELECT * FROM tbl_product WHERE product_id = '$id_product' ")->row_array();
             $x['bank'] = $this->db->query("SELECT * FROM tbl_bank")->result_array();
-            $x['status'] = $this->db->query("SELECT * FROM tbl_status")->result_array();
+            $x['status'] = $this->db->query("SELECT * FROM tbl_status WHERE status_id LIKE '_'")->result_array();
             $this->load->view('pelanggan/template/V_header', $x);
             $this->load->view('pelanggan/V_detail', $x);
             $this->load->view('pelanggan/template/V_footer');

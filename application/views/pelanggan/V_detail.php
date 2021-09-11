@@ -657,12 +657,38 @@
                                 </div>
                                 <br>
                                 <br>
-                                <h2>Sudah Selesai</h2>
+                                <h2>Sudah selesai</h2>
                             <?php else : ?>
                                 <img style="width:100%;" src="<?= base_url('assets/img/print.gif') ?>" alt="">
                                 <br>
                                 <br>
-                                <h2>Sedang Menyetak Produk</h2>
+                                <h2>Sedang menyetak produk</h2>
+                                <br>
+                                <div class="timeline timeline-one-side" data-timeline-content="axis" data-timeline-axis-style="dashed">
+                                    <?php
+                                    $produksi = $this->db->query("SELECT * FROM tbl_status WHERE status_id LIKE '5_';")->result_array();
+                                    $statusproduksi = $ctk['transaksi_produksi_status_id'];
+                                    $produksicount = 1;
+                                    ?>
+                                    <?php foreach ($produksi as $p) : ?>
+                                        <div class="timeline-block mt-1 mb-0">
+                                            <span style="background-color: <?= ($statusproduksi == $produksicount) ? "blue" : ($statusproduksi > $produksicount ? "green" : "grey"); ?>;color: white;" class="timeline-step badge-success">
+                                                <i class="fa fa-image"></i>
+                                            </span>
+                                            <div class="timeline-content">
+                                                <p class="my-0"><b class="font-weight-bold"><?= $p['status_status']; ?></b></p>
+                                                <p class=" text-sm mt-1 mb-0"><?= $p['status_keterangan']; ?></p>
+                                                <!-- <div class="mt-3">
+                                                    <span class="badge badge-pill badge-success">Diterima</span>
+                                                    <p class="text-sm mt-2">
+                                                    </p>
+                                                </div> -->
+                                            </div>
+                                        </div>
+                                        <?php $produksicount++ ?>
+                                    <?php endforeach; ?>
+
+                                </div>
                             <?php endif; ?>
 
                         </div>

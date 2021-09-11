@@ -108,7 +108,7 @@ class Order extends CI_Controller
     function get_data()
     {
         $id = $this->input->post('id');
-        $status = $this->db->query("SELECT * FROM tbl_status")->result_array();
+        $status = $this->db->query("SELECT * FROM tbl_status WHERE status_id LIKE '_'")->result_array();
         $e = $this->db->query("SELECT * FROM tbl_transaksi JOIN tbl_pelanggan ON tbl_transaksi.transaksi_nohp = tbl_pelanggan.pelanggan_nohp JOIN tbl_product ON tbl_transaksi.transaksi_product_id = tbl_product.product_id WHERE transaksi_id = '$id' ")->row_array();
         $html = '<div class="modal-body">
 				<div id="alert_update"></div>
@@ -234,7 +234,7 @@ class Order extends CI_Controller
             $id_product = $o['transaksi_product_id'];
             $x['p'] = $this->db->query("SELECT * FROM tbl_product WHERE product_id = '$id_product' ")->row_array();
             $x['bank'] = $this->db->query("SELECT * FROM tbl_bank")->result_array();
-            $x['status'] = $this->db->query("SELECT * FROM tbl_status")->result_array();
+            $x['status'] = $this->db->query("SELECT * FROM tbl_status WHERE status_id LIKE '_'")->result_array();
             $this->load->view('admin/template/V_header', $x);
             $this->load->view('admin/V_detail', $x);
             $this->load->view('admin/template/V_footer');
