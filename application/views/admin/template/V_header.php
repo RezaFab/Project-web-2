@@ -1,7 +1,7 @@
 <?php
 $kd = $this->db->query("SELECT count(t.transaksi_id) AS kd FROM tbl_transaksi AS t JOIN tbl_status_transaksi AS s ON t.transaksi_id = s.transaksi_order_id WHERE s.transaksi_status_id = '2' AND (s.transaksi_status = '2' OR s.transaksi_status IS NULL OR s.transaksi_status = '0')  AND t.transaksi_terima IS NULL ")->row_array();
 $pmb = $this->db->query("SELECT count(t.transaksi_id) AS pmb FROM tbl_transaksi AS t JOIN tbl_status_transaksi AS s ON t.transaksi_id = s.transaksi_order_id WHERE s.transaksi_status_id = '3' AND (s.transaksi_status = '2' OR s.transaksi_status IS NULL OR s.transaksi_status = '0')  AND t.transaksi_terima IS NULL ")->row_array();
-$apv = $this->db->query("SELECT count(t.transaksi_id) AS pmb FROM tbl_transaksi AS t JOIN tbl_status_transaksi AS s ON t.transaksi_id = s.transaksi_order_id WHERE s.transaksi_status_id = '4' AND (s.transaksi_status = '2' OR s.transaksi_status IS NULL OR s.transaksi_status = '0')  AND t.transaksi_terima IS NULL ")->row_array();
+$apv = $this->db->query("SELECT count(t.transaksi_id) AS apv FROM tbl_transaksi AS t JOIN tbl_status_transaksi AS s ON t.transaksi_id = s.transaksi_order_id WHERE s.transaksi_status_id = '4' AND (s.transaksi_status = '2' OR s.transaksi_status IS NULL OR s.transaksi_status = '0')  AND t.transaksi_terima IS NULL ")->row_array();
 $ctk = $this->db->query("SELECT count(t.transaksi_id) AS ctk FROM tbl_transaksi AS t JOIN tbl_status_transaksi AS s ON t.transaksi_id = s.transaksi_order_id WHERE s.transaksi_status_id = '5' AND (s.transaksi_status = '2' OR s.transaksi_status IS NULL OR s.transaksi_status = '0')  AND t.transaksi_terima IS NULL ")->row_array();
 $k_a = $this->db->query("SELECT count(t.transaksi_id) AS k_a FROM tbl_transaksi AS t JOIN tbl_status_transaksi AS s ON t.transaksi_id = s.transaksi_order_id WHERE s.transaksi_status_id = '6' AND (s.transaksi_status = '2' OR s.transaksi_status IS NULL OR s.transaksi_status = '0')  AND t.transaksi_terima IS NULL ")->row_array();
 $h = $this->db->query("SELECT count(transaksi_id) AS h FROM tbl_transaksi WHERE transaksi_terima = '1' ")->row_array();
@@ -107,7 +107,7 @@ $h = $this->db->query("SELECT count(transaksi_id) AS h FROM tbl_transaksi WHERE 
                                                 <table style="width:100%;">
                                                     <tr>
                                                         <td>APPROVAL</td>
-                                                        <td style="text-align:right;"><span class="badge badge-pill badge-danger"><?= $pmb['pmb'] ?></span></td>
+                                                        <td style="text-align:right;"><span class="badge badge-pill badge-danger"><?= $apv['apv'] ?></span></td>
                                                     </tr>
                                                 </table>
                                             </a>
