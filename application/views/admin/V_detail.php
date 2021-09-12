@@ -180,6 +180,9 @@
                                                     $verifikator = $verif['verif_pembayaran'];
                                                     break;
                                                 case "4":
+                                                    $verifikator = $verif['verif_approval'];
+                                                    break;
+                                                case "5":
                                                     $verifikator = $verif['verif_cetak'];
                                                     break;
                                             }

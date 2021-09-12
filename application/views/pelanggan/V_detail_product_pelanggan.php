@@ -100,7 +100,7 @@
                             <input type="hidden" value="<?= $p['product_id'] ?>" name="id_product">
                             <input type="hidden" value="<?= $_SESSION['pelanggan_nohp'] ?>" name="nohp">
                             <div class="form-group">
-                                <input type="number" placeholder="jumlah" name="jumlah" class="form-control">
+                                <input type="number" placeholder="jumlah" name="jumlah" class="form-control" required>
                                 <input type="hidden" value="<?= $p['product_harga'] ?>" name="harga">
                             </div>
                             <div class="grid-container">

@@ -178,6 +178,9 @@
                                                     $verifikator = (!empty($verif['verif_pembayaran']) ? $verif['verif_pembayaran'] : "-");
                                                     break;
                                                 case "4":
+                                                    $verifikator = (!empty($verif['verif_approval']) ? $verif['verif_approval'] : "-");
+                                                    break;
+                                                case "5":
                                                     $verifikator = (!empty($verif['verif_cetak']) ? $verif['verif_cetak'] : "-");
                                                     break;
                                             }
