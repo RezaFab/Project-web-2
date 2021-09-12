@@ -92,7 +92,7 @@
                             <p><?= $p['product_deskripsi'] ?></p>
                             <b>Keunggulan</b>
                             <p><?= $p['product_keunggulan'] ?></p>
-                            <b>Keterangan</b>
+                            <b>Keterangan Produk</b>
                             <p><?= $p['product_keterangan'] ?></p>
                         </div>
                         <br>
@@ -100,6 +100,8 @@
                             <input type="hidden" value="<?= $p['product_id'] ?>" name="id_product">
                             <input type="hidden" value="<?= $_SESSION['pelanggan_nohp'] ?>" name="nohp">
                             <div class="form-group">
+                                <b>Jumlah Pesanan</b>
+                                <br><br>
                                 <input type="number" placeholder="jumlah" name="jumlah" class="form-control" required>
                                 <input type="hidden" value="<?= $p['product_harga'] ?>" name="harga">
                             </div>
