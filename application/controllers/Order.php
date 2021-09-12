@@ -545,7 +545,7 @@ body{background-color:#f5f5f5;text-align:center}.btn{color:#fff;background-color
             $this->db->query("UPDATE tbl_status_transaksi SET transaksi_status = '$keputusan', transaksi_keterangan = '$keterangan', transaksi_tanggal = '$tanggal_ini', transaksi_tanggal_hangus = '$tanggal_hangus' WHERE transaksi_status_id = '$id_status' AND transaksi_order_id = '$id' ");
         }
         // $e = $this->db->query("SELECT * FROM tbl_transaksi JOIN tbl_pelanggan ON tbl_transaksi.transaksi_nohp = tbl_pelanggan.pelanggan_nohp JOIN tbl_product ON tbl_transaksi.transaksi_product_id = tbl_product.product_id WHERE transaksi_id = '$id' ")->row_array();
-        if ($status_urut <= 5 && $keputusan == 1) {
+        if ($status_urut <= 6 && $keputusan == 1) {
             $this->db->query("INSERT INTO tbl_status_transaksi VALUES (NULL,'$status_urut','$id',NULL,NULL,$tanggal_ini,$tanggal_hangus) ");
         }
     }
