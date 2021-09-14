@@ -662,12 +662,12 @@
                                 <img style="width:100%;" src="<?= base_url('assets/img/print.gif') ?>" alt="">
                                 <br>
                                 <br>
-                                <h2>Sedang menyetak produk</h2>
+                                <h2>Sedang mencetak produk</h2>
                                 <br>
                                 <div class="timeline timeline-one-side" data-timeline-content="axis" data-timeline-axis-style="dashed">
                                     <?php
                                     $produksi = $this->db->query("SELECT * FROM tbl_status WHERE status_id LIKE '5_';")->result_array();
-                                    $statusproduksi = $ctk['transaksi_produksi_status_id'];
+                                    $statusproduksi = @$ctk['transaksi_produksi_status_id'];
                                     $produksicount = 1;
                                     ?>
                                     <?php foreach ($produksi as $p) : ?>

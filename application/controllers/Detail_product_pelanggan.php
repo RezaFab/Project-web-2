@@ -72,7 +72,18 @@ class Detail_product_pelanggan extends CI_Controller
 		$s = $this->db->query("SELECT * FROM tbl_status WHERE status_id = '1' ")->row_array();
 		$tanggal_hangus = $tanggal_ini + (86400 * $s['status_jangka_waktu']);
 
-		$this->db->query("INSERT INTO tbl_status_transaksi VALUES (NULL,1,'$id_transaksi',2,NULL,$tanggal_ini,$tanggal_hangus) ");
+		$data = array(
+			'transaksi_status_id'			=> 1,
+			'transaksi_order_id'			=> $id_transaksi,
+			'transaksi_status'				=> 2,
+			'transaksi_keterangan'			=> null,
+			'transaksi_tanggal'				=> $tanggal_ini,
+			'transaksi_tanggal_hangus'		=> $tanggal_hangus
+		);
+
+		$this->db->insert('tbl_status_transaksi', $data);
+
+		// $this->db->query("INSERT INTO tbl_status_transaksi VALUES (NULL,1,'$id_transaksi',2,NULL,$tanggal_ini,$tanggal_hangus) ");
 		redirect('Order_pelanggan/detail/' . $id_transaksi);
 	}
 	function checkStatus()
