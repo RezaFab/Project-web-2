@@ -90,9 +90,10 @@ class Detail_product_pelanggan extends CI_Controller
 	{
 		$id = $_POST['id'];
 		$status = $_POST['status'];
-		$chk = $this->db->query("SELECT max(transaksi_status_id) tsi FROM tbl_status_transaksi WHERE transaksi_order_id=" . $id)->row_array();
+		$produksi = $_POST['produksi'];
+		$statusRefresh = $this->db->query("SELECT max(transaksi_status_id) st, max(transaksi_produksi_status_id) pd FROM tbl_status_transaksi WHERE transaksi_order_id=" . $id)->row_array();
 
-		if ($chk['tsi'] !== $status) {
+		if ($statusRefresh['st'] !== $status || $statusRefresh['pd'] !== $produksi) {
 			echo 'refresh';
 		}
 	}

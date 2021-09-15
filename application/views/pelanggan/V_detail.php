@@ -124,10 +124,13 @@
                     <div class="timeline timeline-one-side" data-timeline-content="axis" data-timeline-axis-style="dashed">
                         <?php
                         $id_transaksi = $this->uri->segment(3);
+                        $ctk = $this->db->query("SELECT * FROM tbl_status_transaksi WHERE transaksi_status_id = '5' AND transaksi_order_id = '$id_transaksi' ORDER BY transaksi_id DESC ")->row_array();
+                        $statusproduksi = @$ctk['transaksi_produksi_status_id'];
+
                         foreach ($status as $s) : ?>
                             <?php
                             $id_status = $s['status_urut'];
-                            $st = $this->db->query("SELECT * FROM tbl_status_transaksi WHERE transaksi_order_id = '$id_transaksi' AND transaksi_status_id = '$id_status' ")->row_array();
+                            $st = $this->db->query("SELECT * FROM tbl_status_transaksi WHERE transaksi_order_id = '$id_transaksi' AND transaksi_status_id = '$id_status' ORDER BY transaksi_id DESC ")->row_array();
                             $verif = $this->db->query("SELECT * FROM tbl_verifikasi WHERE transaksi_id = '$id_transaksi';")->row_array();
                             ?>
                             <?php if (!empty($st) && ($st['transaksi_status'] == NULL || $st['transaksi_status'] == '2')) : ?>
@@ -649,8 +652,7 @@
                         </div>
                         <div class="card-body">
                             <?php
-                            $ctk = $this->db->query("SELECT * FROM tbl_status_transaksi WHERE transaksi_status_id = '5' AND transaksi_order_id = '$id_transaksi' ")->row_array();
-                            if (!empty($ctk['transaksi_status']) && $ctk['transaksi_status'] == '1') :
+                            if (!empty($ctk['transaksi_status']) && @$ctk['transaksi_status'] == '1') :
                             ?>
                                 <div style="display: flex;justify-content: center;">
                                     <img style="width:50%;margin: auto;" src="<?= base_url('assets/img/gifcheck.gif') ?>" alt="">
@@ -662,13 +664,12 @@
                                 <img style="width:100%;" src="<?= base_url('assets/img/print.gif') ?>" alt="">
                                 <br>
                                 <br>
-                                <h2>Sedang mencetak produk</h2>
+                                <h2>Sedang membuat produk</h2>
                                 <br>
                                 <div class="timeline timeline-one-side" data-timeline-content="axis" data-timeline-axis-style="dashed">
                                     <?php
                                     $produksi = $this->db->query("SELECT * FROM tbl_status WHERE status_id LIKE '5_';")->result_array();
-                                    $statusproduksi = @$ctk['transaksi_produksi_status_id'];
-                                    $produksicount = 1;
+                                    $produksicount = 51;
                                     ?>
                                     <?php foreach ($produksi as $p) : ?>
                                         <div class="timeline-block mt-1 mb-0">
@@ -715,22 +716,18 @@
                                         <div class="form-group row w-100">
                                             <label for="noresi" class="col-sm-4 col-form-label">Nomor Resi:</label>
                                             <div class="col-sm-8">
-                                                <input type="text" readonly class="form-control-plaintext" id="noresi" value="<?= $resi['transaksi_resi']; ?>">
+                                                <input type="text" readonly class="form-control-plaintext" id="noresi" value="<?= (is_null($resi['transaksi_resi']) || empty($resi['transaksi_resi']) ? 'Belum ada resi' : $resi['transaksi_resi']); ?>">
                                             </div>
                                         </div>
                                     </div>
-                                    <a class="btn btn-success" style="width:100%;" style="text-align: center;" href="https://cekresi.com/">
+                                    <a class="btn btn-success" style="width:100%;" style="text-align: center;" href="https://cekresi.com/?v=wdg&noresi=<?= $resi['transaksi_resi'] ?>">
                                         Cek Resi
                                     </a>
                                 <?php endif; ?>
-
                                 <br>
-
+                                <br>
                                 <div id="paket_terima">
                                     <!-- <button style="width:100%;display:none;" class="btn btn-primary terima">Paket Sudah Diterima</button> -->
-
-                                    <br>
-                                    <br>
                                     <?php
                                     if ($o['transaksi_paket'] != NULL) :
                                     ?>
@@ -738,12 +735,8 @@
                                     <?php
                                     endif;
                                     ?>
-
                                 </div>
-
-
                             <?php else : ?>
-
                                 <h2 style="text-align: center;">Transaksi Anda Selesai</h2>
                                 <h2 style="text-align: center;">Terima kasih telah berbelanja di<br>UCARD Indonesia</h2>
                                 <br>
@@ -762,15 +755,12 @@
                                         UCARD Jakarta
                                     </a>
                                 </div>
-
                             <?php endif; ?>
                         </div>
                     </div>
                 </div>
                 </div>
             </div>
-
-
             <div class="modal fade" id="lihat" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                     <div class="modal-content">
@@ -794,7 +784,6 @@
                 <div class="modal fade" id="hapus" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
                     <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
                         <div class="modal-content">
-
                             <div class="modal-header">
                                 <h6 class="modal-title" id="modal-title-default">Hapus Design</h6>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -805,22 +794,17 @@
                                 <div id="alert_hapus"></div>
                                 <h3>Apakah anda yakin?</h3>
                             </div>
-
                             <div class="modal-footer">
                                 <button type="submit" class="btn btn-danger btn_hapus">hapus</button>
                                 <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal">Close</button>
                             </div>
-
                         </div>
                     </div>
                 </div>
-
     </div>
-
     <div class="modal fade" id="hapus" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
         <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
             <div class="modal-content">
-
                 <div class="modal-header">
                     <h6 class="modal-title" id="modal-title-default">Hapus Pelanggan</h6>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -831,16 +815,13 @@
                     <div id="alert_hapus"></div>
                     <h3>Apakah anda yakin?</h3>
                 </div>
-
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-danger btn_hapus">hapus</button>
                     <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal">Close</button>
                 </div>
-
             </div>
         </div>
     </div>
-
 </div>
 <?php endif ?>
 <script src="<?= base_url('assets/admin/vendor/dropzone/dist/min/dropzone.min.js') ?>"></script>
@@ -977,7 +958,7 @@
     });
 </script>
 <?php
-$chk = $this->db->query("SELECT max(transaksi_status_id) tsi FROM tbl_status_transaksi WHERE transaksi_order_id=" . $this->uri->segment(3))->row_array();
+$statusRefresh = $this->db->query("SELECT max(transaksi_status_id) st, max(transaksi_produksi_status_id) pd FROM tbl_status_transaksi WHERE transaksi_order_id=" . $this->uri->segment(3))->row_array();
 
 ?>
 <script>
@@ -992,13 +973,15 @@ $chk = $this->db->query("SELECT max(transaksi_status_id) tsi FROM tbl_status_tra
 
         setInterval(function() {
             var id = $('#id').val();
-            var status = '<?= $chk['tsi']; ?>';
+            var status = '<?= $statusRefresh['st']; ?>';
+            var produksi = '<?= $statusRefresh['pd']; ?>';
             $.ajax({
                 type: 'POST',
                 url: '<?= base_url('Detail_product_pelanggan/checkStatus') ?>',
                 data: {
                     id: id,
-                    status: status
+                    status: status,
+                    produksi: produksi
                 },
                 success: function(data) {
                     if (data === 'refresh') {

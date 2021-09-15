@@ -257,7 +257,7 @@ class Order extends CI_Controller
     function status()
     {
         $id_status = $this->input->post('id_status');
-        $status_urut = $this->input->post('id_status') + 1;
+        $status_urut = (50 < $id_status && $id_status <= 55 ? '5' : $this->input->post('id_status') + 1);
         $id = $this->input->post('id');
         $keputusan = $this->input->post('keputusan');
         $keterangan = $this->input->post('keterangan');
@@ -265,86 +265,31 @@ class Order extends CI_Controller
         $tanggal_ini = time();
 
         $pelanggan = $this->db->query("SELECT p.* FROM tbl_transaksi AS t JOIN tbl_pelanggan AS p ON t.transaksi_nohp = p.pelanggan_nohp WHERE transaksi_id = '$id' ")->row_array();
+        $transaksi_produksi_status_id = $this->db->query("SELECT max(transaksi_produksi_status_id) as tpsi FROM tbl_status_transaksi WHERE transaksi_order_id = '$id' ")->row_array()['tpsi'];
 
         if ($keputusan == '1') {
-            if ($id_status == '5') {
-                $k = 'PRODUCT SELESAI DICETAK';
-                $s = $this->db->query("SELECT * FROM tbl_status WHERE status_id = '$status_urut' ")->row_array();
-                $tanggal_hangus = $tanggal_ini + (86400 * $s['status_jangka_waktu']);
-                $this->db->query("UPDATE tbl_status_transaksi SET transaksi_status = '$keputusan', transaksi_keterangan = '$keterangan' WHERE transaksi_status_id = '$id_status' AND transaksi_order_id = '$id' ");
+            $k = 'DITERIMA';
+            $s = $this->db->query("SELECT * FROM tbl_status WHERE status_id = '$status_urut' ")->row_array();
+            $tanggal_hangus = $tanggal_ini + (86400 * $s['status_jangka_waktu']);
+            $this->db->query("UPDATE tbl_status_transaksi SET transaksi_status = '$keputusan', transaksi_keterangan = '$keterangan' WHERE transaksi_status_id = '$id_status' AND transaksi_order_id = '$id' ");
 
-                $this->db->set('verif_cetak', $user)->where('transaksi_id', $id)->update('tbl_verifikasi');
+            switch ($id_status) {
+                case "1":
+                    $dataVerif = array(
+                        'transaksi_id'  => $id,
+                        'verif_pesanan' => $user
+                    );
+                    $this->db->insert('tbl_verifikasi', $dataVerif);
 
-                //produk selesai dicetak
-                $this->load->library('email');
+                    //kirim email telah terverifikasi
+                    $this->load->library('email');
 
-                $this->email->clear();
-                $this->email->to($pelanggan['pelanggan_email']);
-                $this->email->from('amarizky02@gmail.com');
-                $this->email->subject('UCard Surabaya - Pesananmu sudah dicetak!');
-                $this->email->set_mailtype('html');
-                $this->email->message('
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>UCARD - Pesananmu sudah dicetak</title>
-<style>
-body{background-color:#f5f5f5;text-align:center}.btn{color:#fff;background-color:#4caf50;font-size:16px;border-radius:8px;border:0;width:180px;height:40px;cursor:pointer}.container{background-image:linear-gradient(87deg,#5e72e4 0,#825ee4 100%);min-width:480px;max-width:700px;border-radius:8px;height:auto;padding-bottom:10px}.body{padding:20px;background-color:#fff;text-align:start;border-radius:8px}.code{text-align:center;color:#000;font-size:18px}.m-auto{margin:auto}.m-10{margin:10px}.p-10{padding:10px}.text-center{text-align:center}.w-100{width:100%}
-</style>
-</head>
-
-<body>
-
-<div class="text-center">
-<div class="container">
-    <div class="m-auto p-10 text-center">
-        <img src="' . base_url('assets/img/logo-kartuidcard-white.png') . '" alt="">
-    </div>
-    <div class="m-10 body">
-        <h2 class="text-center">Halo, ' . $pelanggan["pelanggan_nama"] . '!</h2>
-        <br>
-        <p>Pesananmu ' . $pelanggan["transaksi_tanggal"] . ' sudah selesai dicetak nih! Ayo cek sekarang juga untuk melanjutkan ke tahap berikutnya!</p>
-        <p>Tekan tombol di bawah untuk membuka halaman detail produk.</p>
-        <div class="text-center">
-            <a href="' . base_url('Order_pelanggan/detail/' . $id) . '">
-                <button class="btn">Detail Produk</button>
-            </a>
-        </div>
-    </div>
-    <p style="color: white;">UCard Surabaya<br>Jl. Rungkut Harapan Blk. F No.008, Kali Rungkut, Kec. Rungkut, Kota SBY, Jawa Timur 60293</p>
-</div>
-</div>
-</body>
-
-</html>
-    ');
-                $this->email->send();
-            } else {
-                $k = 'DITERIMA';
-                $s = $this->db->query("SELECT * FROM tbl_status WHERE status_id = '$status_urut' ")->row_array();
-                $tanggal_hangus = $tanggal_ini + (86400 * $s['status_jangka_waktu']);
-                $this->db->query("UPDATE tbl_status_transaksi SET transaksi_status = '$keputusan', transaksi_keterangan = '$keterangan' WHERE transaksi_status_id = '$id_status' AND transaksi_order_id = '$id' ");
-
-                switch ($id_status) {
-                    case "1":
-                        $dataVerif = array(
-                            'transaksi_id'  => $id,
-                            'verif_pesanan' => $user
-                        );
-                        $this->db->insert('tbl_verifikasi', $dataVerif);
-
-                        //kirim email telah terverifikasi
-                        $this->load->library('email');
-
-                        $this->email->clear();
-                        $this->email->to($pelanggan['pelanggan_email']);
-                        $this->email->from('amarizky02@gmail.com');
-                        $this->email->subject('UCard Surabaya - Pesananmu sudah diverifikasi!');
-                        $this->email->set_mailtype('html');
-                        $this->email->message('
+                    $this->email->clear();
+                    $this->email->to($pelanggan['pelanggan_email']);
+                    $this->email->from('amarizky02@gmail.com');
+                    $this->email->subject('UCard Surabaya - Pesananmu sudah diverifikasi!');
+                    $this->email->set_mailtype('html');
+                    $this->email->message('
 <!DOCTYPE html>
 <html lang="en">
 
@@ -382,19 +327,19 @@ body{background-color:#f5f5f5;text-align:center}.btn{color:#fff;background-color
 
 </html>
             ');
-                        $this->email->send();
-                        break;
-                    case "2":
-                        $this->db->set('verif_desain', $user)->where('transaksi_id', $id)->update('tbl_verifikasi');
-                        //kirim email desain diterima
-                        $this->load->library('email');
+                    $this->email->send();
+                    break;
+                case "2":
+                    $this->db->set('verif_desain', $user)->where('transaksi_id', $id)->update('tbl_verifikasi');
+                    //kirim email desain diterima
+                    $this->load->library('email');
 
-                        $this->email->clear();
-                        $this->email->to($pelanggan['pelanggan_email']);
-                        $this->email->from('amarizky02@gmail.com');
-                        $this->email->subject('UCard Surabaya - Desainmu sudah diverifikasi!');
-                        $this->email->set_mailtype('html');
-                        $this->email->message('
+                    $this->email->clear();
+                    $this->email->to($pelanggan['pelanggan_email']);
+                    $this->email->from('amarizky02@gmail.com');
+                    $this->email->subject('UCard Surabaya - Desainmu sudah diverifikasi!');
+                    $this->email->set_mailtype('html');
+                    $this->email->message('
 <!DOCTYPE html>
 <html lang="en">
 
@@ -432,19 +377,19 @@ body{background-color:#f5f5f5;text-align:center}.btn{color:#fff;background-color
 
 </html>
             ');
-                        $this->email->send();
-                        break;
-                    case "3":
-                        $this->db->set('verif_pembayaran', $user)->where('transaksi_id', $id)->update('tbl_verifikasi');
-                        //kirim email pembayaran diterima
-                        $this->load->library('email');
+                    $this->email->send();
+                    break;
+                case "3":
+                    $this->db->set('verif_pembayaran', $user)->where('transaksi_id', $id)->update('tbl_verifikasi');
+                    //kirim email pembayaran diterima
+                    $this->load->library('email');
 
-                        $this->email->clear();
-                        $this->email->to($pelanggan['pelanggan_email']);
-                        $this->email->from('amarizky02@gmail.com');
-                        $this->email->subject('UCard Surabaya - Pembayaranmu sudah diverifikasi!');
-                        $this->email->set_mailtype('html');
-                        $this->email->message('
+                    $this->email->clear();
+                    $this->email->to($pelanggan['pelanggan_email']);
+                    $this->email->from('amarizky02@gmail.com');
+                    $this->email->subject('UCard Surabaya - Pembayaranmu sudah diverifikasi!');
+                    $this->email->set_mailtype('html');
+                    $this->email->message('
 <!DOCTYPE html>
 <html lang="en">
 
@@ -482,19 +427,21 @@ body{background-color:#f5f5f5;text-align:center}.btn{color:#fff;background-color
 
 </html>
             ');
-                        $this->email->send();
-                        break;
-                        case "4":
-                            $this->db->set('verif_approval', $user)->where('transaksi_id', $id)->update('tbl_verifikasi');
-                            //kirim email pembayaran diterima
-                            $this->load->library('email');
-    
-                            $this->email->clear();
-                            $this->email->to($pelanggan['pelanggan_email']);
-                            $this->email->from('amarizky02@gmail.com');
-                            $this->email->subject('UCard Surabaya - Approval : Pilih Desain Cetakanmu');
-                            $this->email->set_mailtype('html');
-                            $this->email->message('
+                    $this->email->send();
+                    break;
+                case "4":
+                    $this->db->set('verif_approval', $user)->where('transaksi_id', $id)->update('tbl_verifikasi');
+                    $transaksi_produksi_status_id = '51';
+
+                    //kirim email pembayaran diterima
+                    $this->load->library('email');
+
+                    $this->email->clear();
+                    $this->email->to($pelanggan['pelanggan_email']);
+                    $this->email->from('amarizky02@gmail.com');
+                    $this->email->subject('UCard Surabaya - Approval : Pilih Desain Cetakanmu');
+                    $this->email->set_mailtype('html');
+                    $this->email->message('
     <!DOCTYPE html>
     <html lang="en">
     
@@ -517,7 +464,7 @@ body{background-color:#f5f5f5;text-align:center}.btn{color:#fff;background-color
                 <div class="m-10 body">
                     <h2 class="text-center">Halo, ' . $pelanggan["pelanggan_nama"] . '!</h2>
                     <br>
-                    <p>Proses Pemilihan Desaimu ' . $pelanggan["transaksi_tanggal"] . ' sudah diverifikasi oleh ' . $user . ' nih! Ayo cek sekarang juga untuk melanjutkan ke tahap berikutnya!</p>
+                    <p>Proses pemilihan desaimu ' . $pelanggan["transaksi_tanggal"] . ' sudah diverifikasi oleh ' . $user . ' nih! Ayo cek sekarang juga untuk melanjutkan ke tahap berikutnya!</p>
                     <p>Tekan tombol di bawah untuk membuka halaman detail produk.</p>
                     <div class="text-center">
                         <a href="' . base_url('Order_pelanggan/detail/' . $id) . '">
@@ -534,19 +481,91 @@ body{background-color:#f5f5f5;text-align:center}.btn{color:#fff;background-color
                 ');
                     $this->email->send();
                     break;
-                    default:
+                case '51':
+                    // $this->db->set('verif_cetak', $user)->where('transaksi_id', $id)->update('tbl_verifikasi');
+                    $transaksi_produksi_status_id = '52';
                     break;
-                }
+                case '52':
+                    $transaksi_produksi_status_id = '53';
+                    break;
+                case '53':
+                    $transaksi_produksi_status_id = '54';
+                    break;
+                case '54':
+                    $transaksi_produksi_status_id = '55';
+                    break;
+                case '55':
+                    $this->db->set('verif_cetak', $user)->where('transaksi_id', $id)->update('tbl_verifikasi');
+                    $this->db->set('transaksi_status', '1')->where(['transaksi_status_id' => '5', 'transaksi_order_id' => $id])->update('tbl_status_transaksi');
+                    $status_urut = '6';
+
+                    //produk selesai dicetak
+                    $this->load->library('email');
+
+                    $this->email->clear();
+                    $this->email->to($pelanggan['pelanggan_email']);
+                    $this->email->from('amarizky02@gmail.com');
+                    $this->email->subject('UCard Surabaya - Pesananmu sudah selesai dicetak!');
+                    $this->email->set_mailtype('html');
+                    $this->email->message('
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UCARD - Pesananmu sudah selesai dicetak</title>
+<style>
+body{background-color:#f5f5f5;text-align:center}.btn{color:#fff;background-color:#4caf50;font-size:16px;border-radius:8px;border:0;width:180px;height:40px;cursor:pointer}.container{background-image:linear-gradient(87deg,#5e72e4 0,#825ee4 100%);min-width:480px;max-width:700px;border-radius:8px;height:auto;padding-bottom:10px}.body{padding:20px;background-color:#fff;text-align:start;border-radius:8px}.code{text-align:center;color:#000;font-size:18px}.m-auto{margin:auto}.m-10{margin:10px}.p-10{padding:10px}.text-center{text-align:center}.w-100{width:100%}
+</style>
+</head>
+
+<body>
+
+<div class="text-center">
+<div class="container">
+    <div class="m-auto p-10 text-center">
+        <img src="' . base_url('assets/img/logo-kartuidcard-white.png') . '" alt="">
+    </div>
+    <div class="m-10 body">
+        <h2 class="text-center">Halo, ' . $pelanggan["pelanggan_nama"] . '!</h2>
+        <br>
+        <p>Pesananmu ' . $pelanggan["transaksi_tanggal"] . ' sudah selesai dicetak nih! Ayo cek sekarang juga untuk melanjutkan ke tahap berikutnya!</p>
+        <p>Tekan tombol di bawah untuk membuka halaman detail produk.</p>
+        <div class="text-center">
+            <a href="' . base_url('Order_pelanggan/detail/' . $id) . '">
+                <button class="btn">Detail Produk</button>
+            </a>
+        </div>
+    </div>
+    <p style="color: white;">UCard Surabaya<br>Jl. Rungkut Harapan Blk. F No.008, Kali Rungkut, Kec. Rungkut, Kota SBY, Jawa Timur 60293</p>
+</div>
+</div>
+</body>
+
+</html>
+            ');
+                    $this->email->send();
+                    break;
+
+                default:
+                    break;
             }
+
+            $data = array(
+                'transaksi_status_id'           => $status_urut,
+                'transaksi_produksi_status_id'  => $transaksi_produksi_status_id,
+                'transaksi_order_id'            => $id,
+                'transaksi_tanggal'             => $tanggal_ini,
+                'transaksi_tanggal_hangus'      => $tanggal_hangus
+            );
+
+            $this->db->insert('tbl_status_transaksi', $data);
         } else {
             $k = 'DITOLAK';
             $s = $this->db->query("SELECT * FROM tbl_status WHERE status_id = '$id_status' ")->row_array();
             $tanggal_hangus = $tanggal_ini + (86400 * $s['status_jangka_waktu']);
             $this->db->query("UPDATE tbl_status_transaksi SET transaksi_status = '$keputusan', transaksi_keterangan = '$keterangan', transaksi_tanggal = '$tanggal_ini', transaksi_tanggal_hangus = '$tanggal_hangus' WHERE transaksi_status_id = '$id_status' AND transaksi_order_id = '$id' ");
-        }
-        // $e = $this->db->query("SELECT * FROM tbl_transaksi JOIN tbl_pelanggan ON tbl_transaksi.transaksi_nohp = tbl_pelanggan.pelanggan_nohp JOIN tbl_product ON tbl_transaksi.transaksi_product_id = tbl_product.product_id WHERE transaksi_id = '$id' ")->row_array();
-        if ($status_urut <= 6 && $keputusan == 1) {
-            $this->db->query("INSERT INTO tbl_status_transaksi VALUES (NULL,'$status_urut','$id',NULL,NULL,$tanggal_ini,$tanggal_hangus) ");
         }
     }
     function paket()
@@ -596,41 +615,59 @@ body{background-color:#f5f5f5;text-align:center}.btn{color:#fff;background-color
     {
         $id = $this->input->post('id');
         $id_status = $this->input->post('id_status');
-        $s = $this->db->query("SELECT * FROM tbl_status_transaksi WHERE transaksi_status_id = '$id_status' AND transaksi_order_id = '$id' ")->row_array();
-        $html = '<div class="modal-body">
-        <input type="hidden" value="' . $id_status . '" id="id_status">
-        <div class="form-group">
-        <label>Keputusan *</label><br>
-        <select id="keputusan" name="keputusan" class="form-control" required="">
-        <option value="">--Pilih--</option>';
 
-        if ($id_status != '5') {
+        if ($id_status > 50) {
+            $s = $this->db->query("SELECT * FROM tbl_status_transaksi WHERE transaksi_produksi_status_id = '$id_status' AND transaksi_order_id = '$id' ")->row_array();
+            $status = $this->db->query("SELECT * FROM tbl_status WHERE status_id LIKE '5_' OR status_id = '6';")->result_array();
+            $curr = $status[array_search($id_status, array_column($status, 'status_id'))];
+            $next = $status[array_search(($id_status != '55' ? $id_status + 1 : '6'), array_column($status, 'status_id'))];
 
-            if ($s['transaksi_status'] == '1') {
-                $html .= '<option selected value="1">Diterima</option>';
-            } else {
-                $html .= '<option value="1">Diterima</option>';
-            }
-            if ($s['transaksi_status'] == '0') {
-                $html .= '<option selected value="0">Ditolak</option>';
-            } else {
-                $html .= '<option value="0">Ditolak</option>';
-            }
+            $html = '<div class="modal-body pt-0">
+            <input type="hidden" value="' . $id_status . '" id="id_status">
+            <div class="form-group">
+            <input id="keputusan" type="hidden" value="1">
+            <p>Status saat ini: <b>' . $curr['status_status'] . '</b><br>Status selanjutnya: <b>' . $next['status_status'] . '</b><br><br>
+            <p class="mb-0">Lanjutkan proses produksi?</p>
+            </div>
+            <div class="modal-footer p-1 pt-0">
+                <button style="width:100%;" id="update-status" class="btn btn-primary">Lanjutkan</button>
+            </div>';
+            echo $html;
         } else {
-            $html .= '<option value="1">Sudah Jadi</option>';
+            $s = $this->db->query("SELECT * FROM tbl_status_transaksi WHERE transaksi_status_id = '$id_status' AND transaksi_order_id = '$id' ")->row_array();
+            $html = '<div class="modal-body">
+            <input type="hidden" value="' . $id_status . '" id="id_status">
+            <div class="form-group">
+            <label>Keputusan *</label><br>
+            <select id="keputusan" name="keputusan" class="form-control" required="">
+            <option value="">--Pilih--</option>';
+
+            if ($id_status != '5') {
+                if ($s['transaksi_status'] == '1') {
+                    $html .= '<option selected value="1">Diterima</option>';
+                } else {
+                    $html .= '<option value="1">Diterima</option>';
+                }
+                if ($s['transaksi_status'] == '0') {
+                    $html .= '<option selected value="0">Ditolak</option>';
+                } else {
+                    $html .= '<option value="0">Ditolak</option>';
+                }
+            } else {
+                $html .= '<option value="1">Sudah Jadi</option>';
+            }
+            $html .= '</select>
+            </div>
+            <div class="form-group">
+            <label>Keterangan</label>
+            <textarea id="keterangan" class="form-control" cols="30" rows="5">' . $s['transaksi_keterangan'] . '</textarea>
+            </div>
+            </div>
+            <div class="modal-footer">
+                <button style="width:100%;" id="update-status" class="btn btn-primary">Save</button>
+            </div>';
+            echo $html;
         }
-        $html .= '</select>
-        </div>
-        <div class="form-group">
-        <label>Keterangan</label>
-        <textarea id="keterangan" class="form-control" cols="30" rows="5">' . $s['transaksi_keterangan'] . '</textarea>
-        </div>
-      
-      </div>
-      <div class="modal-footer">
-      <button style="width:100%;" id="update-status" class="btn btn-primary">Save</button>
-      </div>';
-        echo $html;
     }
     function hangus()
     {
