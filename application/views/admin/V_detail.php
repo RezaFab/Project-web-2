@@ -120,10 +120,13 @@
                     <div class="timeline timeline-one-side" data-timeline-content="axis" data-timeline-axis-style="dashed">
                         <?php
                         $id_transaksi = $this->uri->segment(3);
+                        $ctk = $this->db->query("SELECT * FROM tbl_status_transaksi WHERE transaksi_status_id = '5' AND transaksi_order_id = '$id_transaksi' ORDER BY transaksi_id DESC ")->row_array();
+                        $statusproduksi = @$ctk['transaksi_produksi_status_id'];
+
                         foreach ($status as $s) : ?>
                             <?php
                             $id_status = $s['status_urut'];
-                            $st = $this->db->query("SELECT * FROM tbl_status_transaksi WHERE transaksi_order_id = '$id_transaksi' AND transaksi_status_id = '$id_status' ")->row_array();
+                            $st = $this->db->query("SELECT * FROM tbl_status_transaksi WHERE transaksi_order_id = '$id_transaksi' AND transaksi_status_id = '$id_status' ORDER BY transaksi_id DESC ")->row_array();
                             $verif = $this->db->query("SELECT * FROM tbl_verifikasi WHERE transaksi_id = '$id_transaksi';")->row_array();
                             ?>
                             <?php if (!empty($st) && ($st['transaksi_status'] == NULL || $st['transaksi_status'] == '2')) : ?>
@@ -134,10 +137,10 @@
                                     <div class="timeline-content">
                                         <a type="button" class="tablinks" onclick="status(event, 'status<?= $s['status_urut'] ?>')" id="defaultOpen"><b class="font-weight-bold"><?= $s['status_status'] ?></b></a>
                                         <?php
-                                        $max = $this->db->query("SELECT MAX(status_id) AS akhir FROM tbl_status")->row_array();
+                                        $max = $this->db->query("SELECT MAX(status_id) AS akhir FROM tbl_status WHERE status_id LIKE '_';")->row_array();
                                         if ($s['status_urut'] != $max['akhir']) :
                                         ?>
-                                            <button id-status="<?= $s['status_id'] ?>" class="btn btn-primary btn-sm status" data-toggle="modal" data-target="#status_update"><i class="fa fa-pen"></i></button>
+                                            <button id-status="<?= $s['status_urut'] == '5' ? $statusproduksi : $s['status_id'] ?>" class="btn btn-primary btn-sm status" data-toggle="modal" data-target="#status_update"><i class="fa fa-pen"></i></button>
                                         <?php endif; ?>
                                         <p class=" text-sm mt-1 mb-0"><?= $s['status_keterangan'] ?></p>
                                         <?php if ($s['status_jangka_waktu'] != NULL) : ?>
@@ -210,9 +213,9 @@
                                         <div class="mt-3">
                                             <?php if ($s['status_jangka_waktu'] != NULL) : ?>
                                                 <?php if ($st['transaksi_status'] == '4') : ?>
-                                                    <b>Sudah Lewat Tanggal</b>
+                                                    <b>Sudah lewat tanggal</b>
                                                 <?php else : ?>
-                                                    <strong>Batas Kirim</strong>
+                                                    <strong>Batas kirim</strong>
                                                     <b><?= date('d/m/Y H:m', $st['transaksi_tanggal_hangus']) ?></b>
                                                 <?php endif; ?>
                                             <?php endif; ?><br>
@@ -252,7 +255,7 @@
                     <div class="card-body">
                         <div class="container-fluid">
                             <h1>Product</h1>
-                            <b>Nama Product</b>
+                            <b>Nama Produk</b>
                             <p><?= $p['product_nama'] ?></p>
                             <b>Jumlah</b>
                             <p><?= $o['transaksi_jumlah'] ?></p>
@@ -588,20 +591,44 @@
                     </div>
                     <div class="card-body">
                         <?php
-                        $ctk = $this->db->query("SELECT * FROM tbl_status_transaksi WHERE transaksi_status_id = '5' AND transaksi_order_id = '$id_transaksi' ")->row_array();
-                        if ($ctk['transaksi_status'] == '1') :
+                        if (@$ctk['transaksi_status'] == '1') :
                         ?>
                             <div style="display: flex;justify-content: center;">
                                 <img style="width:50%;margin: auto;" src="<?= base_url('assets/img/gifcheck.gif') ?>" alt="">
                             </div>
                             <br>
                             <br>
-                            <h2>Sudah Selesai</h2>
+                            <h2>Sudah selesai</h2>
                         <?php else : ?>
                             <img style="width:100%;" src="<?= base_url('assets/img/print.gif') ?>" alt="">
                             <br>
                             <br>
-                            <h2>Sedang Menyetak Produk</h2>
+                            <h2>Sedang membuat produk</h2>
+                            <br>
+                            <div class="timeline timeline-one-side" data-timeline-content="axis" data-timeline-axis-style="dashed">
+                                <?php
+                                $produksi = $this->db->query("SELECT * FROM tbl_status WHERE status_id LIKE '5_';")->result_array();
+                                $produksicount = 51;
+                                ?>
+                                <?php foreach ($produksi as $p) : ?>
+                                    <div class="timeline-block mt-1 mb-0">
+                                        <span style="background-color: <?= ($statusproduksi == $produksicount) ? "blue" : ($statusproduksi > $produksicount ? "green" : "grey"); ?>;color: white;" class="timeline-step badge-success">
+                                            <i class="fa fa-image"></i>
+                                        </span>
+                                        <div class="timeline-content">
+                                            <p class="my-0"><b class="font-weight-bold"><?= $p['status_status']; ?></b></p>
+                                            <p class=" text-sm mt-1 mb-0"><?= $p['status_keterangan']; ?></p>
+                                            <!-- <div class="mt-3">
+                                                    <span class="badge badge-pill badge-success">Diterima</span>
+                                                    <p class="text-sm mt-2">
+                                                    </p>
+                                                </div> -->
+                                        </div>
+                                    </div>
+                                    <?php $produksicount++ ?>
+                                <?php endforeach; ?>
+
+                            </div>
                         <?php endif; ?>
 
                     </div>
@@ -744,7 +771,7 @@
     <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Status</h5>
+                <h5 class="modal-title" id="exampleModalLongTitle">Ubah Status</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
