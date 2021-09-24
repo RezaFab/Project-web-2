@@ -578,7 +578,17 @@
                         <h3 class="mb-0">Approval</h3>
                     </div>
                     <div class="card-body">
-                        Isi Approval
+
+                        
+                        <form method="post" action="<?= base_url('Order/upload_approval') ?>">
+                            <label for="apv1">Ori</label>    
+                            <input type="file" id="apv1" name="approval1" class="form-control" required><br>
+                            <label for="apv2">Gelap</label>
+                            <input type="file" id="apv2" name="approval2" class="form-control"><br>
+                            <label for="apv3">Terang</label>
+                            <input type="file" id="apv3" name="approval3" class="form-control"><br>
+                            <button type="submit" style="width: 100%;" class="btn btn-primary">Kirim</button>
+                        </form>
 
                     </div>
                 </div>
