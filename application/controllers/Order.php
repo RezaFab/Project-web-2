@@ -20,7 +20,7 @@ class Order extends CI_Controller
     }
     function verifikasi()
     {
-        $x['title'] = "VERIFIKASI";
+        $x['title'] = "Verifikasi";
         $x['order'] = $this->db->query("SELECT t.*,p.pelanggan_nama, s.transaksi_status_id, s.transaksi_order_id, s.transaksi_status, s.transaksi_keterangan FROM tbl_transaksi AS t JOIN tbl_status_transaksi AS s ON t.transaksi_id = s.transaksi_order_id JOIN tbl_pelanggan AS p ON t.transaksi_nohp = p.pelanggan_nohp WHERE t.transaksi_terima IS NULL AND s.transaksi_status_id = '1' AND (s.transaksi_status = '2' OR s.transaksi_status = '0' OR s.transaksi_status IS NULL) ")->result_array();
         $this->load->view('admin/template/V_header', $x);
         $this->load->view('admin/V_order', $x);
@@ -28,7 +28,7 @@ class Order extends CI_Controller
     }
     function kirim_design()
     {
-        $x['title'] = "KIRIM DESIGN";
+        $x['title'] = "Kirim Design";
         $x['order'] = $this->db->query("SELECT t.*,p.pelanggan_nama, s.transaksi_status_id, s.transaksi_order_id, s.transaksi_status, s.transaksi_keterangan FROM tbl_transaksi AS t JOIN tbl_status_transaksi AS s ON t.transaksi_id = s.transaksi_order_id JOIN tbl_pelanggan AS p ON t.transaksi_nohp = p.pelanggan_nohp WHERE t.transaksi_terima IS NULL AND s.transaksi_status_id = '2' AND (s.transaksi_status = '2' OR s.transaksi_status = '0' OR s.transaksi_status IS NULL) ")->result_array();
         $this->load->view('admin/template/V_header', $x);
         $this->load->view('admin/V_order', $x);
@@ -36,7 +36,7 @@ class Order extends CI_Controller
     }
     function pembayaran()
     {
-        $x['title'] = "PEMBAYARAN";
+        $x['title'] = "Pembayaran";
         $x['order'] = $this->db->query("SELECT t.*,p.pelanggan_nama, s.transaksi_status_id, s.transaksi_order_id, s.transaksi_status, s.transaksi_keterangan FROM tbl_transaksi AS t JOIN tbl_status_transaksi AS s ON t.transaksi_id = s.transaksi_order_id JOIN tbl_pelanggan AS p ON t.transaksi_nohp = p.pelanggan_nohp WHERE t.transaksi_terima IS NULL AND s.transaksi_status_id = '3' AND (s.transaksi_status = '2' OR s.transaksi_status = '0' OR s.transaksi_status IS NULL) ")->result_array();
         $this->load->view('admin/template/V_header', $x);
         $this->load->view('admin/V_order', $x);
@@ -44,7 +44,7 @@ class Order extends CI_Controller
     }
     function approval()
     {
-        $x['title'] = "APPROVAL";
+        $x['title'] = "Approval";
         $x['order'] = $this->db->query("SELECT t.*,p.pelanggan_nama, s.transaksi_status_id, s.transaksi_order_id, s.transaksi_status, s.transaksi_keterangan FROM tbl_transaksi AS t JOIN tbl_status_transaksi AS s ON t.transaksi_id = s.transaksi_order_id JOIN tbl_pelanggan AS p ON t.transaksi_nohp = p.pelanggan_nohp WHERE t.transaksi_terima IS NULL AND s.transaksi_status_id = '4' AND (s.transaksi_status = '2' OR s.transaksi_status = '0' OR s.transaksi_status IS NULL) ")->result_array();
         $this->load->view('admin/template/V_header', $x);
         $this->load->view('admin/V_order', $x);
@@ -52,7 +52,7 @@ class Order extends CI_Controller
     }
     function cetak_produk()
     {
-        $x['title'] = "CETAK PRODUK";
+        $x['title'] = "Cetak Produk";
         $x['order'] = $this->db->query("SELECT t.*,p.pelanggan_nama, s.transaksi_status_id, s.transaksi_order_id, s.transaksi_status, s.transaksi_keterangan FROM tbl_transaksi AS t JOIN tbl_status_transaksi AS s ON t.transaksi_id = s.transaksi_order_id JOIN tbl_pelanggan AS p ON t.transaksi_nohp = p.pelanggan_nohp WHERE t.transaksi_terima IS NULL AND s.transaksi_status_id = '5' AND (s.transaksi_status = '2' OR s.transaksi_status = '0' OR s.transaksi_status IS NULL) ")->result_array();
         $this->load->view('admin/template/V_header', $x);
         $this->load->view('admin/V_order', $x);
@@ -60,7 +60,7 @@ class Order extends CI_Controller
     }
     function kirim_ambil()
     {
-        $x['title'] = "AMBIL / KIRIM";
+        $x['title'] = "Ambil / Kirim";
         $x['order'] = $this->db->query("SELECT t.*,p.pelanggan_nama, s.transaksi_status_id, s.transaksi_order_id, s.transaksi_status, s.transaksi_keterangan FROM tbl_transaksi AS t JOIN tbl_status_transaksi AS s ON t.transaksi_id = s.transaksi_order_id JOIN tbl_pelanggan AS p ON t.transaksi_nohp = p.pelanggan_nohp WHERE t.transaksi_terima IS NULL AND s.transaksi_status_id = '6' AND (s.transaksi_status = '2' OR s.transaksi_status = '0' OR s.transaksi_status IS NULL) ")->result_array();
         $this->load->view('admin/template/V_header', $x);
         $this->load->view('admin/V_order', $x);
@@ -68,7 +68,7 @@ class Order extends CI_Controller
     }
     function history()
     {
-        $x['title'] = "ORDER HISTORY";
+        $x['title'] = "Order History";
         $x['order'] = $this->db->query("SELECT t.*,p.pelanggan_nama FROM tbl_transaksi AS t JOIN tbl_pelanggan AS p ON t.transaksi_nohp = p.pelanggan_nohp WHERE t.transaksi_terima = '1' OR t.transaksi_terima = '0' ")->result_array();
         $this->load->view('admin/template/V_header', $x);
         $this->load->view('admin/V_order_history', $x);
@@ -81,29 +81,29 @@ class Order extends CI_Controller
     function new_status()
     {
         $status = $this->db->query("SELECT * FROM tbl_status_transaksi AS st JOIN tbl_status AS s ON st.transaksi_status_id = s.status_id JOIN tbl_transaksi AS t ON t.transaksi_id = st.transaksi_order_id JOIN tbl_pelanggan AS p ON t.transaksi_nohp = p.pelanggan_nohp WHERE transaksi_status = '2' ")->result_array();
-        $html = '';
         foreach ($status as $s) {
-            $html .= '<a href="' . base_url('Order/detail/' . $s['transaksi_id']) . '" class="list-group-item list-group-item-action">
-         <div class="row align-items-center">
-           <div class="col-auto">
-             <!-- Avatar -->
-             <i class="' . $s['status_icon'] . '"></i>
-           </div>
-           <div class="col ml--2">
-             <div class="d-flex justify-content-between align-items-center">
-               <div>
-                 <h4 class="mb-0 text-sm">' . $s['pelanggan_nama'] . '</h4>
-               </div>
-               <div class="text-right text-muted">
-                 <small>' . $s['status_status'] . '</small>
-               </div>
-             </div>
-             <p class="text-sm mb-0">Menunggu Konfirmasi</p>
-           </div>
-         </div>
-       </a>';
+?>
+            <a href="<?= base_url('Order/detail/' . $s['transaksi_id']); ?>" class="list-group-item list-group-item-action">
+                <div class="row align-items-center">
+                    <div class="col-auto">
+                        <!-- Avatar -->
+                        <i class="<?= $s['status_icon']; ?>"></i>
+                    </div>
+                    <div class="col ml--2">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h4 class="mb-0 text-sm"><?= $s['pelanggan_nama']; ?></h4>
+                            </div>
+                            <div class="text-right text-muted">
+                                <small><?= $s['status_status']; ?></small>
+                            </div>
+                        </div>
+                        <p class="text-sm mb-0">Menunggu Konfirmasi</p>
+                    </div>
+                </div>
+            </a>
+<?php
         }
-        echo $html;
     }
     function get_data()
     {

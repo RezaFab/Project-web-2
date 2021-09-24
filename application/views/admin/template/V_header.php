@@ -9,6 +9,7 @@ $h = $this->db->query("SELECT count(transaksi_id) AS h FROM tbl_transaksi WHERE 
 <!DOCTYPE html>
 <html>
 <!-- buat push doang -->
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -54,182 +55,180 @@ $h = $this->db->query("SELECT count(transaksi_id) AS h FROM tbl_transaksi WHERE 
                 <!-- Collapse -->
                 <div class="collapse navbar-collapse" id="sidenav-collapse-main">
                     <!-- Nav items -->
+                    <?php $seg1 = $this->uri->segment(1); ?>
+                    <?php $seg2 = $this->uri->segment(2); ?>
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= base_url('Dashboard') ?>">
+                            <a class="nav-link <?= $seg1 == 'Dashboard' ? 'active' : ''; ?>" href="<?= base_url('Dashboard') ?>">
                                 <i class="ni ni-shop text-primary"></i>
                                 <span class="nav-link-text">Dashboard</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="#navbar-order" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-order">
+                            <a class="nav-link <?= $seg1 == 'Order' && $seg1 . '/' . $seg2 != 'Order/history' ? 'active' : ''; ?>" href="#navbar-order" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-order">
                                 <i class="ni ni-cart text-green"></i>
                                 <span class="nav-link-text">Order <span class="badge badge-pill badge-danger to">0</span></span>
                             </a>
-                            <?php if ($this->uri->segment(1) == 'Dashboard') : ?>
-                                <div class="collapse" id="navbar-order">
-                                <?php else : ?>
-                                    <div class="collapse show" id="navbar-order">
-                                    <?php endif; ?>
-                                    <ul class="nav nav-sm flex-column">
-                                        <li class="nav-item">
-                                            <a href="<?= base_url('Order/verifikasi') ?>" class="nav-link"><i class="fa fa-check"></i>
-                                                <table style="width:100%;">
-                                                    <tr>
-                                                        <td>VERIFIKASI</td>
-                                                        <td style="text-align:right;"><span class="badge badge-pill badge-danger c_v">0</span></td>
-                                                    </tr>
-                                                </table>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="<?= base_url('Order/kirim_design') ?>" class="nav-link"><i class="fa fa-image"></i>
-                                                <table style="width:100%;">
-                                                    <tr>
-                                                        <td>KIRIM DESIGN</td>
-                                                        <td style="text-align:right;"><span class="badge badge-pill badge-danger"><?= $kd['kd'] ?></span></td>
-                                                    </tr>
-                                                </table>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="<?= base_url('Order/pembayaran') ?>" class="nav-link"><i class="fa fa-credit-card"></i>
-                                                <table style="width:100%;">
-                                                    <tr>
-                                                        <td>PEMBAYARAN</td>
-                                                        <td style="text-align:right;"><span class="badge badge-pill badge-danger"><?= $pmb['pmb'] ?></span></td>
-                                                    </tr>
-                                                </table>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="<?= base_url('Order/approval') ?>" class="nav-link"><i class="fa fa-check"></i>
-                                                <table style="width:100%;">
-                                                    <tr>
-                                                        <td>APPROVAL</td>
-                                                        <td style="text-align:right;"><span class="badge badge-pill badge-danger"><?= $apv['apv'] ?></span></td>
-                                                    </tr>
-                                                </table>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="<?= base_url('Order/cetak_produk') ?>" class="nav-link"><i class="fa fa-print"></i>
-                                                <table style="width:100%;">
-                                                    <tr>
-                                                        <td>CETAK PRODUK</td>
-                                                        <td style="text-align:right;"><span class="badge badge-pill badge-danger"><?= $ctk['ctk'] ?></span></td>
-                                                    </tr>
-                                                </table>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="<?= base_url('Order/kirim_ambil') ?>" class="nav-link"><i class="fa fa-truck"></i>
-                                                <table style="width:100%;">
-                                                    <tr>
-                                                        <td>KIRIM / AMBIL</td>
-                                                        <td style="text-align:right;"><span class="badge badge-pill badge-danger"><?= $k_a['k_a'] ?></span></td>
-                                                    </tr>
-                                                </table>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                    </div>
+                            <div class="collapse <?= $seg1 == 'Order' && $seg1 . '/' . $seg2 != 'Order/history' ? 'show' : ''; ?>" id="navbar-order">
+                                <ul class="nav nav-sm flex-column">
+                                    <li class="nav-item">
+                                        <a href="<?= base_url('Order/verifikasi') ?>" class="nav-link <?= $seg2 == 'verifikasi' ? 'active' : ''; ?>"><i class="fa fa-check"></i>
+                                            <table style="width:100%;">
+                                                <tr>
+                                                    <td>VERIFIKASI</td>
+                                                    <td style="text-align:right;"><span class="badge badge-pill badge-danger c_v">0</span></td>
+                                                </tr>
+                                            </table>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="<?= base_url('Order/kirim_design') ?>" class="nav-link <?= $seg2 == 'kirim_design' ? 'active' : ''; ?>"><i class="fa fa-image"></i>
+                                            <table style="width:100%;">
+                                                <tr>
+                                                    <td>KIRIM DESIGN</td>
+                                                    <td style="text-align:right;"><span class="badge badge-pill badge-danger"><?= $kd['kd'] ?></span></td>
+                                                </tr>
+                                            </table>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="<?= base_url('Order/pembayaran') ?>" class="nav-link <?= $seg2 == 'pembayaran' ? 'active' : ''; ?>"><i class="fa fa-credit-card"></i>
+                                            <table style="width:100%;">
+                                                <tr>
+                                                    <td>PEMBAYARAN</td>
+                                                    <td style="text-align:right;"><span class="badge badge-pill badge-danger"><?= $pmb['pmb'] ?></span></td>
+                                                </tr>
+                                            </table>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="<?= base_url('Order/approval') ?>" class="nav-link <?= $seg2 == 'approval' ? 'active' : ''; ?>"><i class="fa fa-check"></i>
+                                            <table style="width:100%;">
+                                                <tr>
+                                                    <td>APPROVAL</td>
+                                                    <td style="text-align:right;"><span class="badge badge-pill badge-danger"><?= $apv['apv'] ?></span></td>
+                                                </tr>
+                                            </table>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="<?= base_url('Order/cetak_produk') ?>" class="nav-link <?= $seg2 == 'cetak_produk' ? 'active' : ''; ?>"><i class="fa fa-print"></i>
+                                            <table style="width:100%;">
+                                                <tr>
+                                                    <td>CETAK PRODUK</td>
+                                                    <td style="text-align:right;"><span class="badge badge-pill badge-danger"><?= $ctk['ctk'] ?></span></td>
+                                                </tr>
+                                            </table>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="<?= base_url('Order/kirim_ambil') ?>" class="nav-link <?= $seg2 == 'kirim_ambil' ? 'active' : ''; ?>"><i class="fa fa-truck"></i>
+                                            <table style="width:100%;">
+                                                <tr>
+                                                    <td>KIRIM / AMBIL</td>
+                                                    <td style="text-align:right;"><span class="badge badge-pill badge-danger"><?= $k_a['k_a'] ?></span></td>
+                                                </tr>
+                                            </table>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= base_url('Order/history') ?>">
+                            <a class="nav-link <?= $seg1 . '/' . $seg2 == 'Order/history' ? 'active' : ''; ?>" href="<?= base_url('Order/history') ?>">
                                 <i class="fa fa-history text-green"></i>
                                 <span class="nav-link-text">Order History</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#navbar-data" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-data">
+                            <a class="nav-link <?= $seg1 == 'Data' ? 'active' : ''; ?>" href="#navbar-data" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-data">
                                 <i class="ni ni-single-copy-04 text-info"></i>
                                 <span class="nav-link-text">Data</span>
                             </a>
                             <div class="collapse" id="navbar-data">
                                 <ul class="nav nav-sm flex-column">
                                     <li class="nav-item">
-                                        <a href="<?= base_url('Data/pelanggan') ?>" class="nav-link">Data Pelanggan</a>
+                                        <a href="<?= base_url('Data/pelanggan') ?>" class="nav-link <?= $seg2 == 'pelanggan' ? 'active' : ''; ?>">Data Pelanggan</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="<?= base_url('Data/produk') ?>" class="nav-link">Data Produk</a>
+                                        <a href="<?= base_url('Data/produk') ?>" class="nav-link <?= $seg2 == 'produk' ? 'active' : ''; ?>">Data Produk</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="<?= base_url('Data/penjualan') ?>" class="nav-link">Data Penjualan</a>
+                                        <a href="<?= base_url('Data/penjualan') ?>" class="nav-link <?= $seg2 == 'penjualan' ? 'active' : ''; ?>">Data Penjualan</a>
                                     </li>
                                 </ul>
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= base_url('Category') ?>">
+                            <a class="nav-link <?= $seg1 == 'Category' ? 'active' : ''; ?>" href="<?= base_url('Category') ?>">
                                 <i class="ni ni-bullet-list-67 text-primary"></i>
                                 <span class="nav-link-text">Category</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= base_url('Product') ?>">
+                            <a class="nav-link <?= $seg1 == 'Product' ? 'active' : ''; ?>" href="<?= base_url('Product') ?>">
                                 <i class="ni ni-box-2 text-danger"></i>
                                 <span class="nav-link-text">Product</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#navbar-template" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-template">
+                            <a class="nav-link <?= $seg1 == 'Daftar_design' ? 'active' : ''; ?>" href="#navbar-template" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-template">
                                 <i class="ni ni-image text-green"></i>
                                 <span class="nav-link-text">Template</span>
                             </a>
                             <div class="collapse" id="navbar-template">
                                 <ul class="nav nav-sm flex-column">
                                     <li class="nav-item">
-                                        <a href="<?= base_url('Daftar_design/design_assets') ?>" class="nav-link">Template Assets</a>
+                                        <a href="<?= base_url('Daftar_design/design_assets') ?>" class="nav-link <?= $seg2 == 'design_assets' ? 'active' : ''; ?>">Template Assets</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="<?= base_url('Daftar_design/design_user') ?>" class="nav-link">Template Pelanggan</a>
+                                        <a href="<?= base_url('Daftar_design/design_user') ?>" class="nav-link <?= $seg2 == 'design_user' ? 'active' : ''; ?>">Template Pelanggan</a>
                                     </li>
                                 </ul>
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#navbar-image" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-image">
+                            <a class="nav-link <?= $seg1 == 'Image' ? 'active' : ''; ?>" href="#navbar-image" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-image">
                                 <i class="ni ni-image text-info"></i>
                                 <span class="nav-link-text">Image</span>
                             </a>
                             <div class="collapse" id="navbar-image">
                                 <ul class="nav nav-sm flex-column">
                                     <li class="nav-item">
-                                        <a href="<?= base_url('Image/image_assets') ?>" class="nav-link">Image Assets</a>
+                                        <a href="<?= base_url('Image/image_assets') ?>" class="nav-link <?= $seg2 == 'image_assets' ? 'active' : ''; ?>">Image Assets</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="<?= base_url('Image/image_user') ?>" class="nav-link">Image Pelanggan</a>
+                                        <a href="<?= base_url('Image/image_user') ?>" class="nav-link <?= $seg2 == 'image_user' ? 'active' : ''; ?>">Image Pelanggan</a>
                                     </li>
                                 </ul>
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= base_url('Pelanggan') ?>">
+                            <a class="nav-link <?= $seg1 == 'Pelanggan' ? 'active' : ''; ?>" href="<?= base_url('Pelanggan') ?>">
                                 <i class="ni ni-single-02 text-info"></i>
                                 <span class="nav-link-text">Pelanggan</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= base_url('Customer_services') ?>">
+                            <a class="nav-link <?= $seg1 == 'Customer_services' ? 'active' : ''; ?>" href="<?= base_url('Customer_services') ?>">
                                 <i class="ni ni-circle-08 text-orange"></i>
                                 <span class="nav-link-text">Customer Services</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= base_url('Status') ?>">
+                            <a class="nav-link <?= $seg1 == 'Status' ? 'active' : ''; ?>" href="<?= base_url('Status') ?>">
                                 <i class="ni ni-tag text-info"></i>
                                 <span class="nav-link-text">Status</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= base_url('Bank') ?>">
+                            <a class="nav-link <?= $seg1 == 'Bank' ? 'active' : ''; ?>" href="<?= base_url('Bank') ?>">
                                 <i class="ni ni-credit-card text-success"></i>
                                 <span class="nav-link-text">Bank</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= base_url('Administrator') ?>">
+                            <a class="nav-link <?= $seg1 == 'Administrator' ? 'active' : ''; ?>" href="<?= base_url('Administrator') ?>">
                                 <i class="ni ni-single-02 text-warning"></i>
                                 <span class="nav-link-text">Admin</span>
                             </a>

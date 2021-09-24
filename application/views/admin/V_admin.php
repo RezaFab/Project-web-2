@@ -133,7 +133,7 @@
           </div>
 
           <div class="modal-footer">
-            <button type="submit" class="btn btn-danger btn_hapus">hapus</button>
+            <button type="submit" class="btn btn-danger btn_hapus">Hapus</button>
             <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal">Close</button>
           </div>
 
