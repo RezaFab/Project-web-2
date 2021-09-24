@@ -578,17 +578,28 @@
                         <h3 class="mb-0">Approval</h3>
                     </div>
                     <div class="card-body">
-
-                        
-                        <form method="post" action="<?= base_url('Order/upload_approval') ?>">
-                            <label for="apv1">Ori</label>    
+                        <form method="post" action="<?= base_url('Order/upload_approval1') ?>" enctype="multipart/form-data">
+                            <input type="hidden" name="transaksi_id" value="<?= $this->uri->segment(3) ?>">
+                            <label for="apv1">Ori</label>
                             <input type="file" id="apv1" name="approval1" class="form-control" required><br>
+                            <button type="submit" style="width: 100%;" class="btn btn-primary">Kirim Gambar Ori</button>
+                        </form>
+
+                        <form method="post" action="<?= base_url('Order/upload_approval2') ?>" enctype="multipart/form-data">
+                            <input type="hidden" name="transaksi_id" value="<?= $this->uri->segment(3) ?>">
                             <label for="apv2">Gelap</label>
                             <input type="file" id="apv2" name="approval2" class="form-control"><br>
+                            <button type="submit" style="width: 100%;" class="btn btn-primary">Kirim Gambar Gelap</button>
+                        </form>
+
+                        <form method="post" action="<?= base_url('Order/upload_approval3') ?>" enctype="multipart/form-data">
+                            <input type="hidden" name="transaksi_id" value="<?= $this->uri->segment(3) ?>">
                             <label for="apv3">Terang</label>
                             <input type="file" id="apv3" name="approval3" class="form-control"><br>
-                            <button type="submit" style="width: 100%;" class="btn btn-primary">Kirim</button>
+                            <button type="submit" style="width: 100%;" class="btn btn-primary">Kirim Gambar Terang</button>
                         </form>
+
+
 
                     </div>
                 </div>

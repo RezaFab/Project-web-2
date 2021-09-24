@@ -164,31 +164,11 @@ class Order_pelanggan extends CI_Controller
         }
         $this->db->query("UPDATE tbl_transaksi SET transaksi_bank = '$bank', transaksi_atas_nama = '$atas_nama', transaksi_bukti = '$f' WHERE transaksi_id = '$id' ");
         redirect('Order_pelanggan/detail/' . $id_transaksi);
-    }function upload_approval()
+    }
+    function upload_approval()
     {
         $id = $this->input->post('id');
-        $id_transaksi = $this->input->post('id_transaksi');
-        $apv1 = $_FILES['approval1']['name'];
-        if (empty($apv1)) {
-            echo "belum ada desain di upload";
-        } else {
-            $config['upload_path']          = './design_approval/';
-            $config['allowed_types']        = 'jpg|jpeg|png';
-            $config['max_size']             = 0;
-            $config['remove_spaces']        = FALSE;
-            $config['encrypt_name'] = TRUE;
-            $this->load->library('upload', $config);
-            if ($this->upload->do_upload('approval1')) {
-                $this->upload->data();
-            }
-            $f = $this->upload->data('file_name');
-        }
-        $c = $this->db->query("SELECT * FROM tbl_status_transaksi WHERE transaksi_status_id = '4' AND transaksi_order_id = '$id_transaksi' ")->num_rows();
-        if ($c['transaksi_keterangan'] == NULL) {
-            $this->db->query("UPDATE tbl_status_transaksi SET transaksi_status = 2 WHERE transaksi_status_id = '4' AND transaksi_order_id = '$id_transaksi' ");
-        }
-        $this->db->query("UPDATE tbl_transaksi SET   transaksi_approval_1 = '$f' WHERE transaksi_id = '$id' ");
-        redirect('Order_pelanggan/detail/' . $id_transaksi);
+        
     }
     function batal_trans()
     {

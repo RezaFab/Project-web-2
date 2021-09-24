@@ -240,31 +240,80 @@ class Order extends CI_Controller
             $this->load->view('admin/template/V_footer');
         }
     }
-    function upload_approval()
+    function upload_approval1()
     {
         $id = $this->input->post('id');
-        $id_transaksi = $this->input->post('id_transaksi');
+        $transaksi_id = $this->input->post('transaksi_id');
         $apv1 = $_FILES['approval1']['name'];
-        if (empty($apv1)) {
-            echo "belum ada desain di upload";
-        } else {
-            $config['upload_path']          = './design_approval/';
-            $config['allowed_types']        = 'jpg|jpeg|png';
-            $config['max_size']             = 0;
-            $config['remove_spaces']        = FALSE;
-            $config['encrypt_name'] = TRUE;
-            $this->load->library('upload', $config);
-            if ($this->upload->do_upload('approval1')) {
-                $this->upload->data();
-            }
-            $f = $this->upload->data('file_name');
+        $config['upload_path']          = './design_approval/';
+        $config['allowed_types']        = 'jpg|jpeg|png';
+        $config['max_size']             = 0;
+        $config['remove_spaces']        = FALSE;
+        $config['encrypt_name'] = TRUE;
+        $this->load->library('upload', $config);
+        if ($this->upload->do_upload('approval1')) {
+            $this->upload->data();
         }
-        $c = $this->db->query("SELECT * FROM tbl_status_transaksi WHERE transaksi_status_id = '4' AND transaksi_order_id = '$id_transaksi' ")->num_rows();
-        if ($c['transaksi_keterangan'] == NULL) {
-            $this->db->query("UPDATE tbl_status_transaksi SET transaksi_status = 2 WHERE transaksi_status_id = '4' AND transaksi_order_id = '$id_transaksi' ");
+
+        $a = $this->upload->data('file_name');
+
+        $data = [
+            'transaksi_approval_1' => $a
+        ];
+
+        $this->db->where('transaksi_id', $transaksi_id);
+        $this->db->update('tbl_transaksi', $data);
+        redirect('Order/detail/' . $transaksi_id);
+    }
+    function upload_approval2()
+    {
+        $id = $this->input->post('id');
+        $transaksi_id = $this->input->post('transaksi_id');
+        $apv1 = $_FILES['approval2']['name'];
+        $config['upload_path']          = './design_approval/';
+        $config['allowed_types']        = 'jpg|jpeg|png';
+        $config['max_size']             = 0;
+        $config['remove_spaces']        = FALSE;
+        $config['encrypt_name'] = TRUE;
+        $this->load->library('upload', $config);
+        if ($this->upload->do_upload('approval2')) {
+            $this->upload->data();
         }
-        $this->db->query("UPDATE tbl_transaksi SET   transaksi_approval_1 = '$f' WHERE transaksi_id = '$id' ");
-        redirect('Order_pelanggan/detail/' . $id_transaksi);
+
+        $a = $this->upload->data('file_name');
+
+        $data = [
+            'transaksi_approval_2' => $a
+        ];
+
+        $this->db->where('transaksi_id', $transaksi_id);
+        $this->db->update('tbl_transaksi', $data);
+        redirect('Order/detail/' . $transaksi_id);
+    }
+    function upload_approval3()
+    {
+        $id = $this->input->post('id');
+        $transaksi_id = $this->input->post('transaksi_id');
+        $apv1 = $_FILES['approval3']['name'];
+        $config['upload_path']          = './design_approval/';
+        $config['allowed_types']        = 'jpg|jpeg|png';
+        $config['max_size']             = 0;
+        $config['remove_spaces']        = FALSE;
+        $config['encrypt_name'] = TRUE;
+        $this->load->library('upload', $config);
+        if ($this->upload->do_upload('approval3')) {
+            $this->upload->data();
+        }
+
+        $a = $this->upload->data('file_name');
+
+        $data = [
+            'transaksi_approval_3' => $a
+        ];
+
+        $this->db->where('transaksi_id', $transaksi_id);
+        $this->db->update('tbl_transaksi', $data);
+        redirect('Order/detail/' . $transaksi_id);
     }
     function info_design()
     {

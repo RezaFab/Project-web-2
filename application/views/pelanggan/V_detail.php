@@ -641,18 +641,18 @@
                             <h3 class="mb-0">Approval</h3>
                         </div>
                         <div class="card-body">
-                        <form action="">
-                            <input type="radio" id="apv1" placeholder="Pilih Approval" name="approval" value="Ori">
-                            <label for="apv1">Ori</label><br>
-                            <a type="button" class="modal_lihat" data-toggle="modal" data-target="#approval1"><img style="width: 100%;" src="<?= base_url('design_approval/' . $o['transaksi_approval_1']) ?>"></a><br>
-                            <input type="radio" id="apv2" placeholder="Pilih Approval" name="approval" value="Gelap">
-                            <label for="apv2">Gelap</label><br>
-                            <a type="button" class="modal_lihat" data-toggle="modal" data-target="#approval2"><img style="width: 100%;" src="<?= base_url('design_approval/' . $o['transaksi_approval_2']) ?>"></a><br>
-                            <input type="radio" id="apv3" placeholder="Pilih Approval" name="approval" value="Terang">
-                            <label for="apv3">Terang</label><br>
-                            <a type="button" class="modal_lihat" data-toggle="modal" data-target="#approval3"><img style="width: 100%;" src="<?= base_url('design_approval/' . $o['transaksi_approval_3']) ?>"></a><br>
-                            <button type="submit" style="width: 100%;" class="btn btn-primary">Kirim</button> 
-                        </form> 
+                            <form action="">
+                                <input type="radio" id="apv1" placeholder="Pilih Approval" name="approval" value="Ori">
+                                <label for="apv1">Ori</label><br>
+                                <a type="button" class="modal_lihat" data-toggle="modal" data-target="#approval1"><img style="width: 100%;" src="<?= base_url('design_approval/' . $o['transaksi_approval_1']) ?>"></a><br>
+                                <input type="radio" id="apv2" placeholder="Pilih Approval" name="approval" value="Gelap">
+                                <label for="apv2">Gelap</label><br>
+                                <a type="button" class="modal_lihat" data-toggle="modal" data-target="#approval2"><img style="width: 100%;" src="<?= base_url('design_approval/' . $o['transaksi_approval_2']) ?>"></a><br>
+                                <input type="radio" id="apv3" placeholder="Pilih Approval" name="approval" value="Terang">
+                                <label for="apv3">Terang</label><br>
+                                <a type="button" class="modal_lihat" data-toggle="modal" data-target="#approval3"><img style="width: 100%;" src="<?= base_url('design_approval/' . $o['transaksi_approval_3']) ?>"></a><br>
+                                <button type="submit" style="width: 100%;" class="btn btn-primary">Kirim</button>
+                            </form>
                         </div>
                     </div>
                 </div>
