@@ -641,16 +641,32 @@
                             <h3 class="mb-0">Approval</h3>
                         </div>
                         <div class="card-body">
-                            <form action="">
-                                <input type="radio" id="apv1" placeholder="Pilih Approval" name="approval" value="Ori">
-                                <label for="apv1">Ori</label><br>
-                                <a type="button" class="modal_lihat" data-toggle="modal" data-target="#approval1"><img style="width: 100%;" src="<?= base_url('design_approval/' . $o['transaksi_approval_1']) ?>"></a><br>
-                                <input type="radio" id="apv2" placeholder="Pilih Approval" name="approval" value="Gelap">
-                                <label for="apv2">Gelap</label><br>
-                                <a type="button" class="modal_lihat" data-toggle="modal" data-target="#approval2"><img style="width: 100%;" src="<?= base_url('design_approval/' . $o['transaksi_approval_2']) ?>"></a><br>
-                                <input type="radio" id="apv3" placeholder="Pilih Approval" name="approval" value="Terang">
-                                <label for="apv3">Terang</label><br>
-                                <a type="button" class="modal_lihat" data-toggle="modal" data-target="#approval3"><img style="width: 100%;" src="<?= base_url('design_approval/' . $o['transaksi_approval_3']) ?>"></a><br>
+                            <form method="post" action="<?= base_url('Order_pelanggan/upload_approval_acc') ?>" enctype="multipart/form-data">
+                                <input type="hidden" name="transaksi_id" value="<?= $this->uri->segment(3) ?>">
+                                <?php if ($o['transaksi_approval_acc'] == '1') : ?>
+                                    <label> <input type="radio" value="1" name="approval" id="apv1" checked> Original </label>
+                                <?php else : ?>
+                                    <label><input type="radio" value="1" name="approval" id="apv1"> Original </label>
+                                <?php endif; ?>
+                                <label for="apv1">
+                                    <a><img style="width: 100%;" src="<?= base_url('design_approval/' . $o['transaksi_approval_1']) ?>"></a><br>
+                                </label><br>
+                                <?php if ($o['transaksi_approval_acc'] == '2') : ?>
+                                    <label><input type="radio" value="2" name="approval" id="apv2" checked> Gelap</label>
+                                <?php else : ?>
+                                    <label><input type="radio" value="2" name="approval" id="apv2"> Gelap</label>
+                                <?php endif; ?>
+                                <label for="apv2">
+                                    <a><img style="width: 100%;" src="<?= base_url('design_approval/' . $o['transaksi_approval_2']) ?>"></a><br>
+                                </label><br>
+                                <?php if ($o['transaksi_approval_acc'] == '3') : ?>
+                                    <label><input type="radio" value="3" name="approval" id="apv3" checked> Terang</label>
+                                <?php else : ?>
+                                    <label><input type="radio" value="3" name="approval" id="apv3"> Terang</label>
+                                <?php endif; ?>
+                                <label for="apv3">
+                                    <a><img style="width: 100%;" src="<?= base_url('design_approval/' . $o['transaksi_approval_3']) ?>"></a><br>
+                                </label><br>
                                 <button type="submit" style="width: 100%;" class="btn btn-primary">Kirim</button>
                             </form>
                         </div>

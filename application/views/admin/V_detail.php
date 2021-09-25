@@ -578,25 +578,44 @@
                         <h3 class="mb-0">Approval</h3>
                     </div>
                     <div class="card-body">
+                        <div>
+                            <b>Yang Terpilih :
+                                <?php
+                                if ($o['transaksi_approval_acc'] == 1) {
+                                    echo "Original";
+                                } elseif ($o['transaksi_approval_acc'] == 2) {
+                                    echo "Gelap";
+                                } elseif ($o['transaksi_approval_acc'] == 3) {
+                                    echo "Terang";
+                                } else {
+                                    echo "Pelanggan Belum Menentukan Pilihan";
+                                } ?>
+                            </b>
+
+                        </div>
+                        <br><br>
                         <form method="post" action="<?= base_url('Order/upload_approval1') ?>" enctype="multipart/form-data">
                             <input type="hidden" name="transaksi_id" value="<?= $this->uri->segment(3) ?>">
-                            <label for="apv1">Ori</label>
+                            <label for="apv1"><b>Original</b></label><br>
+                            <a type="button" class="modal_lihat" data-toggle="modal" data-target="#approval1"><img style="width: 100%;" src="<?= base_url('design_approval/' . $o['transaksi_approval_1']) ?>"></a><br>
                             <input type="file" id="apv1" name="approval1" class="form-control" required><br>
-                            <button type="submit" style="width: 100%;" class="btn btn-primary">Kirim Gambar Ori</button>
+                            <button type="submit" style="width: 100%;" class="btn btn-primary">Tetapkan Sebagai Gambar Original</button>
                         </form>
 
                         <form method="post" action="<?= base_url('Order/upload_approval2') ?>" enctype="multipart/form-data">
                             <input type="hidden" name="transaksi_id" value="<?= $this->uri->segment(3) ?>">
-                            <label for="apv2">Gelap</label>
+                            <label for="apv2">Gelap</label><br>
+                            <a type="button" class="modal_lihat" data-toggle="modal" data-target="#approval2"><img style="width: 100%;" src="<?= base_url('design_approval/' . $o['transaksi_approval_2']) ?>"></a><br>
                             <input type="file" id="apv2" name="approval2" class="form-control"><br>
-                            <button type="submit" style="width: 100%;" class="btn btn-primary">Kirim Gambar Gelap</button>
+                            <button type="submit" style="width: 100%;" class="btn btn-primary">Tetapkan Sebagai Gambar Gelap</button>
                         </form>
 
                         <form method="post" action="<?= base_url('Order/upload_approval3') ?>" enctype="multipart/form-data">
                             <input type="hidden" name="transaksi_id" value="<?= $this->uri->segment(3) ?>">
-                            <label for="apv3">Terang</label>
+                            <label for="apv3">Terang</label><br>
+                            <a type="button" class="modal_lihat" data-toggle="modal" data-target="#approval3"><img style="width: 100%;" src="<?= base_url('design_approval/' . $o['transaksi_approval_3']) ?>"></a><br>
                             <input type="file" id="apv3" name="approval3" class="form-control"><br>
-                            <button type="submit" style="width: 100%;" class="btn btn-primary">Kirim Gambar Terang</button>
+                            <button type="submit" style="width: 100%;" class="btn btn-primary">Tetapkan Sebagai Gambar Terang</button>
                         </form>
 
 
