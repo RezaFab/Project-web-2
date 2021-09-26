@@ -2,8 +2,6 @@
 *.rar
 *.tar*
 
-*.sql
-
 *.doc*
 *.ppt*
 *.xls*
