@@ -122,7 +122,8 @@ $h = $this->db->query("SELECT count(transaksi_id) AS h FROM tbl_transaksi WHERE 
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="<?= base_url('Order/kirim_ambil') ?>" class="nav-link <?= $seg2 == 'kirim_ambil' ? 'active' : ''; ?>"><i class="fa fa-truck"></i>
+                                        <a href="<?= base_url('Order/kirim_ambil') ?>" class="nav-link <?= $seg2 == 'kirim_ambil' ? 'active' : ''; ?>">
+                                            <i class="fa fa-truck"></i>
                                             <table style="width:100%;">
                                                 <tr>
                                                     <td>KIRIM / AMBIL</td>
@@ -148,13 +149,19 @@ $h = $this->db->query("SELECT count(transaksi_id) AS h FROM tbl_transaksi WHERE 
                             <div class="collapse" id="navbar-data">
                                 <ul class="nav nav-sm flex-column">
                                     <li class="nav-item">
-                                        <a href="<?= base_url('Data/pelanggan') ?>" class="nav-link <?= $seg2 == 'pelanggan' ? 'active' : ''; ?>">Data Pelanggan</a>
+                                        <a href="<?= base_url('Data/pelanggan') ?>" class="nav-link <?= $seg2 == 'pelanggan' ? 'active' : ''; ?>">
+                                            <i class="ni ni-single-copy-04 text-info"></i>Data Pelanggan
+                                        </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="<?= base_url('Data/produk') ?>" class="nav-link <?= $seg2 == 'produk' ? 'active' : ''; ?>">Data Produk</a>
+                                        <a href="<?= base_url('Data/produk') ?>" class="nav-link <?= $seg2 == 'produk' ? 'active' : ''; ?>">
+                                            <i class="ni ni-single-copy-04 text-info"></i>Data Produk
+                                        </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="<?= base_url('Data/penjualan') ?>" class="nav-link <?= $seg2 == 'penjualan' ? 'active' : ''; ?>">Data Penjualan</a>
+                                        <a href="<?= base_url('Data/penjualan') ?>" class="nav-link <?= $seg2 == 'penjualan' ? 'active' : ''; ?>">
+                                            <i class="ni ni-single-copy-04 text-info"></i>Data Penjualan
+                                        </a>
                                     </li>
                                 </ul>
                             </div>
@@ -179,10 +186,14 @@ $h = $this->db->query("SELECT count(transaksi_id) AS h FROM tbl_transaksi WHERE 
                             <div class="collapse" id="navbar-template">
                                 <ul class="nav nav-sm flex-column">
                                     <li class="nav-item">
-                                        <a href="<?= base_url('Daftar_design/design_assets') ?>" class="nav-link <?= $seg2 == 'design_assets' ? 'active' : ''; ?>">Template Assets</a>
+                                        <a href="<?= base_url('Daftar_design/design_assets') ?>" class="nav-link <?= $seg2 == 'design_assets' ? 'active' : ''; ?>">
+                                            <i class="ni ni-image text-green"></i>Template Assets
+                                        </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="<?= base_url('Daftar_design/design_user') ?>" class="nav-link <?= $seg2 == 'design_user' ? 'active' : ''; ?>">Template Pelanggan</a>
+                                        <a href="<?= base_url('Daftar_design/design_user') ?>" class="nav-link <?= $seg2 == 'design_user' ? 'active' : ''; ?>"><i class="ni ni-image text-green"></i>
+                                            Template Pelanggan
+                                        </a>
                                     </li>
                                 </ul>
                             </div>
@@ -195,10 +206,14 @@ $h = $this->db->query("SELECT count(transaksi_id) AS h FROM tbl_transaksi WHERE 
                             <div class="collapse" id="navbar-image">
                                 <ul class="nav nav-sm flex-column">
                                     <li class="nav-item">
-                                        <a href="<?= base_url('Image/image_assets') ?>" class="nav-link <?= $seg2 == 'image_assets' ? 'active' : ''; ?>">Image Assets</a>
+                                        <a href="<?= base_url('Image/image_assets') ?>" class="nav-link <?= $seg2 == 'image_assets' ? 'active' : ''; ?>">
+                                            <i class="ni ni-image text-info"></i>Image Assets
+                                        </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="<?= base_url('Image/image_user') ?>" class="nav-link <?= $seg2 == 'image_user' ? 'active' : ''; ?>">Image Pelanggan</a>
+                                        <a href="<?= base_url('Image/image_user') ?>" class="nav-link <?= $seg2 == 'image_user' ? 'active' : ''; ?>">
+                                            <i class="ni ni-image text-info"></i>Image Pelanggan
+                                        </a>
                                     </li>
                                 </ul>
                             </div>
