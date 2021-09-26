@@ -354,12 +354,21 @@
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Save</button>
-                        <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-link ml-auto" data-dismiss="modal">Close</button>
                     </div>
                 </div>
             </form>
         </div>
     </div>
+    <style>
+        .add_perm_icon {
+            width: 1%;
+        }
+
+        .add_perm_check {
+            width: 20px;
+        }
+    </style>
     <script>
         $('#tblAddAdminPerm tr').click(function() {
             var inp = $(this).find("input")[0];
