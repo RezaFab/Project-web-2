@@ -64,40 +64,329 @@
     </div>
     <div class="modal fade" id="tambah" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
         <div class="modal-dialog modal- modal-dialog-centered" role="document">
-            <div class="modal-content">
+            <form method="post" action="<?= base_url('Administrator/tambah_admin') ?>" style="width: 600px;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h6 class="modal-title" id="modal-title-default">Tambah Admin</h6>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body pb-0">
+                        <div class="form-group">
+                            <label>No HP</label>
+                            <input type="number" name="add_nohp" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Nama</label>
+                            <input type="text" name="add_nama" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="text" name="add_email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Kata sandi</label>
+                            <input type="password" autocomplete="off" name="add_password" class="form-control" required>
+                        </div>
+                        <div class="form-group m-0">
+                            <label>Perizinan</label>
+                            <table id="tblAddAdminPerm" class="table m-0" style="cursor: default;">
+                                <tbody>
+                                    <tr>
+                                        <td class="add_perm_icon">
+                                            <i class="ni ni-shop text-primary"></i>
+                                        </td>
+                                        <td colspan="2">Dashboard</td>
+                                        <td class="add_perm_check">
+                                            <input type="checkbox" value="1" name="add_perm_dashboard" id="add_perm_dashboard" checked disabled>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="add_perm_icon">
+                                            <i class="ni ni-cart text-green"></i>
+                                        </td>
+                                        <td colspan="2">Order</td>
+                                        <td class="add_perm_check">
+                                            <input class="add_perm_order" type="checkbox" value="1" name="add_perm_order" id="add_perm_order">
+                                        </td>
+                                    </tr>
 
-                <div class="modal-header">
-                    <h6 class="modal-title" id="modal-title-default">Tambah Admin</h6>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
+                                    <tr>
+                                        <td></td>
+                                        <td class="add_perm_icon">
+                                            <i class="fa fa-check"></i>
+                                        </td>
+                                        <td>VERIFIKASI</td>
+                                        <td class="add_perm_check">
+                                            <input class="add_perm_orders" type="checkbox" value="1" name="add_perm_verifikasi" id="add_perm_verifikasi">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td class="add_perm_icon">
+                                            <i class="fa fa-image"></i>
+                                        </td>
+                                        <td>KIRIM DESIGN</td>
+                                        <td class="add_perm_check">
+                                            <input class="add_perm_orders" type="checkbox" value="1" name="add_perm_kirimdesign" id="add_perm_kirimdesign">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td class="add_perm_icon">
+                                            <i class="fa fa-credit-card"></i>
+                                        </td>
+                                        <td>PEMBAYARAN</td>
+                                        <td class="add_perm_check">
+                                            <input class="add_perm_orders" type="checkbox" value="1" name="add_perm_pembayaran" id="add_perm_pembayaran">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td class="add_perm_icon">
+                                            <i class="fa fa-check"></i>
+                                        </td>
+                                        <td>APPROVAL</td>
+                                        <td class="add_perm_check">
+                                            <input class="add_perm_orders" type="checkbox" value="1" name="add_perm_approval" id="add_perm_approval">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td class="add_perm_icon">
+                                            <i class="fa fa-print"></i>
+                                        </td>
+                                        <td>CETAK PRODUK</td>
+                                        <td class="add_perm_check">
+                                            <input class="add_perm_orders" type="checkbox" value="1" name="add_perm_cetakproduk" id="add_perm_cetakproduk">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td class="add_perm_icon">
+                                            <i class="fa fa-truck"></i>
+                                        </td>
+                                        <td>KIRIM / AMBIL</td>
+                                        <td class="add_perm_check">
+                                            <input class="add_perm_orders" type="checkbox" value="1" name="add_perm_kirimambil" id="add_perm_kirimambil">
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="add_perm_icon">
+                                            <i class="fa fa-history text-green"></i>
+                                        </td>
+                                        <td colspan="2">Order History</td>
+                                        <td class="add_perm_check">
+                                            <input type="checkbox" value="1" name="add_perm_orderhistory" id="add_perm_orderhistory">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="add_perm_icon">
+                                            <i class="ni ni-single-copy-04 text-info"></i>
+                                        </td>
+                                        <td colspan="2">Data</td>
+                                        <td class="add_perm_check">
+                                            <input class="add_perm_data" type="checkbox" value="1" name="add_perm_data" id="add_perm_data">
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td></td>
+                                        <td class="add_perm_icon">
+                                            <i class="ni ni-single-copy-04 text-info"></i>
+                                        </td>
+                                        <td>Data Pelanggan</td>
+                                        <td class="add_perm_check">
+                                            <input class="add_perm_datas" type="checkbox" value="1" name="add_perm_datapelanggan" id="add_perm_datapelanggan">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td class="add_perm_icon">
+                                            <i class="ni ni-single-copy-04 text-info"></i>
+                                        </td>
+                                        <td>Data Produk</td>
+                                        <td class="add_perm_check">
+                                            <input class="add_perm_datas" type="checkbox" value="1" name="add_perm_dataproduk" id="add_perm_dataproduk">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td class="add_perm_icon">
+                                            <i class="ni ni-single-copy-04 text-info"></i>
+                                        </td>
+                                        <td>Data Penjualan</td>
+                                        <td class="add_perm_check">
+                                            <input class="add_perm_datas" type="checkbox" value="1" name="add_perm_datapenjualan" id="add_perm_datapenjualan">
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="add_perm_icon">
+                                            <i class="ni ni-bullet-list-67 text-primary"></i>
+                                        </td>
+                                        <td colspan="2">Category</td>
+                                        <td class="add_perm_check">
+                                            <input type="checkbox" value="1" name="add_perm_category" id="add_perm_category">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="add_perm_icon">
+                                            <i class="ni ni-box-2 text-danger"></i>
+                                        </td>
+                                        <td colspan="2">Product</td>
+                                        <td class="add_perm_check">
+                                            <input type="checkbox" value="1" name="add_perm_produk" id="add_perm_produk">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="add_perm_icon">
+                                            <i class="ni ni-image text-green"></i>
+                                        </td>
+                                        <td colspan="2">Template</td>
+                                        <td class="add_perm_check">
+                                            <input class="add_perm_template" type="checkbox" value="1" name="add_perm_template" id="add_perm_template">
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td></td>
+                                        <td class="add_perm_icon">
+                                            <i class="ni ni-image text-green"></i>
+                                        </td>
+                                        <td>Template Assets</td>
+                                        <td class="add_perm_check">
+                                            <input class="add_perm_templates" type="checkbox" value="1" name="add_perm_templateassets" id="add_perm_templateassets">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td class="add_perm_icon">
+                                            <i class="ni ni-image text-green"></i>
+                                        </td>
+                                        <td>Template Pelanggan</td>
+                                        <td class="add_perm_check">
+                                            <input class="add_perm_templates" type="checkbox" value="1" name="add_perm_templatepelanggan" id="add_perm_templatepelanggan">
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="add_perm_icon">
+                                            <i class="ni ni-image text-info"></i>
+                                        </td>
+                                        <td colspan="2">Image</td>
+                                        <td class="add_perm_check">
+                                            <input class="add_perm_image" type="checkbox" value="1" name="add_perm_image" id="add_perm_image">
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td></td>
+                                        <td class="add_perm_icon">
+                                            <i class="ni ni-image text-info"></i>
+                                        </td>
+                                        <td>Image Assets</td>
+                                        <td class="add_perm_check">
+                                            <input class="add_perm_images" type="checkbox" value="1" name="add_perm_imageassets" id="add_perm_imageassets">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td class="add_perm_icon">
+                                            <i class="ni ni-image text-info"></i>
+                                        </td>
+                                        <td>Image Pelanggan</td>
+                                        <td class="add_perm_check">
+                                            <input class="add_perm_images" type="checkbox" value="1" name="add_perm_imagepelanggan" id="add_perm_imagepelanggan">
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="add_perm_icon">
+                                            <i class="ni ni-single-02 text-info"></i>
+                                        </td>
+                                        <td colspan="2">Pelanggan</td>
+                                        <td class="add_perm_check">
+                                            <input type="checkbox" value="1" name="add_perm_pelanggan" id="add_perm_pelanggan">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="add_perm_icon">
+                                            <i class="ni ni-circle-08 text-orange"></i>
+                                        </td>
+                                        <td colspan="2">Customer Services</td>
+                                        <td class="add_perm_check">
+                                            <input type="checkbox" value="1" name="add_perm_customerservices" id="add_perm_customerservices">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="add_perm_icon">
+                                            <i class="ni ni-tag text-info"></i>
+                                        </td>
+                                        <td colspan="2">Status</td>
+                                        <td class="add_perm_check">
+                                            <input type="checkbox" value="1" name="add_perm_status" id="add_perm_status">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="add_perm_icon">
+                                            <i class="ni ni-credit-card text-success"></i>
+                                        </td>
+                                        <td colspan="2">Bank</td>
+                                        <td class="add_perm_check">
+                                            <input type="checkbox" value="1" name="add_perm_bank" id="add_perm_bank">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="add_perm_icon">
+                                            <i class="ni ni-single-02 text-warning"></i>
+                                        </td>
+                                        <td colspan="2">Admin</td>
+                                        <td class="add_perm_check">
+                                            <input type="checkbox" value="1" name="add_perm_admin" id="add_perm_admin">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal">Close</button>
+                    </div>
                 </div>
-
-                <div class="modal-body">
-                    <form method="post" action="<?= base_url('Administrator/tambah_admin') ?>">
-                        <div class="form-group">
-                            <input type="number" placeholder="No Hp" name="nohp" required="" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <input type="text" placeholder="Nama" name="nama" required="" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <input type="text" placeholder="Email" name="email" required="" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <input type="password" placeholder="Password" name="password" required="" class="form-control">
-                        </div>
-                </div>
-
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Save</button>
-                    </form>
-                    <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal">Close</button>
-                </div>
-
-            </div>
+            </form>
         </div>
     </div>
+    <script>
+        $('#tblAddAdminPerm tr').click(function() {
+            var inp = $(this).find("input")[0];
+            if (!$(inp).is('#perm_dashboard')) {
+                inp.checked = !inp.checked;
+                if ($(inp).hasClass("add_perm_order")) $(".add_perm_orders").prop("checked", $(".add_perm_order").prop("checked"));
+                if ($(inp).hasClass("add_perm_orders"))
+                    if ($(".add_perm_orders:checked").length) $(".add_perm_order").prop("checked", true);
+                    else $(".add_perm_order").prop("checked", false);
+                if ($(inp).hasClass("add_perm_data")) $(".add_perm_datas").prop("checked", $(".add_perm_data").prop("checked"));
+                if ($(inp).hasClass("add_perm_datas"))
+                    if ($(".add_perm_datas:checked").length) $(".add_perm_data").prop("checked", true);
+                    else $(".add_perm_data").prop("checked", false);
+                if ($(inp).hasClass("add_perm_template")) $(".add_perm_templates").prop("checked", $(".add_perm_template").prop("checked"));
+                if ($(inp).hasClass("add_perm_templates"))
+                    if ($(".add_perm_templates:checked").length) $(".add_perm_template").prop("checked", true);
+                    else $(".add_perm_template").prop("checked", false);
+                if ($(inp).hasClass("add_perm_image")) $(".add_perm_images").prop("checked", $(".add_perm_image").prop("checked"));
+                if ($(inp).hasClass("add_perm_images"))
+                    if ($(".add_perm_images:checked").length) $(".add_perm_image").prop("checked", true);
+                    else $(".add_perm_image").prop("checked", false);
+            }
+        });
+        $('#tblAddAdminPerm input').click(function() {
+            this.checked = !this.checked;
+        })
+    </script>
 
     </div>
 
@@ -120,7 +409,7 @@
         <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h6 class="modal-title" id="modal-title-default">Hapus Pelanggan</h6>
+                    <h6 class="modal-title" id="modal-title-default">Hapus Admin</h6>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>

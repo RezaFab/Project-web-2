@@ -28,6 +28,7 @@ $h = $this->db->query("SELECT count(transaksi_id) AS h FROM tbl_transaksi WHERE 
 
     <!-- Argon CSS -->
     <link rel="stylesheet" href="<?= base_url('assets/admin/css/argon.css?v=1.1.0') ?>" type="text/css">
+    <link rel="stylesheet" href="<?= base_url('assets/admin/css/administrator.css'); ?>">
     <script src="<?= base_url('assets/admin/vendor/jquery/dist/jquery.min.js') ?>"></script>
 </head>
 

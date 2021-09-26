@@ -56,23 +56,25 @@ class Administrator extends CI_Controller
                 <script>
                     $('#tblPerm tr').click(function() {
                         var inp = $(this).find("input")[0];
-                        inp.checked = !inp.checked;
-                        if ($(inp).hasClass("perm_order")) $(".perm_orders").prop("checked", $(".perm_order").prop("checked"));
-                        if ($(inp).hasClass("perm_orders"))
-                            if ($(".perm_orders:checked").length) $(".perm_order").prop("checked", true);
-                            else $(".perm_order").prop("checked", false);
-                        if ($(inp).hasClass("perm_data")) $(".perm_datas").prop("checked", $(".perm_data").prop("checked"));
-                        if ($(inp).hasClass("perm_datas"))
-                            if ($(".perm_datas:checked").length) $(".perm_data").prop("checked", true);
-                            else $(".perm_data").prop("checked", false);
-                        if ($(inp).hasClass("perm_template")) $(".perm_templates").prop("checked", $(".perm_template").prop("checked"));
-                        if ($(inp).hasClass("perm_templates"))
-                            if ($(".perm_templates:checked").length) $(".perm_template").prop("checked", true);
-                            else $(".perm_template").prop("checked", false);
-                        if ($(inp).hasClass("perm_image")) $(".perm_images").prop("checked", $(".perm_image").prop("checked"));
-                        if ($(inp).hasClass("perm_images"))
-                            if ($(".perm_images:checked").length) $(".perm_image").prop("checked", true);
-                            else $(".perm_image").prop("checked", false);
+                        if (!$(inp).is('#perm_dashboard')) {
+                            inp.checked = !inp.checked;
+                            if ($(inp).hasClass("perm_order")) $(".perm_orders").prop("checked", $(".perm_order").prop("checked"));
+                            if ($(inp).hasClass("perm_orders"))
+                                if ($(".perm_orders:checked").length) $(".perm_order").prop("checked", true);
+                                else $(".perm_order").prop("checked", false);
+                            if ($(inp).hasClass("perm_data")) $(".perm_datas").prop("checked", $(".perm_data").prop("checked"));
+                            if ($(inp).hasClass("perm_datas"))
+                                if ($(".perm_datas:checked").length) $(".perm_data").prop("checked", true);
+                                else $(".perm_data").prop("checked", false);
+                            if ($(inp).hasClass("perm_template")) $(".perm_templates").prop("checked", $(".perm_template").prop("checked"));
+                            if ($(inp).hasClass("perm_templates"))
+                                if ($(".perm_templates:checked").length) $(".perm_template").prop("checked", true);
+                                else $(".perm_template").prop("checked", false);
+                            if ($(inp).hasClass("perm_image")) $(".perm_images").prop("checked", $(".perm_image").prop("checked"));
+                            if ($(inp).hasClass("perm_images"))
+                                if ($(".perm_images:checked").length) $(".perm_image").prop("checked", true);
+                                else $(".perm_image").prop("checked", false);
+                        }
                     });
                     $('#tblPerm input').click(function() {
                         this.checked = !this.checked;
@@ -86,7 +88,7 @@ class Administrator extends CI_Controller
                             </td>
                             <td colspan="2">Dashboard</td>
                             <td class="perm_check">
-                                <input type="checkbox" value="1" name="perm_dashboard" id="perm_dashboard" <?= $a['admin_perm_dashboard'] == 1 ? 'checked' : ''; ?>>
+                                <input type="checkbox" value="1" name="perm_dashboard" id="perm_dashboard" checked disabled>
                             </td>
                         </tr>
                         <tr>
@@ -350,19 +352,44 @@ class Administrator extends CI_Controller
     }
     function tambah_admin()
     {
-        $id = 'A-' . time();
-        $no_hp = $this->input->post('nohp');
-        $nama = $this->input->post('nama');
-        $email = $this->input->post('email');
-        $password = md5($this->input->post('password'));
-        $nohp = str_replace(" ", "", $no_hp);
-        if (substr(trim($nohp), 0, 1) == '0') {
-            $hp = '62' . substr(trim($nohp), 1);
-        } else {
-            $hp = $no_hp;
-        }
+        $nohp = $this->input->post('add_nohp');
 
-        $this->M_admin->tambah_admin($id, $hp, $nama, $email, $password);
+        $data = [
+            'admin_id'                      => 'A-' . time(),
+            'admin_nama'                    => $this->input->post('add_nama'),
+            'admin_email'                   => $this->input->post('add_email'),
+            'admin_nohp'                    => (substr(trim($nohp), 0, 1) == '0' ? '62' . substr(trim($nohp), 1) : $nohp),
+            'admin_password'                => md5($this->input->post('add_password')),
+            'admin_perm_dashboard'          => "1",
+            'admin_perm_order'              => $this->input->post('add_perm_order')              ?? "0",
+            'admin_perm_verifikasi'         => $this->input->post('add_perm_verifikasi')         ?? "0",
+            'admin_perm_kirimdesign'        => $this->input->post('add_perm_kirimdesign')        ?? "0",
+            'admin_perm_pembayaran'         => $this->input->post('add_perm_pembayaran')         ?? "0",
+            'admin_perm_approval'           => $this->input->post('add_perm_approval')           ?? "0",
+            'admin_perm_cetakproduk'        => $this->input->post('add_perm_cetakproduk')        ?? "0",
+            'admin_perm_kirimambil'         => $this->input->post('add_perm_kirimambil')         ?? "0",
+            'admin_perm_orderhistory'       => $this->input->post('add_perm_orderhistory')       ?? "0",
+            'admin_perm_data'               => $this->input->post('add_perm_data')               ?? "0",
+            'admin_perm_datapelanggan'      => $this->input->post('add_perm_datapelanggan')      ?? "0",
+            'admin_perm_dataproduk'         => $this->input->post('add_perm_dataproduk')         ?? "0",
+            'admin_perm_datapenjualan'      => $this->input->post('add_perm_datapenjualan')      ?? "0",
+            'admin_perm_category'           => $this->input->post('add_perm_category')           ?? "0",
+            'admin_perm_produk'             => $this->input->post('add_perm_produk')             ?? "0",
+            'admin_perm_template'           => $this->input->post('add_perm_template')           ?? "0",
+            'admin_perm_templateassets'     => $this->input->post('add_perm_templateassets')     ?? "0",
+            'admin_perm_templatepelanggan'  => $this->input->post('add_perm_templatepelanggan')  ?? "0",
+            'admin_perm_image'              => $this->input->post('add_perm_image')              ?? "0",
+            'admin_perm_imageassets'        => $this->input->post('add_perm_imageassets')        ?? "0",
+            'admin_perm_imagepelanggan'     => $this->input->post('add_perm_imagepelanggan')     ?? "0",
+            'admin_perm_pelanggan'          => $this->input->post('add_perm_pelanggan')          ?? "0",
+            'admin_perm_customerservices'   => $this->input->post('add_perm_customerservices')   ?? "0",
+            'admin_perm_status'             => $this->input->post('add_perm_status')             ?? "0",
+            'admin_perm_bank'               => $this->input->post('add_perm_bank')               ?? "0",
+            'admin_perm_admin'              => $this->input->post('add_perm_admin')              ?? "0",
+        ];
+
+        $this->db->insert('tbl_admin', $data);
+        // $this->M_admin->tambah_admin($id, $hp, $nama, $email, $password);
         redirect('Administrator');
     }
     function update_admin()
@@ -377,7 +404,7 @@ class Administrator extends CI_Controller
             'admin_email'                   => $this->input->post('email'),
             'admin_nohp'                    => (substr(trim($nohp), 0, 1) == '0' ? '62' . substr(trim($nohp), 1) : $nohp),
             'admin_password'                => (empty($password) ? $pw : $pwDef),
-            'admin_perm_dashboard'          => $this->input->post('perm_dashboard')          ?? "0",
+            'admin_perm_dashboard'          => "1",
             'admin_perm_order'              => $this->input->post('perm_order')              ?? "0",
             'admin_perm_verifikasi'         => $this->input->post('perm_verifikasi')         ?? "0",
             'admin_perm_kirimdesign'        => $this->input->post('perm_kirimdesign')        ?? "0",
