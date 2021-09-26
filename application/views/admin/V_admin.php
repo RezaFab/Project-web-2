@@ -119,7 +119,7 @@
                                         </td>
                                         <td>VERIFIKASI</td>
                                         <td class="add_perm_check">
-                                            <input class="add_perm_orders" type="checkbox" value="1" name="add_perm_verifikasi" id="add_perm_verifikasi">
+                                            <input class="add_perm_orders" type="checkbox" value="1" name="add_perm_orderverifikasi" id="add_perm_orderverifikasi">
                                         </td>
                                     </tr>
                                     <tr>
@@ -129,7 +129,7 @@
                                         </td>
                                         <td>KIRIM DESIGN</td>
                                         <td class="add_perm_check">
-                                            <input class="add_perm_orders" type="checkbox" value="1" name="add_perm_kirimdesign" id="add_perm_kirimdesign">
+                                            <input class="add_perm_orders" type="checkbox" value="1" name="add_perm_orderkirimdesign" id="add_perm_orderkirimdesign">
                                         </td>
                                     </tr>
                                     <tr>
@@ -139,7 +139,7 @@
                                         </td>
                                         <td>PEMBAYARAN</td>
                                         <td class="add_perm_check">
-                                            <input class="add_perm_orders" type="checkbox" value="1" name="add_perm_pembayaran" id="add_perm_pembayaran">
+                                            <input class="add_perm_orders" type="checkbox" value="1" name="add_perm_orderpembayaran" id="add_perm_orderpembayaran">
                                         </td>
                                     </tr>
                                     <tr>
@@ -149,7 +149,7 @@
                                         </td>
                                         <td>APPROVAL</td>
                                         <td class="add_perm_check">
-                                            <input class="add_perm_orders" type="checkbox" value="1" name="add_perm_approval" id="add_perm_approval">
+                                            <input class="add_perm_orders" type="checkbox" value="1" name="add_perm_orderapproval" id="add_perm_orderapproval">
                                         </td>
                                     </tr>
                                     <tr>
@@ -159,7 +159,7 @@
                                         </td>
                                         <td>CETAK PRODUK</td>
                                         <td class="add_perm_check">
-                                            <input class="add_perm_orders" type="checkbox" value="1" name="add_perm_cetakproduk" id="add_perm_cetakproduk">
+                                            <input class="add_perm_orders" type="checkbox" value="1" name="add_perm_ordercetakproduk" id="add_perm_ordercetakproduk">
                                         </td>
                                     </tr>
                                     <tr>
@@ -169,7 +169,7 @@
                                         </td>
                                         <td>KIRIM / AMBIL</td>
                                         <td class="add_perm_check">
-                                            <input class="add_perm_orders" type="checkbox" value="1" name="add_perm_kirimambil" id="add_perm_kirimambil">
+                                            <input class="add_perm_orders" type="checkbox" value="1" name="add_perm_orderkirimambil" id="add_perm_orderkirimambil">
                                         </td>
                                     </tr>
 
@@ -450,8 +450,8 @@
                         success: function(data) {
                             $('#alert_edit').html('<div class="alert alert-success alert-dismissible fade show" role="alert"><span class="alert-icon"><i class="fa fa-check"></i></span><span class="alert-text"><strong>Berhasil!</strong> Data berhasil diperbarui</span><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>')
                             setTimeout(function() {
-                                $('.alert .close').click();
-                            }, 3000)
+                                location.reload();
+                            }, 2000)
                         }
                     })
                     console.log(formData)
@@ -459,40 +459,40 @@
                     $('#alert_edit').html('<div class="alert alert-danger alert-dismissible fade show" role="alert"><span class="alert-icon"><i class="fa fa-times"></i></span><span class="alert-text"><strong>Isi semua data</strong> Jangan biarkan data kosong</span><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>')
                 }
             })
-        })
 
-        $(document).on('click', '.hapus', function() {
-            var id = $(this).attr('id');
-            $('.btn_hapus').attr('id', id);
-        });
-        $(document).on('click', '.btn_hapus', function() {
-            var url = document.URL;
-            var id = $(this).attr('id');
-            $.ajax({
-                type: "POST",
-                url: "<?= base_url('Administrator/hapus_admin') ?>",
-                data: {
-                    id: id
-                },
-                success: function(data) {
-                    $('#alert_hapus').html('<div class="alert alert-success alert-dismissible fade show" role="alert"><span class="alert-icon"><i class="fa fa-check"></i></span><span class="alert-text"><strong>Berhasil!</strong> Data dihapus</span><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
-                    setTimeout(function() {
-                        window.location.href = url;
-                    }, 1000);
-                }
+            $('.hapus').click(function() {
+                var id = $(this).attr('id');
+                $('.btn_hapus').attr('id', id);
             });
-        });
-        $('.edit').click(function() {
-            var id = $(this).attr('id');
-            $.ajax({
-                type: "POST",
-                url: "<?= base_url('Administrator/get_data') ?>",
-                data: {
-                    id: id
-                },
-                success: function(data) {
-                    $('#form_edit').html(data);
-                }
+            $('.btn_hapus').click(function() {
+                var url = document.URL;
+                var id = $(this).attr('id');
+                $.ajax({
+                    type: "POST",
+                    url: "<?= base_url('Administrator/hapus_admin') ?>",
+                    data: {
+                        id: id
+                    },
+                    success: function(data) {
+                        $('#alert_hapus').html('<div class="alert alert-success alert-dismissible fade show" role="alert"><span class="alert-icon"><i class="fa fa-check"></i></span><span class="alert-text"><strong>Berhasil!</strong> Data dihapus</span><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
+                        setTimeout(function() {
+                            window.location.href = url;
+                        }, 1000);
+                    }
+                });
             });
-        });
+            $('.edit').click(function() {
+                var id = $(this).attr('id');
+                $.ajax({
+                    type: "POST",
+                    url: "<?= base_url('Administrator/get_data') ?>",
+                    data: {
+                        id: id
+                    },
+                    success: function(data) {
+                        $('#form_edit').html(data);
+                    }
+                });
+            });
+        })
     </script>
