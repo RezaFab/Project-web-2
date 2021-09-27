@@ -1,13 +1,16 @@
 <?php
-class Dashboard extends CI_Controller {
-    function __construct() {
+class Dashboard extends CI_Controller
+{
+    function __construct()
+    {
         parent::__construct();
         if (!isset($this->session->admin_nama)) {
-            redirect('Admin');        
+            redirect('Admin');
         }
     }
 
-    function index() {
+    function index()
+    {
         $x['title'] = "Dashboard";
         $x['kd'] = $this->db->query("SELECT count(t.transaksi_id) AS kd FROM tbl_transaksi AS t JOIN tbl_status_transaksi AS s ON t.transaksi_id = s.transaksi_order_id WHERE t.transaksi_terima IS NULL AND s.transaksi_status_id = '2' AND (s.transaksi_status = '2' OR s.transaksi_status = '0' OR s.transaksi_status IS NULL)")->row_array();
         $x['pmb'] = $this->db->query("SELECT count(t.transaksi_id) AS pmb FROM tbl_transaksi AS t JOIN tbl_status_transaksi AS s ON t.transaksi_id = s.transaksi_order_id WHERE t.transaksi_terima IS NULL AND s.transaksi_status_id = '3' AND (s.transaksi_status = '2' OR s.transaksi_status = '0' OR s.transaksi_status IS NULL) ")->row_array();
@@ -23,24 +26,25 @@ class Dashboard extends CI_Controller {
         $this->load->view('admin/V_dashboard', $x);
         $this->load->view('admin/template/V_footer');
     }
-    function order_saat_ini() {
+    function order_saat_ini()
+    {
         $order = $this->db->query("SELECT * FROM tbl_transaksi WHERE transaksi_terima IS NULL ORDER BY transaksi_id DESC")->result_array();
-        $html = '';
-        $n=1; foreach($order as $o ) {
-            $html .= '<tr>
-            <td>'. $n++ .'</td>
-            <td>'. $o['transaksi_nohp'].'</td>';
-            $nohp = $o['transaksi_nohp']; 
-            $p = $this->db->query("SELECT * FROM tbl_pelanggan WHERE pelanggan_nohp = '$nohp' ")->row_array();
-            $html .= '<td>'.$p['pelanggan_nama'].'</td>
-            <td>'. $o['transaksi_tanggal'].'</td>
-            <td>'. $o['transaksi_jumlah'].'</td>
-            <td>'. $o['transaksi_status'].'</td>
-            <td>
-            <a href="'. base_url('Order/detail/'.$o['transaksi_id']).'" class="btn btn-primary btn-sm"><i class="fa fa-box"></i></a>
-            </td>
-          </tr>';
+        $n = 1;
+        foreach ($order as $o) {
+            $p = $this->db->query("SELECT * FROM tbl_pelanggan WHERE pelanggan_nohp = '$o[transaksi_nohp]' ")->row_array();
+?>
+            <tr>
+                <td><?= $n++; ?></td>
+                <td><?= $o['transaksi_nohp']; ?></td>
+                <td><?= $p['pelanggan_nama']; ?></td>
+                <td><?= $o['transaksi_tanggal']; ?></td>
+                <td><?= $o['transaksi_jumlah']; ?></td>
+                <td><?= $o['transaksi_status']; ?></td>
+                <td>
+                    <a href="<?= base_url('Order/detail/' . $o['transaksi_id']); ?>" class="btn btn-primary btn-sm"><i class="fa fa-box"></i></a>
+                </td>
+            </tr>
+<?php
         }
-        echo $html;
     }
 }

@@ -7,6 +7,7 @@ class Status extends CI_Controller
 		if (!isset($this->session->admin_nama)) {
 			redirect('Admin');
 		}
+		if (!$this->M_admin->check_permission('status')) redirect('Dashboard');
 	}
 
 	function index()
