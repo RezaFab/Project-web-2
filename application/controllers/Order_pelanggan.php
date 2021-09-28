@@ -131,6 +131,13 @@ class Order_pelanggan extends CI_Controller
         $status = $this->input->post('status');
         $this->db->query("UPDATE tbl_transaksi SET transaksi_status = '$status' WHERE transaksi_id = '$id' ");
     }
+    function upload_approval_acc()
+    {
+        $transaksi_id = $this->input->post('transaksi_id');
+        $acc = $this->input->post('approval');
+        $this->db->query("UPDATE tbl_transaksi SET transaksi_approval_acc = '$acc' WHERE transaksi_id = '$transaksi_id' ");
+        redirect('Order_pelanggan/detail/' . $transaksi_id);
+    }
     function hapus_order()
     {
         $id = $this->input->post('id');
@@ -164,6 +171,10 @@ class Order_pelanggan extends CI_Controller
         }
         $this->db->query("UPDATE tbl_transaksi SET transaksi_bank = '$bank', transaksi_atas_nama = '$atas_nama', transaksi_bukti = '$f' WHERE transaksi_id = '$id' ");
         redirect('Order_pelanggan/detail/' . $id_transaksi);
+    }
+    function upload_approval()
+    {
+        $id = $this->input->post('id');
     }
     function batal_trans()
     {

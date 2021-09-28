@@ -256,6 +256,81 @@ class Order extends CI_Controller
             $this->load->view('admin/template/V_footer');
         }
     }
+    function upload_approval1()
+    {
+        $id = $this->input->post('id');
+        $transaksi_id = $this->input->post('transaksi_id');
+        $apv1 = $_FILES['approval1']['name'];
+        $config['upload_path']          = './design_approval/';
+        $config['allowed_types']        = 'jpg|jpeg|png';
+        $config['max_size']             = 0;
+        $config['remove_spaces']        = FALSE;
+        $config['encrypt_name'] = TRUE;
+        $this->load->library('upload', $config);
+        if ($this->upload->do_upload('approval1')) {
+            $this->upload->data();
+        }
+
+        $a = $this->upload->data('file_name');
+
+        $data = [
+            'transaksi_approval_1' => $a
+        ];
+
+        $this->db->where('transaksi_id', $transaksi_id);
+        $this->db->update('tbl_transaksi', $data);
+        redirect('Order/detail/' . $transaksi_id);
+    }
+    function upload_approval2()
+    {
+        $id = $this->input->post('id');
+        $transaksi_id = $this->input->post('transaksi_id');
+        $apv1 = $_FILES['approval2']['name'];
+        $config['upload_path']          = './design_approval/';
+        $config['allowed_types']        = 'jpg|jpeg|png';
+        $config['max_size']             = 0;
+        $config['remove_spaces']        = FALSE;
+        $config['encrypt_name'] = TRUE;
+        $this->load->library('upload', $config);
+        if ($this->upload->do_upload('approval2')) {
+            $this->upload->data();
+        }
+
+        $a = $this->upload->data('file_name');
+
+        $data = [
+            'transaksi_approval_2' => $a
+        ];
+
+        $this->db->where('transaksi_id', $transaksi_id);
+        $this->db->update('tbl_transaksi', $data);
+        redirect('Order/detail/' . $transaksi_id);
+    }
+    function upload_approval3()
+    {
+        $id = $this->input->post('id');
+        $transaksi_id = $this->input->post('transaksi_id');
+        $apv1 = $_FILES['approval3']['name'];
+        $config['upload_path']          = './design_approval/';
+        $config['allowed_types']        = 'jpg|jpeg|png';
+        $config['max_size']             = 0;
+        $config['remove_spaces']        = FALSE;
+        $config['encrypt_name'] = TRUE;
+        $this->load->library('upload', $config);
+        if ($this->upload->do_upload('approval3')) {
+            $this->upload->data();
+        }
+
+        $a = $this->upload->data('file_name');
+
+        $data = [
+            'transaksi_approval_3' => $a
+        ];
+
+        $this->db->where('transaksi_id', $transaksi_id);
+        $this->db->update('tbl_transaksi', $data);
+        redirect('Order/detail/' . $transaksi_id);
+    }
     function info_design()
     {
         $d = $this->input->post('d');
