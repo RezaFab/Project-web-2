@@ -30,10 +30,10 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Nohp</th>
+                                    <th>No HP</th>
                                     <th>Nama</th>
                                     <th>Email</th>
-                                    <th>Action</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>

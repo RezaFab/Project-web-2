@@ -21,11 +21,11 @@
               <tr>
                 <th>No</th>
                 <th>Name</th>
-                <th>Category</th>
-                <th>Author</th>
-                <th>Dimension</th>
+                <th>Kategori</th>
+                <th>Pemilik</th>
+                <th>Dimensi</th>
                 <th>Image</th>
-                <th>Action</th>
+                <th>Aksi</th>
               </tr>
             </thead>
             <tbody>

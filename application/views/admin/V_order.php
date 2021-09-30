@@ -68,8 +68,8 @@
                                 <th>Tanggal</th>
                                 <th>Jumlah</th>
                                 <th>Status</th>
-                                <th>Action</th>
-                                <th>Delete</th>
+                                <th>Aksi</th>
+                                <th>Hapus</th>
                             </tr>
                         </thead>
                         <tbody>

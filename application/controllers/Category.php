@@ -14,7 +14,7 @@ class Category extends CI_Controller
 
 	function index()
 	{
-		$x['title'] = "Category";
+		$x['title'] = "Kategori";
 		$x['category'] = $this->M_category->get_category();
 		$this->load->view('admin/template/V_header', $x);
 		$this->load->view('admin/V_category', $x);

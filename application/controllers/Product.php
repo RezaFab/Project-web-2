@@ -13,7 +13,7 @@ class Product extends CI_Controller
 
 	function index()
 	{
-		$x['title'] = "Product";
+		$x['title'] = "Produk";
 		$x['product'] = $this->db->query("SELECT * FROM tbl_product")->result_array();
 		$x['category'] = $this->db->query("SELECT * FROM tbl_product_category")->result_array();
 		$this->load->view('admin/template/V_header', $x);
@@ -62,7 +62,7 @@ class Product extends CI_Controller
 			<p><?= $get['product_kode']; ?></p>
 			<b>Nama</b>
 			<p><?= $get['product_nama']; ?></p>
-			<b>Category</b>
+			<b>Kategori</b>
 			<p><?= $get['product_category']; ?></p>
 			<b>Deskripsi</b>
 			<p><?= $get['product_deskripsi']; ?></p>
