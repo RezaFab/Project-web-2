@@ -166,7 +166,7 @@ $h = $this->db->query("SELECT count(transaksi_id) AS h FROM tbl_transaksi WHERE 
                                     <i class="ni ni-single-copy-04 text-info"></i>
                                     <span class="nav-link-text">Data</span>
                                 </a>
-                                <div class="collapse" id="navbar-data">
+                                <div class="collapse <?= $seg1 == 'Data' ? 'show' : ''; ?>" id="navbar-data">
                                     <ul class="nav nav-sm flex-column">
                                         <?php if ($perms['admin_perm_datapelanggan']) : ?>
                                             <li class="nav-item">
@@ -197,7 +197,7 @@ $h = $this->db->query("SELECT count(transaksi_id) AS h FROM tbl_transaksi WHERE 
                             <li class="nav-item">
                                 <a class="nav-link <?= $seg1 == 'Category' ? 'active' : ''; ?>" href="<?= base_url('Category') ?>">
                                     <i class="ni ni-bullet-list-67 text-primary"></i>
-                                    <span class="nav-link-text">Category</span>
+                                    <span class="nav-link-text">Kategori</span>
                                 </a>
                             </li>
                         <?php endif; ?>
@@ -205,7 +205,7 @@ $h = $this->db->query("SELECT count(transaksi_id) AS h FROM tbl_transaksi WHERE 
                             <li class="nav-item">
                                 <a class="nav-link <?= $seg1 == 'Product' ? 'active' : ''; ?>" href="<?= base_url('Product') ?>">
                                     <i class="ni ni-box-2 text-danger"></i>
-                                    <span class="nav-link-text">Product</span>
+                                    <span class="nav-link-text">Produk</span>
                                 </a>
                             </li>
                         <?php endif; ?>
@@ -215,7 +215,7 @@ $h = $this->db->query("SELECT count(transaksi_id) AS h FROM tbl_transaksi WHERE 
                                     <i class="ni ni-image text-green"></i>
                                     <span class="nav-link-text">Template</span>
                                 </a>
-                                <div class="collapse" id="navbar-template">
+                                <div class="collapse <?= $seg1 == 'Template' ? 'show' : ''; ?>" id="navbar-template">
                                     <ul class="nav nav-sm flex-column">
                                         <?php if ($perms['admin_perm_templateassets']) : ?>
                                             <li class="nav-item">
@@ -241,7 +241,7 @@ $h = $this->db->query("SELECT count(transaksi_id) AS h FROM tbl_transaksi WHERE 
                                     <i class="ni ni-image text-info"></i>
                                     <span class="nav-link-text">Image</span>
                                 </a>
-                                <div class="collapse" id="navbar-image">
+                                <div class="collapse <?= $seg1 == 'Image' ? 'show' : ''; ?>" id="navbar-image">
                                     <ul class="nav nav-sm flex-column">
                                         <?php if ($perms['admin_perm_imageassets']) : ?>
                                             <li class="nav-item">

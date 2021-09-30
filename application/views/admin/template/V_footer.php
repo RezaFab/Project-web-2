@@ -1,25 +1,21 @@
 <button id="notif-pesan-tombol" type="button" style="display:none;" data-toggle="modal" data-target="#notif-pesan"></button>
 <div class="modal fade" id="notif-pesan" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
-  <div class="modal-dialog modal- modal-dialog-centered" role="document">
-    <div class="modal-content">
-
-      <div class="modal-header">
-        <h6 class="modal-title" id="modal-title-default">Notification</h6>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">×</span>
-        </button>
-      </div>
-
-      <div class="modal-body">
-        <h2>Ada pesanan baru!</h2>
-      </div>
-
-      <div class="modal-footer">
-        <a href="<?= base_url('Order/verifikasi') ?>" class="btn btn-primary ml-auto">Lihat</a>
-      </div>
-
+    <div class="modal-dialog modal- modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title" id="modal-title-default">Notification</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h2>Ada pesanan baru!</h2>
+            </div>
+            <div class="modal-footer">
+                <a href="<?= base_url('Order/verifikasi') ?>" class="btn btn-primary ml-auto">Lihat</a>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 </div>
@@ -48,84 +44,63 @@
 
 </html>
 <script>
-  var notif = function() {
-    $.ajax({
-      type: 'POST',
-      url: '<?= base_url('Order/check') ?>',
-      data: {},
-      success: function(data) {
-        if (data == 'baru') {
-          // alert('Ada pesanan baru!');
-          $('#notif-pesan-tombol').click();
-        }
-      }
+    $("body").addClass((window.innerWidth <= 1200 ? "g-sidenav-hidden" : "g-sidenav-pinned"))
+    $(document).ready(function() {
+        $(window).resize(function() {
+            notif();
+            var refInterval = window.setInterval('notif()', 2000);
+        });
     });
-    $.ajax({
-      type: 'POST',
-      url: '<?= base_url('Order/check_status') ?>',
-      data: {},
-      success: function(data) {
-        $('.notif_status').html(data);
-      }
-    });
-    $.ajax({
-      type: 'POST',
-      url: '<?= base_url('Order/new_status') ?>',
-      data: {},
-      success: function(data) {
-        $('#list-notif').html(data);
-      }
-    });
-    $.ajax({
-      type: 'POST',
-      url: '<?= base_url('Order/check_tot') ?>',
-      data: {},
-      success: function(data) {
-        $('.to').html(data);
-      }
-    });
-    $.ajax({
-      type: 'POST',
-      url: '<?= base_url('Order/check_v') ?>',
-      data: {},
-      success: function(data) {
-        $('.c_v').html(data);
-      }
-    });
-    $.ajax({
-      type: 'POST',
-      url: '<?= base_url('Order/hangus') ?>',
-      data: {},
-      success: function(data) {}
-    });
-  };
-  notif();
-  var refInterval = window.setInterval('notif()', 2000);
+
+    function notif() {
+        $.ajax({
+            type: 'POST',
+            url: '<?= base_url('Order/check') ?>',
+            data: {},
+            success: function(data) {
+                if (data == 'baru') {
+                    // alert('Ada pesanan baru!');
+                    $('#notif-pesan-tombol').click();
+                }
+            }
+        });
+        $.ajax({
+            type: 'POST',
+            url: '<?= base_url('Order/check_status') ?>',
+            data: {},
+            success: function(data) {
+                $('.notif_status').html(data);
+            }
+        });
+        $.ajax({
+            type: 'POST',
+            url: '<?= base_url('Order/new_status') ?>',
+            data: {},
+            success: function(data) {
+                $('#list-notif').html(data);
+            }
+        });
+        $.ajax({
+            type: 'POST',
+            url: '<?= base_url('Order/check_tot') ?>',
+            data: {},
+            success: function(data) {
+                $('.to').html(data);
+            }
+        });
+        $.ajax({
+            type: 'POST',
+            url: '<?= base_url('Order/check_v') ?>',
+            data: {},
+            success: function(data) {
+                $('.c_v').html(data);
+            }
+        });
+        $.ajax({
+            type: 'POST',
+            url: '<?= base_url('Order/hangus') ?>',
+            data: {},
+            success: function(data) {}
+        });
+    }
 </script>
-
-<!-- <script>
-document.addEventListener('DOMContentLoaded', function() {
- if (!Notification) {
-  alert('Desktop notifications not available in your browser. Try Chromium.');
-  return;
- }
-
- if (Notification.permission !== 'granted')
-  Notification.requestPermission();
-});
-
-
-function notifyMe() {
- if (Notification.permission !== 'granted')
-  Notification.requestPermission();
- else {
-  var notification = new Notification('UCARD INDONESIA', {
-   icon: 'https://amarizky.com/assets/img/icon.png',
-   body: 'Ada pesanan baru!',
-  });
-  notification.onclick = function() {
-   window.open('http://stackoverflow.com/a/13328397/1269037');
-  };
- }
-}
-</script> -->
