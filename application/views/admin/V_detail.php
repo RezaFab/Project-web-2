@@ -940,6 +940,11 @@
         var id = $('#id').val();
         var id_status = $('#id_status').val();
         var keputusan = $('#keputusan').val();
+        var personalisasi = $('#personalisasi').val();
+        var coating = $('#coating').val();
+        var functionn = $('#functionn').val();
+        var packaging = $('#packaging').val();
+        var status = $('#status').val();
         var keterangan = $('#keterangan').val();
         var loggeduser = $('#loggeduser').val();
         if (keputusan !== '') {
@@ -954,6 +959,11 @@
                         id: id,
                         id_status: id_status,
                         keputusan: keputusan,
+                        personalisasi: personalisasi,
+                        coating: coating,
+                        functionn: functionn,
+                        packaging: packaging,
+                        status: status,
                         keterangan: keterangan,
                         user: loggeduser
                     },
