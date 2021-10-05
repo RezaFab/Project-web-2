@@ -71,7 +71,7 @@ $h = $this->db->query("SELECT count(transaksi_id) AS h FROM tbl_transaksi WHERE 
                             <li class="nav-item">
                                 <a class="nav-link <?= $seg1 == 'Order' && $seg1 . '/' . $seg2 != 'Order/history' ? 'active' : ''; ?>" href="#navbar-order" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-order">
                                     <i class="ni ni-cart text-green"></i>
-                                    <span class="nav-link-text">Order <span class="badge badge-pill badge-danger to">0</span></span>
+                                    <span class="nav-link-text">Order <span class="badge badge-pill badge-danger to"><?= $h['h']; ?></span></span>
                                 </a>
                                 <div class="collapse <?= $seg1 == 'Order' && $seg1 . '/' . $seg2 != 'Order/history' ? 'show' : ''; ?>" id="navbar-order">
                                     <ul class="nav nav-sm flex-column">

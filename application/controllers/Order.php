@@ -357,10 +357,10 @@ class Order extends CI_Controller
 
         $pelanggan = $this->db->query("SELECT p.* FROM tbl_transaksi AS t JOIN tbl_pelanggan AS p ON t.transaksi_nohp = p.pelanggan_nohp WHERE transaksi_id = '$id' ")->row_array();
         $transaksi_produksi_status_id = $this->db->query("SELECT max(transaksi_produksi_status_id) as tpsi FROM tbl_status_transaksi WHERE transaksi_order_id = '$id' ")->row_array()['tpsi'];
+        $s = $this->db->query("SELECT * FROM tbl_status WHERE status_id = '$id_status' ")->row_array();
 
         if ($keputusan == '1') {
             $k = 'DITERIMA';
-            $s = $this->db->query("SELECT * FROM tbl_status WHERE status_id = '$status_urut' ")->row_array();
             $tanggal_hangus = $tanggal_ini + (86400 * $s['status_jangka_waktu']);
             $this->db->query("UPDATE tbl_status_transaksi SET transaksi_status = '$keputusan', transaksi_keterangan = '$keterangan' WHERE transaksi_status_id = '$id_status' AND transaksi_order_id = '$id' ");
 
@@ -654,7 +654,6 @@ body{background-color:#f5f5f5;text-align:center}.btn{color:#fff;background-color
             $this->db->insert('tbl_status_transaksi', $data);
         } else {
             $k = 'DITOLAK';
-            $s = $this->db->query("SELECT * FROM tbl_status WHERE status_id = '$id_status' ")->row_array();
             $tanggal_hangus = $tanggal_ini + (86400 * $s['status_jangka_waktu']);
             $this->db->query("UPDATE tbl_status_transaksi SET transaksi_status = '$keputusan', transaksi_keterangan = '$keterangan', transaksi_tanggal = '$tanggal_ini', transaksi_tanggal_hangus = '$tanggal_hangus' WHERE transaksi_status_id = '$id_status' AND transaksi_order_id = '$id' ");
         }
@@ -714,7 +713,7 @@ body{background-color:#f5f5f5;text-align:center}.btn{color:#fff;background-color
             $next = $status[array_search(($id_status != '55' ? $id_status + 1 : '6'), array_column($status, 'status_id'))];
         ?>
             <div class="modal-body pt-0">
-                <input type="hidden" value="' . $id_status . '" id="id_status">
+                <input type="hidden" value="<?= $id_status; ?>" id="id_status">
                 <div class="form-group">
                     <input id="keputusan" type="hidden" value="1">
                     <p>Status saat ini: <b><?= $curr['status_status']; ?></b><br>Status selanjutnya: <b><?= $next['status_status']; ?></b><br><br>
